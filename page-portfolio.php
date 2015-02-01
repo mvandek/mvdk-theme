@@ -7,7 +7,7 @@
 */
 get_header(); ?>
 <main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-<div class="entry portfolio">
+<div class="entry page-portfolio">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
@@ -15,7 +15,7 @@ breadcrumb_trail();
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
-<?php if ( ! get_theme_mod( 'esplanade_hide_portfolio_page_content' ) ) : ?>
+<?php if ( ! get_theme_mod( 'mvdk_hide_portfolio_page_content' ) ) : ?>
 <?php while ( have_posts() ) : the_post(); ?>
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
