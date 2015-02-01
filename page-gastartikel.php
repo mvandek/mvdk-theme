@@ -17,7 +17,7 @@ breadcrumb_trail();
 </header>
 <?php if ( ! get_theme_mod( 'mvdk_hide_gastartikel_page_content' ) ) : ?>
 <?php while ( have_posts() ) : the_post(); ?>
-<div class="entry-content" itemprop="articleBody">
+<div class="entry-content" itemprop="mainContentOfPage">
 <?php the_content(); ?>
 </div>
 <?php wp_link_pages( array( 'before' => '<footer class="entry-utility"><p class="post-pagination">' . __( 'Pagina:', 'esplanade' ), 'after' => '</p></footer>' ) ); ?>
