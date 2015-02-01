@@ -6,7 +6,7 @@
 * @package MaartenvandeKamp.nl
 */
 get_header(); ?>
-<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Event">
 <div class="entry page-workshop">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <?php if ( function_exists('breadcrumb_trail') ) {
