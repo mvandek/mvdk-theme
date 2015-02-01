@@ -14,7 +14,7 @@ wpcf7_enqueue_styles();
 get_header(); ?>
 <main class="page-content" role="main" itemscope="itemscope" itemtype="http://schema.org/ContactPage">
 <?php while ( have_posts() ) : the_post();
-get_template_part( 'content', 'contactpage' );
+get_template_part( 'page', 'contact' );
 endwhile; ?>
 </main>
 <?php get_footer(); ?>
