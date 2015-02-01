@@ -1,0 +1,64 @@
+@font-face{
+font-family:'Open Sans';
+font-style:normal;
+font-weight:400;
+src:local('Open Sans Regular'), local('OpenSans'), local('Open Sans'),
+url(https://www.staticcdn.nl/fonts/open-sans/400.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/open-sans/400.woff) format('woff');
+}
+@font-face{
+font-family:'Open Sans';
+font-style:normal;
+font-weight:700;
+src:local('Open Sans Bold'), local('OpenSans-Bold'),
+url(https://www.staticcdn.nl/fonts/open-sans/700.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/open-sans/700.woff) format('woff');
+}
+@font-face{
+font-family:'Open Sans';
+font-style:italic;
+font-weight:400;
+src:local('Open Sans Italic'), local('OpenSans-Italic'),
+url(https://www.staticcdn.nl/fonts/open-sans/400i.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/open-sans/400i.woff) format('woff');
+}
+@font-face{
+font-family:'Open Sans';
+font-style:italic;
+font-weight:700;
+src:local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'),
+url(https://www.staticcdn.nl/fonts/open-sans/700i.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/open-sans/700i.woff) format('woff');
+}
+@font-face{
+font-family:'Raleway';
+font-style:normal;
+font-weight:400;
+src:local('Raleway'),
+url(https://www.staticcdn.nl/fonts/raleway/400.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/raleway/400.woff) format('woff');
+}
+@font-face{
+font-family:'Raleway';
+font-style:normal;
+font-weight:700;
+src:local('Raleway Bold'), local('Raleway-Bold'),
+url(https://www.staticcdn.nl/fonts/raleway/700.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/raleway/700.woff) format('woff');
+}
+@font-face{
+font-family:'Source Code Pro';
+font-style:normal;
+font-weight:300;
+src:local('Source Code Pro Light'),
+url(https://www.staticcdn.nl/fonts/sourcesanspro/300.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/sourcesanspro/300.woff) format('woff');
+}
+@font-face{
+font-family:'Source Code Pro';
+font-style:normal;
+font-weight:400;
+src:local('Source Code Pro Regular'),
+url(https://www.staticcdn.nl/fonts/sourcesanspro/400.woff2) format('woff2'),
+url(https://www.staticcdn.nl/fonts/sourcesanspro/400.woff) format('woff');
+}
