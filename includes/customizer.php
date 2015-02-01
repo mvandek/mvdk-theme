@@ -57,11 +57,26 @@ $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'esplanade_
 ) ) );
 
 $wp_customize->add_section( 'esplanade_theme_options', array(
-'title'             => __( 'Portfolio Page Options', 'esplanade' ),
+'title'             => __( 'Custom Post Type Page Options', 'esplanade' ),
 'priority'          => 120,
 ) );
 
-$wp_customize->add_setting( 'esplanade_hide_portfolio_page_content', array(
+$wp_customize->add_setting( 'mvdk_hide_advertentie_page_content', array(
+'default'           => '',
+'sanitize_callback' => 'esplanade_sanitize_checkbox',
+) );
+
+$wp_customize->add_setting( 'mvdk_hide_gastartikel_page_content', array(
+'default'           => '',
+'sanitize_callback' => 'esplanade_sanitize_checkbox',
+) );
+
+$wp_customize->add_setting( 'mvdk_hide_portfolio_page_content', array(
+'default'           => '',
+'sanitize_callback' => 'esplanade_sanitize_checkbox',
+) );
+
+$wp_customize->add_setting( 'mvdk_hide_workshop_page_content', array(
 'default'           => '',
 'sanitize_callback' => 'esplanade_sanitize_checkbox',
 ) );
