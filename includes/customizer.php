@@ -66,9 +66,21 @@ $wp_customize->add_setting( 'mvdk_hide_advertentie_page_content', array(
 'sanitize_callback' => 'esplanade_sanitize_checkbox',
 ) );
 
+$wp_customize->add_control( 'mvdk_hide_advertentie_page_content', array(
+'label'             => __( 'Hide title and content on Advertentie Page Template', 'esplanade' ),
+'section'           => 'esplanade_theme_options',
+'type'              => 'checkbox',
+) );
+
 $wp_customize->add_setting( 'mvdk_hide_gastartikel_page_content', array(
 'default'           => '',
 'sanitize_callback' => 'esplanade_sanitize_checkbox',
+) );
+
+$wp_customize->add_control( 'mvdk_hide_gastartikel_page_content', array(
+'label'             => __( 'Hide title and content on Gastartikel Page Template', 'esplanade' ),
+'section'           => 'esplanade_theme_options',
+'type'              => 'checkbox',
 ) );
 
 $wp_customize->add_setting( 'mvdk_hide_portfolio_page_content', array(
@@ -76,13 +88,19 @@ $wp_customize->add_setting( 'mvdk_hide_portfolio_page_content', array(
 'sanitize_callback' => 'esplanade_sanitize_checkbox',
 ) );
 
+$wp_customize->add_control( 'mvdk_hide_portfolio_page_content', array(
+'label'             => __( 'Hide title and content on Portfolio Page Template', 'esplanade' ),
+'section'           => 'esplanade_theme_options',
+'type'              => 'checkbox',
+) );
+
 $wp_customize->add_setting( 'mvdk_hide_workshop_page_content', array(
 'default'           => '',
 'sanitize_callback' => 'esplanade_sanitize_checkbox',
 ) );
 
-$wp_customize->add_control( 'esplanade_hide_portfolio_page_content', array(
-'label'             => __( 'Hide title and content on Portfolio Page Template', 'esplanade' ),
+$wp_customize->add_control( 'mvdk_hide_workshop_page_content', array(
+'label'             => __( 'Hide title and content on Workshop Page Template', 'esplanade' ),
 'section'           => 'esplanade_theme_options',
 'type'              => 'checkbox',
 ) );
