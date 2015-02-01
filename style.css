@@ -997,6 +997,7 @@ width:100%;
 background:#fff;
 margin-left: auto;
 margin-right: auto;
+min-width: 320px;
 }
 
 .header,
