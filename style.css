@@ -792,6 +792,10 @@ content:"\f208"
 content:"\f225"
 }
 
+.social-navigation a[href*="github.com"]:before {
+content: "\f200";
+}
+
 .social-navigation a[href*="mailto"]:before{
 content:"\410"
 }
