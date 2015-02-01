@@ -6,7 +6,7 @@
 * @package MaartenvandeKamp.nl
 */
 get_header(); ?>
-<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <div class="entry page-advertentie">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <?php if ( function_exists('breadcrumb_trail') ) {
@@ -20,7 +20,16 @@ breadcrumb_trail();
 <div class="entry-content" itemprop="mainContentOfPage">
 <?php the_content(); ?>
 </div>
-<?php wp_link_pages( array( 'before' => '<footer class="entry-utility"><p class="post-pagination">' . __( 'Pagina:', 'esplanade' ), 'after' => '</p></footer>' ) ); ?>
+<?php
+wp_link_pages( array(
+'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'twentyfifteen' ) . '</span>',
+'after'       => '</div>',
+'link_before' => '<span>',
+'link_after'  => '</span>',
+'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'twentyfifteen' ) . ' </span>%',
+'separator'   => '<span class="screen-reader-text">, </span>',
+) );
+?>
 <?php endwhile; // end of the loop. ?>
 <?php endif; ?>
 </article>
