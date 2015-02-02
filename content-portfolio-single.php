@@ -4,7 +4,7 @@
 breadcrumb_trail();
 } ?>
 <?php if( is_preview() ) : ?>
-<div class="alert alert-info"><span class="genericon genericon-warning"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</span></div>
+<div class="alert alert-info"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</div>
 <?php endif; ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
@@ -18,7 +18,7 @@ breadcrumb_trail();
 </div>
 <footer class="entry-utility">
 <?php
-echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="portfolio-type-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
+echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
 echo get_the_term_list( $post->ID, 'portfolio-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
 ?>
 <div class="entry-related">

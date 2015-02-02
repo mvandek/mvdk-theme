@@ -4,7 +4,7 @@
 breadcrumb_trail();
 } ?>
 <?php if( is_preview() ) { ?>
-<div class="alert alert-info"><span class="genericon genericon-warning"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</span></div>
+<div class="alert alert-info"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</div>
 <?php } ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
