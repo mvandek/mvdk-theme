@@ -1,4 +1,4 @@
-<article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" itemprop="workExample" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+<article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" itemprop="workExample" itemscope="itemscope" itemtype="http://schema.org/blogPost">
 <?php if ( has_post_thumbnail() ) : ?>
 <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_post_thumbnail('post-thumbnail', array( "itemprop" => "image" ) ); ?></a>
 <?php endif;?>
