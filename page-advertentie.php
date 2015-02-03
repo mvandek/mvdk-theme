@@ -7,7 +7,7 @@
 */
 get_header(); ?>
 <main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
-<div class="entry page-advertentie">
+<div class="entry page advertentie">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
