@@ -19,13 +19,15 @@ breadcrumb_trail();
 <footer class="entry-utility">
 <?php
 echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
-echo get_the_term_list( $post->ID, 'portfolio-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
+// echo get_the_term_list( $post->ID, 'portfolio-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
+echo get_the_term_list( $post->ID, 'post_tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
 ?>
 <div class="entry-related">
 <div class="entry-related-module">
 <h3 class="widget-title">Aanbevolen om te lezen:</h3>
 <?php
-$get_tags_from_post = get_the_terms( $post->ID, 'portfolio-tag' );
+//$get_tags_from_post = get_the_terms( $post->ID, 'portfolio-tag' );
+$get_tags_from_post = get_the_terms( $post->ID, 'post_tag' );
 $get_tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
 $args = array(
 'tag__in' => $get_tag_ids,
