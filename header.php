@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="NL">
+<html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
