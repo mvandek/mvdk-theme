@@ -7,11 +7,11 @@ $content_width = 715;
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
-function esplanade_content_width() {
+function mvdk_content_width() {
 if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) )
 $GLOBALS['content_width'] = 980;
 }
-add_action( 'template_redirect', 'esplanade_content_width' );
+add_action( 'template_redirect', 'mvdk_content_width' );
 /**
 * Set up theme specific settings
 *
@@ -23,7 +23,14 @@ add_action( 'template_redirect', 'esplanade_content_width' );
 *
 * @since Esplanade 1.0
 */
-function esplanade_theme_setup() {
+function mvdk_theme_setup() {
+/*
+ * Make theme available for translation.
+ * Translations can be filed in the /languages/ directory.
+ * If you're building a theme based on mvdk, use a find and replace
+ * to change 'mvdk' to the name of your theme in all the template files
+ */
+load_theme_textdomain( 'mvdk', get_template_directory() . '/languages' );
 // Automatically add feed links to document head
 add_theme_support( 'automatic-feed-links' );
 // Switches default core markup for search form to output valid HTML5.
@@ -58,7 +65,7 @@ add_editor_style( array( 'css/editor-style.css', 'css/font-style.css', 'generico
  */
 set_user_setting( 'dfw_width', 715 );
 }
-add_action( 'after_setup_theme', 'esplanade_theme_setup' );
+add_action( 'after_setup_theme', 'mvdk_theme_setup' );
 /**
 * Enqueue theme scripts
 *
@@ -103,10 +110,10 @@ add_action( 'pre_get_posts', 'add_custom_post_type_to_loop' );
  *
  * @since MaartenvandeKamp 1.10 - 28-1-2013
  */
-function esplanade_html5_shiv() { ?>
+function mvdk_html5_shiv() { ?>
 <!--[if lt IE 9]><script src="https://www.staticcdn.nl/html5.js" type="text/javascript"></script><![endif]-->
 <?php } // endif;
-add_action( 'wp_print_scripts', 'esplanade_html5_shiv' );
+add_action( 'wp_print_scripts', 'mvdk_html5_shiv' );
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
@@ -115,10 +122,10 @@ add_action( 'wp_print_scripts', 'esplanade_html5_shiv' );
  * @param string $html Search form HTML.
  * @return string Modified search form HTML.
  */
-function twentyfifteen_search_form_modify( $html ) {
+function mvdk_search_form_modify( $html ) {
 return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
 }
-add_filter( 'get_search_form', 'twentyfifteen_search_form_modify' );
+add_filter( 'get_search_form', 'mvdk_search_form_modify' );
 /**
  * Custom functions that act independently of the theme templates.
  */
