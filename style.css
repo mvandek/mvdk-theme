@@ -72,7 +72,7 @@ overflow:auto;
 }
 
 body{
-background:#eee;
+background:#f4f4f4;
 }
 
 article,
@@ -1358,8 +1358,7 @@ margin: 0;
 .comment-list article,
 .comment-list .pingback,
 .comment-list .trackback {
-border: 1px solid #eaeaea;
-border: 1px solid rgba(51, 51, 51, 0.1);
+border: 1px solid #d9d9d9;
 padding: 1.6em;
 }
 
@@ -1383,7 +1382,6 @@ font-weight: 700;
 
 .comment-author a:hover {
 border-bottom: 1px solid #707070;
-border-bottom: 1px solid rgba(51, 51, 51, 0.7);
 }
 
 .comment-author .avatar {
@@ -1400,7 +1398,6 @@ background: #fffccc;
 .comment-metadata,
 .pingback .edit-link {
 color: #707070;
-color: rgba(51, 51, 51, 0.7);
 font-size: 12px;
 line-height: 1.5;
 }
@@ -1408,7 +1405,6 @@ line-height: 1.5;
 .comment-metadata a,
 .pingback .edit-link a {
 color: #707070;
-color: rgba(51, 51, 51, 0.7);
 }
 
 .comment-metadata a:hover,
