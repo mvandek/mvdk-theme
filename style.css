@@ -1358,8 +1358,8 @@ margin: 0;
 .comment-list article,
 .comment-list .pingback,
 .comment-list .trackback {
-border-top: 1px solid #eaeaea;
-border-top: 1px solid rgba(51, 51, 51, 0.1);
+border: 1px solid #eaeaea;
+border: 1px solid rgba(51, 51, 51, 0.1);
 padding: 1.6em;
 }
 
@@ -1451,6 +1451,10 @@ margin-bottom: 0;
 
 .comment-content > :last-child {
 margin-bottom: 0;
+}
+
+.comment-list li{
+margin: 20px 0;
 }
 
 .comment-list .reply {
