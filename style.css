@@ -1944,6 +1944,7 @@ flex-direction: row
 
 .footer-area .widget {
 border-bottom: 0;
+flex: 1;
 width: auto;
 margin-right: 6px;
 }
