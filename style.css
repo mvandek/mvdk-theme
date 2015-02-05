@@ -1587,9 +1587,15 @@ flex-direction: column;
 }
 
 .footer-area .widget {
-margin-top: 20px;
 border-bottom: 1px solid #eee;
+box-sizing: border-box;
+margin-top: 20px;
+margin-right: 6px;
 width:100%;
+}
+
+.footer-area .widget:last-of-type{
+margin-right: 0;
 }
 
 .footer a {
@@ -1943,7 +1949,7 @@ flex-direction: row
 
 .footer-area .widget {
 border-bottom: 0;
-width: 50%;
+width: auto;
 }
 
 .copyright {
