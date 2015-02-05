@@ -1590,12 +1590,7 @@ flex-direction: column;
 border-bottom: 1px solid #eee;
 box-sizing: border-box;
 margin-top: 20px;
-margin-right: 6px;
 width:100%;
-}
-
-.footer-area .widget:last-of-type{
-margin-right: 0;
 }
 
 .footer a {
@@ -1950,6 +1945,11 @@ flex-direction: row
 .footer-area .widget {
 border-bottom: 0;
 width: auto;
+margin-right: 6px;
+}
+
+.footer-area .widget:last-of-type{
+margin-right: 0;
 }
 
 .copyright {
