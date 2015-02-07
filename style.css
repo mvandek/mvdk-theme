@@ -1933,25 +1933,7 @@ margin-right: 4px;
 
 .wp-post-image {
 float:left;
-margin: 0;
-}
-
-.index .has-post-thumbnail .entry-header,
-.index .has-post-thumbnail .entry-summary,
-.index .has-post-thumbnail .entry-footer,
-.search .has-post-thumbnail .entry-header,
-.search .has-post-thumbnail .entry-summary,
-.search .has-post-thumbnail .entry-footer,
-.archive .has-post-thumbnail .entry-header,
-.archive .has-post-thumbnail .entry-summary,
-.archive .has-post-thumbnail .entry-footer,
-.taxonomy .has-post-thumbnail .entry-header,
-.taxonomy .has-post-thumbnail .entry-summary,
-.taxonomy .has-post-thumbnail .entry-footer,
-.portfolio .has-post-thumbnail .entry-header,
-.portfolio .has-post-thumbnail .entry-summary,
-.portfolio .has-post-thumbnail .entry-footer {
-margin-left: 285px;
+margin-right: 14px;
 }
 
 }
