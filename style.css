@@ -1744,8 +1744,18 @@ padding:15px
 }
 
 .alert-info{
-background-color:#FF5722;
+background-color:#2273FF;
 color:#fff;
+}
+
+.alert-info a{
+color: #FFD00B;
+}
+
+.alert-info a:hover,
+.alert-info a:focus,
+.alert-fino a:active {
+color: #FF700B;
 }
 
 .wpcf7-list-item{
