@@ -890,10 +890,8 @@ margin: 0.4em 0 1.6em 1.6em;
 }
 
 .aligncenter {
-align-self: center;
 clear: both;
-margin-bottom: 1.6em;
-margin-top: 0.4em;
+margin: 0.4em auto 1.6em;
 }
 
 .wp-caption.alignleft,
@@ -2027,12 +2025,6 @@ flex-direction: row;
 }
 
 .content{
-display: -ms-flexbox;
-display: -webkit-flex;
-display: flex;
--ms-flex-direction: column;
--webkit-flex-direction: column;
-flex-direction: column;
 width: 715px;
 }
 
@@ -2042,12 +2034,8 @@ width:100%
 
 .sidebar{
 font-size:14px;
-margin-left: 4px;
+margin-left: 10px;
 width:260px;
-}
-
-.sidebar .widget{
-margin-left:10px;
 }
 
 .entry-summary,
