@@ -1061,12 +1061,6 @@ line-height: 1.25;
 -webkit-hyphens: auto;
 -moz-hyphens: auto;
 -ms-hyphens: auto;
-display: -ms-flexbox;
-display: -webkit-flex;
-display:flex;
--ms-flex-direction: colum;
--webkit-flex-direction: column;
-flex-direction: column;
 hyphens: auto;
 word-wrap: break-word;
 }
@@ -2034,7 +2028,7 @@ width:100%
 
 .sidebar{
 font-size:14px;
-margin-left: 10px;
+margin-left: 16px;
 width:260px;
 }
 
