@@ -1308,7 +1308,6 @@ margin:0 10px 0 0
 */
 
 .sidebar .widget {
-margin-left: 16px;
 margin-bottom: 20px;
 }
 
@@ -2033,6 +2032,10 @@ width:100%
 float: right;
 font-size:14px;
 width:260px;
+}
+
+.sidebar .widget {
+margin-left: 16px;
 }
 
 .entry-summary,
