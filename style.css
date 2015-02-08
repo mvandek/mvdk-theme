@@ -1963,7 +1963,9 @@ flex-direction: row
 
 .footer-area .widget {
 border-bottom: 0;
-flex: 1 1 auto;
+-ms-flexbox: 1 auto;
+-webkit-flex: 1 auto;
+flex: 1 auto;
 margin-right: 6px;
 }
 
