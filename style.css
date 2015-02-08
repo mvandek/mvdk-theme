@@ -1018,6 +1018,7 @@ flex-direction: column;
 
 .content,
 .page-content {
+float: left;
 order: 1;
 width:100%;
 }
@@ -1028,6 +1029,7 @@ margin-bottom: 20px;
 
 .sidebar{
 box-sizing: border-box;
+float: right;
 order: 2;
 width:100%;
 }
