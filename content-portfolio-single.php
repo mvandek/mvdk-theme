@@ -18,9 +18,9 @@ breadcrumb_trail();
 </div>
 <footer class="entry-utility">
 <?php
-echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
+// echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
 // echo get_the_term_list( $post->ID, 'portfolio-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
-echo get_the_term_list( $post->ID, 'post_tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
+echo get_the_term_list( get_the_ID(), 'post_tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
 ?>
 <div class="entry-related">
 <div class="entry-related-module">
