@@ -189,7 +189,7 @@ function maartenvandekamp_entry_meta() {
 			esc_url( get_permalink() ),
 			$time_string
 		);
-}
+	}
 		// if ( is_singular() || is_multi_author() ) {
 			printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s" itemprop="name">%3$s</a></span></span>',
 				_x( 'Schrijver', 'Used before post author name.', 'twentyfifteen' ),
@@ -199,7 +199,18 @@ function maartenvandekamp_entry_meta() {
 		// }
 	
 
-		$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'twentyfifteen' ) );
+		if ( 'post' == get_post_type() ) {
+		$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );	
+		} elseif ( 'portfolio' == get_post_type() ) {
+			$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+		} elseif ( 'gastartikel' == get_post_type() ) {
+			$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+		} elseif ( 'workshop' == get_post_type() ) {
+			$categories_list = get_the_term_list( get_the_ID(), 'workshop-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+		} elseif ( 'advertentie' == get_post_type() ) {
+		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+		}
+		
 		if ( $categories_list && esplanade_categorized_blog() ) {
 			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
 				_x( 'Categorie', 'Used before category names.', 'twentyfifteen' ),
