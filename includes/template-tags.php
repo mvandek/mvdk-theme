@@ -211,7 +211,8 @@ function maartenvandekamp_entry_meta() {
 		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
 		}
 		
-		if ( $categories_list && esplanade_categorized_blog() ) {
+		// if ( $categories_list && esplanade_categorized_blog() ) {
+		if ( $categories_list ) {
 			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
 				_x( 'Categorie', 'Used before category names.', 'twentyfifteen' ),
 				$categories_list
