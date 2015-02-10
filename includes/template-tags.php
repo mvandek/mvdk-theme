@@ -202,13 +202,13 @@ function maartenvandekamp_entry_meta() {
 		if ( 'post' == get_post_type() ) {
 		$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );	
 		} elseif ( 'portfolio' == get_post_type() ) {
-			$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+			$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
 		} elseif ( 'gastartikel' == get_post_type() ) {
-			$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+			$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type' );
 		} elseif ( 'workshop' == get_post_type() ) {
-			$categories_list = get_the_term_list( get_the_ID(), 'workshop-type', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+			$categories_list = get_the_term_list( get_the_ID(), 'workshop-type' );
 		} elseif ( 'advertentie' == get_post_type() ) {
-		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder', _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );
+		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
 		}
 		
 		if ( $categories_list && esplanade_categorized_blog() ) {
