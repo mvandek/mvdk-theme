@@ -21,7 +21,7 @@ breadcrumb_trail();
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header><!-- .entry-header -->
 
-<?php maartenvandekamp_entry_meta(); ?>
+<?php mvdk_entry_meta(); ?>
 
 <div class="entry-content" itemscope="itemscope" itemtype="http://schema.org/ImageObject">
 
@@ -34,7 +34,7 @@ breadcrumb_trail();
 								 *
 								 * @param string $image_size Image size. Default 'large'.
 								 */
-								$image_size = apply_filters( 'esplanade_attachment_size', 'large' );
+								$image_size = apply_filters( 'mvdk_attachment_size', 'large' );
 
 								echo wp_get_attachment_image( get_the_ID(), $image_size );
 							?>
@@ -50,24 +50,24 @@ breadcrumb_trail();
 						<?php
 							the_content();
 							wp_link_pages( array(
-								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
+								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'mvdk' ) . '</span>',
 								'after'       => '</div>',
 								'link_before' => '<span>',
 								'link_after'  => '</span>',
-								'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>%',
+								'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'mvdk' ) . ' </span>%',
 								'separator'   => '<span class="screen-reader-text">, </span>',
 							) );
 						?>
 					</div><!-- .entry-content -->
 
 <footer class="entry-footer">
-<?php edit_post_link( __( 'Bewerk', 'esplanade' ), '<span class="edit-link">', '</span>' ); ?>
+<?php edit_post_link( __( 'Bewerk', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </footer><!-- .entry-footer -->
 
 <?php
 // Previous/next post navigation.
 					the_post_navigation( array(
-						'prev_text' => _x( '<span class="meta-nav">Terug naar </span><span class="post-title">%title</span>', 'Parent post link', 'twentyfifteen' ),
+						'prev_text' => _x( '<span class="meta-nav">Terug naar </span><span class="post-title">%title</span>', 'Parent post link', 'mvdk' ),
 					) );
 ?>
 

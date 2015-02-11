@@ -20,7 +20,7 @@
 <?php the_excerpt(); ?>
 </div>
 <footer class="entry-footer">
-<?php maartenvandekamp_entry_meta(); ?>
-<?php edit_post_link( esc_html__( 'Bewerken', 'esplanade' ), '<span class="edit-link">', '</span>' ); ?>
+<?php mvdk_entry_meta(); ?>
+<?php edit_post_link( esc_html__( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </footer>
 </article>

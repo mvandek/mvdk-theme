@@ -19,8 +19,8 @@ breadcrumb_trail();
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 <div class="entry-meta">
-<?php maartenvandekamp_entry_meta(); ?>
-<?php edit_post_link( esc_html__( 'Bewerken', 'esplanade' ), '<span class="edit-link">', '</span>' ); ?>
+<?php mvdk_entry_meta(); ?>
+<?php edit_post_link( esc_html__( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
 </header>
 <div class="entry-content" itemprop="articleBody">
@@ -51,7 +51,7 @@ if( $tag_query->have_posts() ) { ?>
 <ul>
 <?php while ( $tag_query->have_posts() ) {
 $tag_query->the_post();
-printf( __( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', 'esplanade' ), esc_url( get_permalink() ), get_the_title() );
+printf( __( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', 'mvdk' ), esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>
@@ -66,13 +66,13 @@ wp_reset_postdata();
 </div>
 </div>
 </footer>
-<?php esplanade_post_author(); ?>
+<?php mvdk_post_author(); ?>
 <?php
 the_post_navigation( array(
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel &raquo;', 'twentyfifteen' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Volgend artikel:', 'twentyfifteen' ) . '</span> ',
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( '&laquo; Vorig artikel', 'twentyfifteen' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Vorig artikel:', 'twentyfifteen' ) . '</span> ',
+'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . __( 'Volgend artikel:', 'mvdk' ) . '</span> ',
+'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . __( 'Vorig artikel:', 'mvdk' ) . '</span> ',
 ) );
 ?>
 <?php endwhile;?>

@@ -22,12 +22,12 @@ breadcrumb_trail();
 } ?>
 <?php if ( have_posts() ) : ?>
 <header class="entry-header">
-<h1 class="entry-title" itemprop="headline"><?php printf( __( '%s archief', 'esplanade' ), '<span>' . get_post_format_string( get_post_format() ) . '</span>' ); ?></h1>
+<h1 class="entry-title" itemprop="headline"><?php printf( __( '%s archief', 'mvdk' ), '<span>' . get_post_format_string( get_post_format() ) . '</span>' ); ?></h1>
 </header>
 <?php while ( have_posts() ) : the_post(); 
 get_template_part( 'content', get_post_format() );
 endwhile; ?>
-<?php esplanade_paging_nav();
+<?php mvdk_paging_nav();
 else :
 get_template_part( 'content', 'none' );
 endif; ?>

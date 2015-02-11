@@ -11,9 +11,9 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="pingback" href="https://www.maartenvandekamp.nl/xmlrpc.php">
+<link rel="pingback" href="https://www.mvdk.nl/xmlrpc.php">
 <link rel="dns-prefetch" href="//staticcdn.nl/">
-<link rel="dns-prefetch" href="//stat.maartenvandekamp.nl/">
+<link rel="dns-prefetch" href="//stat.mvdk.nl/">
 <link rel="dns-prefetch" href="//secure.gravatar.com/">
 <!--[if gte IE 9]>
 <div class="browsehappy">Zoals je kunt zien wordt de website niet bepaald goed weergegeven. Dat komt omdat je een <strong>sterk verouderde</strong> browser gebruikt, waardoor de website niet goed wordt weergegeven. <a href="http://browsehappy.com/">Upgrade je browser</a> als dat mogelijk is om veilig te kunnen internetten en om deze website optimaal te kunnen gebruiken.</div>
@@ -22,7 +22,7 @@
 </head>
 <body <?php body_class() ?> itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <div class="hfeed site">
-<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'esplanade' ); ?></a>
+<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'mvdk' ); ?></a>
 <header id="masthead" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
 <div class="site-branding">
 <?php
@@ -39,7 +39,7 @@ if ( $description || is_customize_preview() ) { ?>
 </div>
 <?php if ( has_nav_menu( 'primary_nav' ) ) : ?>
 <nav id="site-navigation" class="main-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-<button class="menu-toggle" aria-controls="menu-hoofdmenu" aria-expanded="false"><?php _e( 'Menu', 'esplanade' ); ?></button>
+<button class="menu-toggle" aria-controls="menu-hoofdmenu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
 <?php
 // Primary navigation menu.
 wp_nav_menu( array(

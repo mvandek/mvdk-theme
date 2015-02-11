@@ -65,8 +65,8 @@ add_theme_support( 'social-links', array( 'facebook', 'twitter', 'google_plus' )
 add_filter( 'use_default_gallery_style', '__return_false' );
 // Register Primary Navigation Menu
 register_nav_menus( array(
-'primary_nav' => __( 'Primary Menu', 'esplanade' ),
-'social' => __( 'Social Menu', 'esplanade' ),
+'primary_nav' => __( 'Primary Menu', 'mvdk' ),
+'social' => __( 'Social Menu', 'mvdk' ),
 ) );
 /*
  * Let WordPress manage the document title.
@@ -96,7 +96,7 @@ add_action( 'after_setup_theme', 'mvdk_theme_setup' );
 *
 * @uses wp_enqueue_scripts() To enqueue scripts
 */
-function maartenvandekamp_enqueue_scripts() {
+function mvdk_enqueue_scripts() {
 // Disables l10n.js
 wp_deregister_script('l10n');
 // Add Open Sans fonts, used in the main stylesheet.
@@ -117,7 +117,7 @@ wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/skip-
 if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 wp_enqueue_script( 'comment-reply' );
 }
-add_action( 'wp_enqueue_scripts', 'maartenvandekamp_enqueue_scripts' );
+add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
 /**
 * Adds the jetpack-portfolio CPT to the loop, to display it between regular posts
 *

@@ -1,9 +1,16 @@
 <?php
-function esplanade_page_menu_args( $args ) {
+/**
+ * The functions on this page add extra functionality to the theme.
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+
+function mvdk_page_menu_args( $args ) {
 $args['show_home'] = true;
 return $args;
 }
-add_filter( 'wp_page_menu_args', 'esplanade_page_menu_args' );
+add_filter( 'wp_page_menu_args', 'mvdk_page_menu_args' );
 
 /**
 * Stop loading the JavaScript and CSS stylesheet on all pages for Contact Form 7
@@ -16,7 +23,7 @@ add_filter( 'wpcf7_load_css', '__return_false' );
 *
 * @since Esplanade 1.0
 */
-function mvdkv2_breadcrumbs($defaults) {
+function mvdk_breadcrumbs($defaults) {
 $defaults['show_on_front'] = false; // whether to show the breadcrumb on the front page
 $defaults['show_browse'] = false; // whether to show the "browse" text
 $defaults['separator'] = '&#187;'; // separator between items
@@ -27,15 +34,15 @@ $defaults['labels']['search'] = esc_html__( 'Zoek resultaat voor %s' );
 $defaults['labels']['paged'] = esc_html__( 'Pagina %s' );
 return $defaults;
 }
-add_filter( 'breadcrumb_trail_args', 'mvdkv2_breadcrumbs' );
+add_filter( 'breadcrumb_trail_args', 'mvdk_breadcrumbs' );
 
 /**
  * Andere functie
  */
-function esplanade_rel_attachment( $link ) {
+function mvdk_rel_attachment( $link ) {
 return str_replace( "<a ", "<a rel='attachment' ", $link );
 }
-add_filter( 'wp_get_attachment_link', 'esplanade_rel_attachment' );
+add_filter( 'wp_get_attachment_link', 'mvdk_rel_attachment' );
 
 /**
 *
@@ -79,7 +86,7 @@ add_filter( 'wp_mail_from_name', 'new_mail_from_name' );
 * @since februari 2013
 */
 function new_mail_from( $from_email ) {
-$from_email = 'noreply@maartenvandekamp.nl';
+$from_email = 'noreply@mvdk.nl';
 return $from_email;
 }
 add_filter( 'wp_mail_from', 'new_mail_from' );
@@ -89,33 +96,33 @@ add_filter( 'wp_mail_from', 'new_mail_from' );
 * @param array $fields
 * @return array
 */
-function esplanade_comment_fields( $fields ) {
+function mvdk_comment_fields( $fields ) {
 $commenter = wp_get_current_commenter();
 $req       = get_option( 'require_name_email' );
 $aria_req  = ( $req ? " aria-required='true'" : '' );
 $html_req  = ( $req ? " required='required'" : '' );
 
-$fields['author'] = '<p class="comment-form-author"><label for="author">' . esc_html__( 'Je naam', 'esplanade' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="text" id="author" name="author" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields['author'] = '<p class="comment-form-author"><label for="author">' . esc_html__( 'Je naam', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="text" id="author" name="author" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
 
-$fields['email'] = '<p class="comment-form-email"><label for="email">' . esc_html__( 'Je emailadres', 'esplanade' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
+$fields['email'] = '<p class="comment-form-email"><label for="email">' . esc_html__( 'Je emailadres', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
 
-$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website (Heb je een website, dan kun je die vermelden.)', 'esplanade' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website (Heb je een website, dan kun je die vermelden.)', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
 
 return $fields;
 
 }
-add_filter( 'comment_form_default_fields', 'esplanade_comment_fields' );
+add_filter( 'comment_form_default_fields', 'mvdk_comment_fields' );
 /**
  * Filters the defaults from the comment field to a custom option
  *
  * @param array $defaults.
  * @return array $defaults
  */
-function esplanade_comment_defaults( $defaults ) {
+function mvdk_comment_defaults( $defaults ) {
 $defaults['comment_field'] = '<p class="comment-form-comment">
-<label for="comment">' . __( 'Je reactie', 'esplanade' ) . '</label>
+<label for="comment">' . __( 'Je reactie', 'mvdk' ) . '</label>
 <textarea id="comment" name="comment" cols="45" rows="8"></textarea></p>';
-$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.' ) . '</p>';
+$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.mvdk.nl/stel-een-vraag/">deze pagina</a> plaatsen.' ) . '</p>';
 $defaults['comment_notes_after'] = 'Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.';
 $defaults['title_reply'] = esc_html__( 'Schrijf een reactie' );
 $defaults['title_reply_to'] = esc_html__( 'Reageer op %s' );
@@ -123,20 +130,20 @@ $defaults['cancel_reply_link'] = esc_html__( 'Annuleer mijn reactie' );
 $defaults['label_submit'] = esc_html__( 'Plaats mijn reactie' );
 return $defaults;
 }
-add_filter( 'comment_form_defaults', 'esplanade_comment_defaults' );
+add_filter( 'comment_form_defaults', 'mvdk_comment_defaults' );
 
 /**
 * Change the number of words shown in excerps
 *
 * @since Esplanade 1.0
 */
-function esplanade_excerpt_length( $length ) {
+function mvdk_excerpt_length( $length ) {
 if( has_post_format( 'aside' ) ) {
 return 36;
 } else
 return 50;
 }
-add_filter( 'excerpt_length', 'esplanade_excerpt_length' );
+add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 /**
 * Changes the default excerpt trailing content
 *
@@ -145,19 +152,19 @@ add_filter( 'excerpt_length', 'esplanade_excerpt_length' );
 *
 * @since 25-10-2014
 */
-function esplanade_excerpt_more( $more ) {
+function mvdk_excerpt_more( $more ) {
     return sprintf( ' <a href="%1$s">%2$s</a>',
         esc_url( get_permalink( get_the_ID() ) ),
         sprintf( __( ' &mdash; Lees verder %s', 'bosco' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
         );
 }
-add_filter( 'excerpt_more', 'esplanade_excerpt_more' );
+add_filter( 'excerpt_more', 'mvdk_excerpt_more' );
 /**
  * Removes some widgets from the Dashboard
  *
  * @Since 5-5-2013
  */
-function esplanade_remove_dashboard_widgets(){
+function mvdk_remove_dashboard_widgets(){
 global$wp_meta_boxes;
 unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
 unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
@@ -166,7 +173,7 @@ unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']);
 unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
 unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
 }
-add_action( 'wp_dashboard_setup', 'esplanade_remove_dashboard_widgets', 11 );
+add_action( 'wp_dashboard_setup', 'mvdk_remove_dashboard_widgets', 11 );
 
 // Change the failed login message for extra WordPress Secruty
 function failed_login() {
@@ -178,11 +185,11 @@ add_filter('login_errors', 'failed_login');
  *
  * @Since 1-8-2013
  */
-function esplanade_w3c_valid_rel( $text ) {
+function mvdk_w3c_valid_rel( $text ) {
 $text = str_replace('rel="category tag"', 'rel="tag"', $text);
 return $text; 
 }
-add_filter( 'the_category', 'esplanade_w3c_valid_rel' );
+add_filter( 'the_category', 'mvdk_w3c_valid_rel' );
 /**
  * Remove the WordPress version from RSS feeds
  */

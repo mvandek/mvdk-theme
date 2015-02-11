@@ -1,11 +1,18 @@
 <?php
 /**
+ * Custom template tags for mvdk-theme
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+
+/**
 * Displays navigation to next/previous set of posts when applicable.
 *
 *
 * @return void
 */
-function esplanade_paging_nav() {
+function mvdk_paging_nav() {
 // Don't print empty markup if there's only one page.
 if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
 return;
@@ -15,10 +22,10 @@ return;
 <h2 class="screen-reader-text"><?php _e( 'Pagina Navigatie', 'simone' ); ?></h2>
 <div class="nav-links">
 <?php if ( get_previous_posts_link() ) { ?>
-<div class="nav-previous"><?php previous_posts_link( __( '<span class="meta-nav">&laquo;</span> Terug', 'esplanade' ) ); ?></div>
+<div class="nav-previous"><?php previous_posts_link( __( '<span class="meta-nav">&laquo;</span> Terug', 'mvdk' ) ); ?></div>
 <?php } ?>
 <?php if ( get_next_posts_link() ) { ?>
-<div class="nav-next"><?php next_posts_link( __( 'Meer <span class="meta-nav">&raquo;</span>', 'esplanade' ) ); ?></div>
+<div class="nav-next"><?php next_posts_link( __( 'Meer <span class="meta-nav">&raquo;</span>', 'mvdk' ) ); ?></div>
 <?php } ?>
 </div>
 </nav>
@@ -30,7 +37,7 @@ return;
 *
 * @return void
 */
-function esplanade_post_nav() {
+function mvdk_post_nav() {
 // Don't print empty markup if there's nowhere to navigate.
 $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
 $next     = get_adjacent_post( false, '', false );
@@ -41,8 +48,8 @@ return;
 <nav class="navigation post-navigation" role="navigation">
 <h2 class="screen-reader-text"><?php _e( 'Post navigation', '_s' ); ?></h2>
 <div class="nav-links">
-<?php previous_post_link( '%link', _x( '<div class="nav-previous">&laquo; Vorig artikel</div>', 'Previous post link', 'esplanade' ) ); ?>
-<?php next_post_link( '%link', _x( '<div class="nav-next">Volgend artikel &raquo;</div>', 'Next post link', 'esplanade' ) ); ?>
+<?php previous_post_link( '%link', _x( '<div class="nav-previous">&laquo; Vorig artikel</div>', 'Previous post link', 'mvdk' ) ); ?>
+<?php next_post_link( '%link', _x( '<div class="nav-next">Volgend artikel &raquo;</div>', 'Next post link', 'mvdk' ) ); ?>
 </div>
 </nav>
 <?php }
@@ -57,14 +64,14 @@ return;
 *
 * @since Twenty Twelve 1.0
 */
-function esplanade_comment( $comment, $args, $depth ) {
+function mvdk_comment( $comment, $args, $depth ) {
 $GLOBALS['comment'] = $comment;
 
 if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) : ?>
 
 <li class="post pingback">
 <div class="comment-body">
-<?php esc_html_e( 'Pingback: ', 'esplanade' ); comment_author_link(); edit_comment_link( __( ' (Bewerk)', 'esplanade' ), '<span class="edit-link">', '</span>' ); ?>
+<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( ' (Bewerk)', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
 
 <?php else : ?>
@@ -81,10 +88,10 @@ printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() 
 <div class="comment-metadata">
 <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>" itemprop="replyToUrl">
 <time datetime="<?php echo get_comment_date('c'); ?>" itemprop="commentTime">
-<?php printf( __( '%1$s om %2$s', 'esplanade' ), get_comment_date(), get_comment_time() ); ?>
+<?php printf( __( '%1$s om %2$s', 'mvdk' ), get_comment_date(), get_comment_time() ); ?>
 </time>
 </a>
-<?php edit_comment_link( __( 'Bewerk', 'esplanade' ), '<p class="edit-link">', '</p>' );
+<?php edit_comment_link( __( 'Bewerk', 'mvdk' ), '<p class="edit-link">', '</p>' );
 
 if ( $comment->comment_approved == '0' ) { ?><p class="comment-awaiting-moderation">Je reactie wordt beoordeeld voor plaatsing.</p><?php } ?>
 </div>
@@ -95,7 +102,7 @@ if ( $comment->comment_approved == '0' ) { ?><p class="comment-awaiting-moderati
 </div>
 
 <div class="reply">
-<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reageer', 'esplanade' ),  'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reageer', 'mvdk' ),  'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 </div>
 
 </article>
@@ -105,7 +112,7 @@ endif;
 /*
  * Change the comment reply link to use 'Reply to [Author First Name]'
  */
-function esplanade_author_comment_reply_link( $link, $args, $comment ) {
+function mvdk_author_comment_reply_link( $link, $args, $comment ) {
 	$comment = get_comment( $comment );
 
 	// If no comment author is blank, use 'Anoniem'
@@ -127,11 +134,11 @@ function esplanade_author_comment_reply_link( $link, $args, $comment ) {
 
 	// Replace Reply Link with "Reageer op <Author First Name>"
 	$reply_link_text = $args['reply_text'];
-	$link            = str_replace( $reply_link_text, __('Reageer op', 'esplanade') . ' ' . $author, $link );
+	$link            = str_replace( $reply_link_text, __('Reageer op', 'mvdk') . ' ' . $author, $link );
 
 	return $link;
 	}
-add_filter( 'comment_reply_link', 'esplanade_author_comment_reply_link', 420, 4 );
+add_filter( 'comment_reply_link', 'mvdk_author_comment_reply_link', 420, 4 );
 
 /**
  * Returns the URL from the post.
@@ -145,7 +152,7 @@ add_filter( 'comment_reply_link', 'esplanade_author_comment_reply_link', 420, 4 
  *
  * @return string The Link format URL.
  */
-function esplanade_get_first_url() {
+function mvdk_get_first_url() {
 $has_url = get_url_in_content( get_the_content() );
 return $has_url ? $has_url : apply_filters( 'the_permalink', get_permalink() );
 }
@@ -157,7 +164,7 @@ return $has_url ? $has_url : apply_filters( 'the_permalink', get_permalink() );
  *
  * @return void
  */
-function esplanade_featured_gallery() {
+function mvdk_featured_gallery() {
 $pattern = get_shortcode_regex();
 if ( preg_match( "/$pattern/s", get_the_content(), $match ) ) {
 if ( 'gallery' == $match[2] ) {
@@ -168,7 +175,7 @@ $match[3] .= ' size="medium"'; echo do_shortcode_tag( $match );
 }
 }
 
-function maartenvandekamp_entry_meta() {
+function mvdk_entry_meta() {
 
 	if ( in_array( get_post_type(), array( 'post', 'attachment', 'portfolio', 'gastartikel', 'workshop', 'advertentie', ) ) ) {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s" itemprop="datePublished">%2$s</time>';
@@ -185,14 +192,14 @@ function maartenvandekamp_entry_meta() {
 		);
 
 		printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
-			_x( 'Geplaatst op', 'Used before publish date.', 'twentyfifteen' ),
+			_x( 'Geplaatst op', 'Used before publish date.', 'mvdk' ),
 			esc_url( get_permalink() ),
 			$time_string
 		);
 	}
 		// if ( is_singular() || is_multi_author() ) {
 			printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s" itemprop="name">%3$s</a></span></span>',
-				_x( 'Schrijver', 'Used before post author name.', 'twentyfifteen' ),
+				_x( 'Schrijver', 'Used before post author name.', 'mvdk' ),
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				get_the_author()
 			);
@@ -211,10 +218,10 @@ function maartenvandekamp_entry_meta() {
 		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
 		}
 		
-		// if ( $categories_list && esplanade_categorized_blog() ) {
+		// if ( $categories_list && mvdk_categorized_blog() ) {
 		if ( $categories_list ) {
 			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
-				_x( 'Categorie', 'Used before category names.', 'twentyfifteen' ),
+				_x( 'Categorie', 'Used before category names.', 'mvdk' ),
 				$categories_list
 			);
 		}
@@ -225,7 +232,7 @@ function maartenvandekamp_entry_meta() {
 		$metadata = wp_get_attachment_metadata();
 
 		printf( '<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
-			_x( 'Full size', 'Used before full size attachment link.', 'twentyfifteen' ),
+			_x( 'Full size', 'Used before full size attachment link.', 'mvdk' ),
 			esc_url( wp_get_attachment_url() ),
 			$metadata['width'],
 			$metadata['height']
@@ -234,7 +241,7 @@ function maartenvandekamp_entry_meta() {
 
 	if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 		echo '<span class="comments-link" itemprop="interactionCount">';
-		comments_popup_link( __( 'Reageer', 'maartenvandekamp' ), __( '1 reactie', 'maartenvandekamp' ), __( '% reacties', 'maartenvandekamp' ) );
+		comments_popup_link( __( 'Reageer', 'mvdk' ), __( '1 reactie', 'mvdk' ), __( '% reacties', 'mvdk' ) );
 		echo '</span>';
 	}
 }
@@ -244,7 +251,7 @@ function maartenvandekamp_entry_meta() {
  *
  * @since 3-3-2013
  */
-function esplanade_categorized_blog() {
+function mvdk_categorized_blog() {
 if ( false === ( $all_the_cool_cats = get_transient( 'all_the_cool_cats' ) ) ) {
 // Create an array of all the categories that are attached to posts.
 $all_the_cool_cats = get_categories( array(
@@ -258,26 +265,26 @@ $all_the_cool_cats = count( $all_the_cool_cats );
 set_transient( 'all_the_cool_cats', $all_the_cool_cats );
 }
 if ( $all_the_cool_cats > 1 ) {
-// This blog has more than 1 category so esplanade_categorized_blog should return true
+// This blog has more than 1 category so mvdk_categorized_blog should return true
 return true;
 } else {
-// This blog has only 1 category so esplanade_categorized_blog should return false
+// This blog has only 1 category so mvdk_categorized_blog should return false
 return false;
 }
 }
 /**
- * Flush out the transients used in esplanade_categorized_blog
+ * Flush out the transients used in mvdk_categorized_blog
  *
  * @since 3-3-2013
  */
-function esplanade_category_transient_flusher() {
+function mvdk_category_transient_flusher() {
 if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 return;
 }
 delete_transient( 'all_the_cool_cats' );
 }
-add_action( 'edit_category', 'esplanade_category_transient_flusher' );
-add_action( 'save_post', 'esplanade_category_transient_flusher' );
+add_action( 'edit_category', 'mvdk_category_transient_flusher' );
+add_action( 'save_post', 'mvdk_category_transient_flusher' );
 /**
  * Retrieve all posts from database and store them for 24h in a transient for the archive page
  *
@@ -300,7 +307,7 @@ set_transient( 'all_posts_for_archive', $all_posts_for_archive );
 return $all_posts_for_archive;
 }
 /**
- * Flush out the transients used in esplanade_categorized_blog when a post is saved
+ * Flush out the transients used in mvdk_categorized_blog when a post is saved
  *
  * @since 11-3-2013
  */
@@ -313,9 +320,9 @@ add_action( 'save_post', 'all_posts_archive_page_transient_flusher' );
 *
 * @since Esplanade 1.0
 */
-function esplanade_post_author() { ?>
+function mvdk_post_author() { ?>
 <section class="entry-author" itemscope="itemscope" itemtype="http://schema.org/Person">
-<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'esplanade_author_bio_avatar_size', 96 ) ); ?>
+<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'mvdk_author_bio_avatar_size', 96 ) ); ?>
 <h3 class="author vcard"><span class="fn" itemprop="name"><?php the_author(); ?></span></h3>
 <?php if ( get_the_author_meta( 'description' ) ) : ?>
 <p class="author-bio" itemprop="description"><?php the_author_meta( 'description' ); ?></p>
@@ -324,27 +331,27 @@ function esplanade_post_author() { ?>
 <?php 
 // Change language depending on number of posts
 //$posts_posted = get_the_author_posts();
-//if ( $posts_posted == 1) { printf(__( 'Eén artikel tot nu toe. ', 'esplanade' ) ); }
-//else { printf(__( '%s artikelen tot nu toe. ', 'esplanade' ), the_author_posts() ); }
+//if ( $posts_posted == 1) { printf(__( 'Eén artikel tot nu toe. ', 'mvdk' ) ); }
+//else { printf(__( '%s artikelen tot nu toe. ', 'mvdk' ), the_author_posts() ); }
 // Laat sociale media en andere links zien
 printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">Mijn archief</a></span>',
 esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-esc_attr( sprintf( __( 'Bekijk het archief van %s', 'esplanade' ), get_the_author() ) )
+esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) )
 );
-if ( get_theme_mod( 'esplanade_facebook' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'esplanade_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'esplanade_facebook' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Facebook', 'esplanade') ?></a>
+if ( get_theme_mod( 'mvdk_facebook' ) ) : ?>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Facebook', 'mvdk') ?></a>
 <?php endif;
-if ( get_theme_mod( 'esplanade_twitter' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'esplanade_twitter' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'esplanade_twitter' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Twitter', 'esplanade') ?></a>
+if ( get_theme_mod( 'mvdk_twitter' ) ) : ?>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Twitter', 'mvdk') ?></a>
 <?php endif;
-if ( get_theme_mod( 'esplanade_500px' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'esplanade_500px' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'esplanade_500px' ) ); ?>" itemprop="sameAs"><?php esc_html_e('500px.com', 'esplanade') ?></a>
+if ( get_theme_mod( 'mvdk_500px' ) ) : ?>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" itemprop="sameAs"><?php esc_html_e('500px.com', 'mvdk') ?></a>
 <?php endif;
-if ( get_theme_mod( 'esplanade_linkedin' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'esplanade_linkedin' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'esplanade_linkedin' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Linkedin', 'esplanade') ?></a>
+if ( get_theme_mod( 'mvdk_linkedin' ) ) : ?>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Linkedin', 'mvdk') ?></a>
 <?php endif;
-if ( get_theme_mod( 'esplanade_flickr' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'esplanade_flickr' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'esplanade_flickr' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Flickr', 'esplanade') ?></a>
+if ( get_theme_mod( 'mvdk_flickr' ) ) : ?>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Flickr', 'mvdk') ?></a>
 <?php endif; ?>
 </section>
 </section>

@@ -13,13 +13,13 @@ get_header(); ?>
 breadcrumb_trail();
 } ?>
 <header class="entry-header">
-<h2 class="entry-title" itemprop="headline"><?php printf( __( 'Uw zoekopdracht: %s', 'esplanade' ), get_search_query() ); ?></h2>
+<h2 class="entry-title" itemprop="headline"><?php printf( __( 'Uw zoekopdracht: %s', 'mvdk' ), get_search_query() ); ?></h2>
 <?php get_search_form(); ?>
 </header>
 <?php while( have_posts() ) : the_post();
 get_template_part( 'content', get_post_format() );
 endwhile;
-esplanade_paging_nav();
+mvdk_paging_nav();
 else :
 get_template_part( 'content', 'none' );
 endif; ?>

@@ -1,5 +1,12 @@
 <?php
-function maartenvandekamp_jetpack_setup() {
+/**
+ * This adds Jetpack functionality to the theme
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+
+function mvdk_jetpack_setup() {
 
 	// This theme supports Portfolios
 	add_theme_support( 'portfolio' );
@@ -17,4 +24,4 @@ function maartenvandekamp_jetpack_setup() {
 	add_theme_support( 'advertentie' );
 
 }
-add_action( 'after_setup_theme', 'maartenvandekamp_jetpack_setup' );
+add_action( 'after_setup_theme', 'mvdk_jetpack_setup' );

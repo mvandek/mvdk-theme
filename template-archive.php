@@ -1,5 +1,4 @@
 <?php
-<?php
 /**
  * Template Name: Site Archive Page
  *
