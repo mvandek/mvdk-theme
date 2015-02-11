@@ -9,6 +9,7 @@ get_header(); ?>
 <main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
 <div class="entry gastartikel-single">
+<?php while ( have_posts() ) : the_post(); ?>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
 } ?>
@@ -82,6 +83,7 @@ the_post_navigation( array(
 '<span class="screen-reader-text">' . __( 'Volgend artikel:', 'twentyfifteen' ) . '</span> ',
 ) );
 ?>
+<?php endwhile; ?>
 </div>
 </article>
 <?php

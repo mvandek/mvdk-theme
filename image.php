@@ -12,7 +12,7 @@ get_header(); ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="main">
 
 <div class="entry">
-
+<?php while ( have_posts() ) : the_post(); ?>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
 } ?>
@@ -72,6 +72,8 @@ breadcrumb_trail();
 ?>
 
 </article>
+
+<?php endwhile; ?>
 
 <?php
 					// If comments are open or we have at least one comment, load up the comment template

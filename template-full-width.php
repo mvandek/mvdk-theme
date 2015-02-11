@@ -9,6 +9,7 @@ get_header(); ?>
 <main class="page-content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
 <div class="entry page">
+<?php while ( have_posts() ) : the_post(); ?>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
 } ?>
@@ -28,6 +29,7 @@ wp_link_pages( array(
 'separator'   => '<span class="screen-reader-text">, </span>',
 ) );
 ?>
+<?php endwhile; ?>
 </div>
 </article>
 <?php
