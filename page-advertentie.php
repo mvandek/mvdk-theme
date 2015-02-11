@@ -1,10 +1,10 @@
 <?php
-
 /**
-* Template Name: Advertentie Page Template
-*
-* @package MaartenvandeKamp.nl
-*/
+ * Template Name: Advertentie Page
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <div class="entry page advertentie">

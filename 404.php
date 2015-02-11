@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying 404 pages (not found)
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+get_header(); ?>
 <main class="page-content" role="main" itemprop="mainContentOfPage">
 <div class="entry 404">
 <?php if ( function_exists('breadcrumb_trail') ) {

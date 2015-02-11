@@ -1,7 +1,10 @@
 <?php
-/*
-Template Name: Links
-*/
+/**
+ * Template Name: Links page
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="page-content" role="main">
 <article id="post-<?php the_ID(); ?>"<?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CreativeWork">

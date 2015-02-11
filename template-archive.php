@@ -1,7 +1,11 @@
 <?php
-/*
-* Template Name: Archief
-*/
+<?php
+/**
+ * Template Name: Site Archive Page
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="page-content" role="main">
 <?php while ( have_posts() ) : the_post(); ?>

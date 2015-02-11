@@ -6,9 +6,8 @@
  *
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package WordPress
- * @subpackage Maarten van de Kamp
- * @since Esplanade 1.10
+ * @package mvdk-theme
+ * @since mvdk-theme v2
  */
 get_header(); ?>
 <main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/CollectionPage">

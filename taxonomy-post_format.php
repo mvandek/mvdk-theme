@@ -1,16 +1,18 @@
 <?php
 /**
- * The template for displaying Post Format pages.
+ * The template for displaying Post Format pages
  *
  * Used to display archive-type pages for posts with a post format.
  * If you'd like to further customize these Post Format views, you may create a
  * new template file for each specific one.
  *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * @todo https://core.trac.wordpress.org/ticket/23257: Add plural versions of Post Format strings
+ * and remove plurals below.
  *
- * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
+ * @link http://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
  */
 get_header(); ?>
 <main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/CollectionPage">

@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying pages
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+get_header(); ?>
 <main class="page-content" role="main">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
 <div class="entry page">
@@ -11,7 +18,16 @@ breadcrumb_trail();
 <div class="entry-content" itemprop="mainContentOfPage">
 <?php the_content(); ?>
 </div>
-<?php wp_link_pages( array( 'before' => '<footer class="entry-utility"><p class="post-pagination">' . __( 'Pagina:', 'esplanade' ), 'after' => '</p></footer>' ) ); ?>
+<?php
+wp_link_pages( array(
+'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'twentyfifteen' ) . '</span>',
+'after'       => '</div>',
+'link_before' => '<span>',
+'link_after'  => '</span>',
+'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'twentyfifteen' ) . ' </span>%',
+'separator'   => '<span class="screen-reader-text">, </span>',
+) );
+?>
 </div>
 </article>
 <?php // If comments are open or we have at least one comment, load up the comment template

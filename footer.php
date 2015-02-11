@@ -1,3 +1,11 @@
+<?php
+/**
+ * The template for displaying the footer
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?>
 </div>
 <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
 <?php get_sidebar( 'footer' ); ?>

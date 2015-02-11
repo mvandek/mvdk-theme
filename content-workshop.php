@@ -1,3 +1,13 @@
+<?php
+/**
+ * The default template for displaying content for the custom post type workshop
+ *
+ * Used for custom post type workshop.
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?>
 <article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" itemscope="itemscope" itemtype="http://schema.org/Event">
 <?php if ( has_post_thumbnail() ) : ?>
 <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_post_thumbnail('post-thumbnail', array( "itemprop" => "image" ) ); ?></a>

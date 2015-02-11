@@ -1,10 +1,10 @@
 <?php
-
 /**
-* Template Name: Workshop Page Template
-*
-* @package MaartenvandeKamp.nl
-*/
+ * Template Name: Workshop Page
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Event">
 <div class="entry page workshop">

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The Social nav menu, for displaying social icons.
  *

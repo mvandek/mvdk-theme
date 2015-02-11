@@ -1,3 +1,11 @@
+<?php
+/**
+ * The template for displaying posts in the Image post format
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?>
 <article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" padding-20px" itemscope="itemscope" itemtype="http://schema.org/ImageObject">
 <header class="entry-header">
 <?php the_title( sprintf( '<h2 class="entry-title" itemprop="headline"><a href="%s" rel="bookmark" itemprop="url">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>

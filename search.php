@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying the Search results pages
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+get_header(); ?>
 <main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/SearchResultsPage">
 <div class="entry search">
 <?php if( have_posts() ) : ?>

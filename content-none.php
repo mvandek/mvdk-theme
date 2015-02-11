@@ -1,3 +1,11 @@
+<?php
+/**
+ * The template for displaying a "No posts found" message
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?>
 <?php if ( is_search() ) { ?>
 <article class="post hentry padding-20px" id="post-0">
 <h1 class="entry-title" itemprop="headline">Geen resultaat</h1>

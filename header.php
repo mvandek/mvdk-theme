@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+/**
+ * The template for displaying the header
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">

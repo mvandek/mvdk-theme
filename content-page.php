@@ -1,3 +1,11 @@
+<?php
+/**
+ * The template for displaying page content
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
+?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
 <div class="entry page">
 <?php if ( function_exists('breadcrumb_trail') ) {

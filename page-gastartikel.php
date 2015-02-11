@@ -1,10 +1,10 @@
 <?php
-
 /**
-* Template Name: Gastartikel Page Template
-*
-* @package MaartenvandeKamp.nl
-*/
+ * Template Name: Gastartikel Page
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <div class="entry page gastartikel">

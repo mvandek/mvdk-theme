@@ -1,14 +1,12 @@
 <?php
 /**
-* The template for displaying image attachments.
-*
-* Learn more: http://codex.wordpress.org/Template_Hierarchy
-*
-* @package WordPress
-* @subpackage Twenty_Thirteen
-* @since Twenty Thirteen 1.0
-*/
-
+ * The template for displaying image attachments.
+ *
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package mvdk-theme
+ * @since mvdk-theme v2
+ */
 get_header(); ?>
 <main class="content" role="main">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="main">
