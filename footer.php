@@ -15,17 +15,9 @@
 <div class="legal-info"><a href="https://www.maartenvandekamp.nl/over/privacy/" rel="nofollow">Privacy</a> en <a href="https://www.maartenvandekamp.nl/over/privacy/cookies/" rel="nofollow">cookies</a> | <a href="https://www.maartenvandekamp.nl/over/auteursrecht/" rel="nofollow">Auteursrechterlijk beschermd</a></div>
 </footer>
 </div>
-<?php if( !is_user_logged_in() ) { ?>
-<script>
-var _paq=[['setSiteId', 1],['setTrackerUrl', 'http://stat.maartenvandekamp.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];
-(function(d){
-var g=d.createElement('script'),
-s=d.scripts[0];
-g.src='//www.staticcdn.nl/piwik.js';
-s.parentNode.insertBefore(g,s)}
-(document))
-</script>
-<?php } ?>
+<?php if( (!defined( 'WP_DEBUG' ) || WP_DEBUG == false ) && !is_user_logged_in() ) {
+piwiktracker();
+} ?>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -111,9 +111,9 @@ wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/gene
 wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
 // Enable jQuery.
 wp_enqueue_script( 'jquery' );
-// Loads JavaScript file with functionality specific to Twenty Thirteen.
-wp_enqueue_script( 'responsive-menu-script', get_template_directory_uri() . '/responsive-menu.js', array( 'jquery' ), '20140323', true );
-wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/skip-link-focus-fix.js', array(), '20130115', true );
+// Loads JavaScript files
+wp_enqueue_script( 'responsive-menu-script', get_template_directory_uri() . '/js/responsive-menu.js', array( 'jquery' ), '20150101', true );
+wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20150218', true );
 if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 wp_enqueue_script( 'comment-reply' );
 }
@@ -142,7 +142,7 @@ add_action( 'wp_print_scripts', 'mvdk_html5_shiv' );
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
- * @since Twenty Fifteen 1.0
+ * @Borrowed from Twenty Fifteen 1.0
  *
  * @param string $html Search form HTML.
  * @return string Modified search form HTML.
@@ -171,3 +171,7 @@ require get_template_directory() . '/includes/widgets.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/includes/jetpack.php';
+/**
+ * Load Piwik Tracking Code.
+ */
+require get_template_directory() . '/includes/piwik.php';
