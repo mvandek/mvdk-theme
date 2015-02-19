@@ -2,7 +2,7 @@
 if( get_theme_mod( 'mvdk_piwik_site_id' ) ) {
 ?>
 <script>
-var _paq=[['setSiteId', <?php echo esc_url( get_theme_mod( 'mvdk_piwik_site_id' ) ); ?>],['setTrackerUrl', 'http://stat.maartenvandekamp.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];
+var _paq=[['setSiteId', <?php echo esc_html( get_theme_mod( 'mvdk_piwik_site_id' ) ); ?>],['setTrackerUrl', 'http://stat.maartenvandekamp.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];
 (function(d){
 var g=d.createElement('script'),
 s=d.scripts[0];
@@ -12,4 +12,4 @@ s.parentNode.insertBefore(g,s)}
 </script>
 <?php
 }
-|
+}
