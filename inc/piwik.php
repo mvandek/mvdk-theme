@@ -1,5 +1,5 @@
-<?php function piwiktracker() {
-if( ! get_theme_mod( 'mvdk_piwik_site_id' ) ) {
+<?php function piwiktracker() { 
+if ( ! get_theme_mod( 'mvdk_piwik_site_id' ) ) {
 return;
 } else {
 ?>
@@ -13,5 +13,5 @@ s.parentNode.insertBefore(g,s)}
 (document))
 </script>
 <?php
-}
-}
+} // Close if( ! get_theme_mod() )
+} // Close piwiktracker()

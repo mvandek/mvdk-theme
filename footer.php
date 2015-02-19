@@ -15,9 +15,7 @@
 <div class="legal-info"><a href="https://www.maartenvandekamp.nl/over/privacy/" rel="nofollow">Privacy</a> en <a href="https://www.maartenvandekamp.nl/over/privacy/cookies/" rel="nofollow">cookies</a> | <a href="https://www.maartenvandekamp.nl/over/auteursrecht/" rel="nofollow">Auteursrechterlijk beschermd</a></div>
 </footer>
 </div>
-<?php if( !is_user_logged_in() ) {
-piwiktracker();
-} ?>
+<?php if( !is_user_logged_in() ) { piwiktracker(); } ?>
 <?php wp_footer(); ?>
 </body>
 </html>
