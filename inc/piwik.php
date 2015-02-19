@@ -1,5 +1,7 @@
-<?php function piwiktracker() { 
-if( get_theme_mod( 'mvdk_piwik_site_id' ) ) {
+<?php function piwiktracker() {
+if( ! get_theme_mod( 'mvdk_piwik_site_id' ) ) {
+return;
+} else {
 ?>
 <script>
 var _paq=[['setSiteId', <?php echo esc_html( get_theme_mod( 'mvdk_piwik_site_id' ) ); ?>],['setTrackerUrl', 'http://stat.maartenvandekamp.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];

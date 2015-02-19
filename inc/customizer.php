@@ -28,7 +28,7 @@ $wp_customize->add_control( 'mvdk_facebook', array(
 'section'			=> 'mvdk_social_section',
 'settings'			=> 'mvdk_facebook',
 'priority'			=> 111,
-) ) );
+) );
 
 $wp_customize->add_setting( 'mvdk_twitter', array(
 'default'			=> '',
@@ -40,7 +40,7 @@ $wp_customize->add_control( 'mvdk_twitter', array(
 'section'			=> 'mvdk_social_section',
 'settings'			=> 'mvdk_twitter',
 'priority'			=> 112,
-) ) );
+) );
 
 $wp_customize->add_setting( 'mvdk_500px', array(
 'default'			=> '',
@@ -52,7 +52,7 @@ $wp_customize->add_control( 'mvdk_500px', array(
 'section'			=> 'mvdk_social_section',
 'settings'			=> 'mvdk_500px',
 'priority'			=> 113,
-) ) );
+) );
 
 $wp_customize->add_setting( 'mvdk_linkedin', array(
 'capability'		=> 'edit_theme_options',
@@ -65,7 +65,7 @@ $wp_customize->add_control( 'mvdk_linkedin', array(
 'section'			=> 'mvdk_social_section',
 'settings'			=> 'mvdk_linkedin',
 'priority'			=> 114,
-) ) );
+) );
 
 $wp_customize->add_setting( 'mvdk_flickr', array(
 'capability'		=> 'edit_theme_options',
@@ -78,7 +78,7 @@ $wp_customize->add_control( 'mvdk_flickr', array(
 'section'			=> 'mvdk_social_section',
 'settings'			=> 'mvdk_flickr',
 'priority'			=> 115,
-) ) );
+) );
 
 $wp_customize->add_section( 'mvdk_theme_options', array(
 'title'				=> __( 'Custom Post Type Page Options', 'mvdk' ),
