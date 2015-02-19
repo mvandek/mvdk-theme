@@ -154,24 +154,24 @@ add_filter( 'get_search_form', 'mvdk_search_form_modify' );
 /**
  * Custom functions that act independently of the theme templates.
  */
-require get_template_directory() . '/includes/extras.php';
+require get_template_directory() . '/inc/extras.php';
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/includes/template-tags.php';
+require get_template_directory() . '/inc/template-tags.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/includes/customizer.php';
+require get_template_directory() . '/inc/customizer.php';
 /**
  * Load Widgets file.
  */
-require get_template_directory() . '/includes/widgets.php';
+require get_template_directory() . '/inc/widgets.php';
 /**
  * Load Jetpack compatibility file.
  */
-require get_template_directory() . '/includes/jetpack.php';
+require get_template_directory() . '/inc/jetpack.php';
 /**
  * Load Piwik Tracking Code.
  */
-require get_template_directory() . '/includes/piwik.php';
+require get_template_directory() . '/inc/piwik.php';
