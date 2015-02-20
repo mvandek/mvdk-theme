@@ -26,8 +26,8 @@ breadcrumb_trail();
 </header>
 <?php while ( have_posts() ) : the_post(); 
 get_template_part( 'content', get_post_format() );
-endwhile; ?>
-<?php mvdk_paging_nav();
+endwhile;
+the_posts_navigation();
 else :
 get_template_part( 'content', 'none' );
 endif; ?>

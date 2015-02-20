@@ -42,14 +42,14 @@ if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
 return;
 }
 ?>
-<nav class="navigation posts-navigation" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Posts navigation', 'sobe' ); ?></h2>
+<nav class="navigation navigation" role="navigation">
+<h2 class="screen-reader-text"><?php _e( 'Pagina navigatie', 'mvdk' ); ?></h2>
 <div class="nav-links">
 <?php if ( get_next_posts_link() ) : ?>
-<div class="nav-previous"><?php next_posts_link( __( 'Older posts', 'sobe' ) ); ?></div>
+<div class="nav-previous"><?php next_posts_link( __( 'Terug', 'mvdk' ) ); ?></div>
 <?php endif; ?>
 <?php if ( get_previous_posts_link() ) : ?>
-<div class="nav-next"><?php previous_posts_link( __( 'Newer posts', 'sobe' ) ); ?></div>
+<div class="nav-next"><?php previous_posts_link( __( 'Meer', 'mvdk' ) ); ?></div>
 <?php endif; ?>
 </div><!-- .nav-links -->
 </nav><!-- .navigation -->
