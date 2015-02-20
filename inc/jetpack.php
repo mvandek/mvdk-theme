@@ -22,6 +22,9 @@ function mvdk_jetpack_setup() {
 
 	// This theme supports Advertenties
 	add_theme_support( 'advertentie' );
+	
+	// Support for Jetpack Responsive Videos
+	add_theme_support( 'jetpack-responsive-videos' );
 
 }
 add_action( 'after_setup_theme', 'mvdk_jetpack_setup' );
