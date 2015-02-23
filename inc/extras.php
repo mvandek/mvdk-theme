@@ -86,7 +86,7 @@ add_filter( 'wp_mail_from_name', 'new_mail_from_name' );
 * @since februari 2013
 */
 function new_mail_from( $from_email ) {
-$from_email = 'noreply@mvdk.nl';
+$from_email = 'noreply@mvdk.me';
 return $from_email;
 }
 add_filter( 'wp_mail_from', 'new_mail_from' );
@@ -155,7 +155,7 @@ add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 function mvdk_excerpt_more( $more ) {
     return sprintf( ' <a href="%1$s">%2$s</a>',
         esc_url( get_permalink( get_the_ID() ) ),
-        sprintf( __( ' &mdash; Lees verder %s', 'bosco' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
+        sprintf( __( ' &mdash; Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
         );
 }
 add_filter( 'excerpt_more', 'mvdk_excerpt_more' );
@@ -175,9 +175,9 @@ unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
 }
 add_action( 'wp_dashboard_setup', 'mvdk_remove_dashboard_widgets', 11 );
 
-// Change the failed login message for extra WordPress Secruty
+// Change the failed login message for extra WordPress Security
 function failed_login() {
-return 'Incorrect login information.';
+return __( 'Oeps, je hebt een verkeerde gebruikersnaam of wachtwoord ingevoerd.', 'mvdk' );
 }
 add_filter('login_errors', 'failed_login');
 /**
@@ -204,10 +204,10 @@ add_filter('get_avatar',          'roots_remove_self_closing_tags'); // <img />
 add_filter('comment_id_fields',   'roots_remove_self_closing_tags'); // <input />
 add_filter('post_thumbnail_html', 'roots_remove_self_closing_tags'); // <img />
 
-function my_login_failed_403() {
+function login_failed_403() {
 status_header( 403 );
 }
-add_action( 'wp_login_failed', 'my_login_failed_403' );
+add_action( 'wp_login_failed', 'login_failed_403' );
 /**
  * Sets default comment and ping status
  * to off for "Page" post types
@@ -223,14 +223,16 @@ add_action( 'load-page-new.php', 'poststatus_change_comment_status' );
 *
 * @since Esplanade 1.0
 */
-function add_twitter_contactmethod( $contactmethods ) {
+function add_social_media_to_profile_contact_information( $fields) {
 // Add Twitter
-$contactmethods['twitter'] = 'Twitter';
-$contactmethods['facebook'] = 'Facebook';
+$fields['twitter'] = __( 'Twitter', 'mvdk' );
+$fields['facebook'] = __( 'Facebook', 'mvdk' );
+$fields['linkedin'] = __( 'LinkedIn', 'mvdk' );
+$fields['googleplus'] = __( 'Google Plus', 'mvdk' );
 // Remove Yahoo IM
-unset($contactmethods['yim']);
-unset($contactmethods['aim']);
-unset($contactmethods['jabber']);
-return $contactmethods;
+unset($fields['yim']);
+unset($fields['aim']);
+unset($fields['jabber']);
+return $fields;
 }
-add_filter( 'user_contactmethods' , 'add_twitter_contactmethod', 10,1 );
+add_filter( 'user_contactmethods' , 'add_social_media_to_profile_contact_information' );

@@ -19,7 +19,7 @@ return;
 }
 ?>
 <nav class="navigation pagination" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Pagina Navigatie', 'simone' ); ?></h2>
+<h2 class="screen-reader-text"><?php _e( 'Pagina Navigatie', 'mvdk' ); ?></h2>
 <div class="nav-links">
 <?php if ( get_previous_posts_link() ) { ?>
 <div class="nav-previous"><?php previous_posts_link( __( '<span class="meta-nav">&laquo;</span> Terug', 'mvdk' ) ); ?></div>
@@ -29,30 +29,6 @@ return;
 <?php } ?>
 </div>
 </nav>
-<?php
-}
-/**
- * Display navigation to next/previous set of posts when applicable.
- *
- * @todo Remove this function when WordPress 4.3 is released.
- */
-function the_posts_navigation() {
-// Don't print empty markup if there's only one page.
-if ( $GLOBALS['wp_query']->max_num_pages < 2 ) {
-return;
-}
-?>
-<nav class="navigation navigation" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Pagina navigatie', 'mvdk' ); ?></h2>
-<div class="nav-links">
-<?php if ( get_next_posts_link() ) : ?>
-<div class="nav-previous"><?php next_posts_link( __( 'Terug', 'mvdk' ) ); ?></div>
-<?php endif; ?>
-<?php if ( get_previous_posts_link() ) : ?>
-<div class="nav-next"><?php previous_posts_link( __( 'Meer', 'mvdk' ) ); ?></div>
-<?php endif; ?>
-</div><!-- .nav-links -->
-</nav><!-- .navigation -->
 <?php
 }
 /**
@@ -70,7 +46,7 @@ return;
 }
 ?>
 <nav class="navigation post-navigation" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Post navigation', '_s' ); ?></h2>
+<h2 class="screen-reader-text"><?php _e( 'Post navigation', 'mvdk' ); ?></h2>
 <div class="nav-links">
 <?php previous_post_link( '%link', _x( '<div class="nav-previous">&laquo; Vorig artikel</div>', 'Previous post link', 'mvdk' ) ); ?>
 <?php next_post_link( '%link', _x( '<div class="nav-next">Volgend artikel &raquo;</div>', 'Next post link', 'mvdk' ) ); ?>
@@ -95,7 +71,7 @@ if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_ty
 
 <li class="post pingback">
 <div class="comment-body">
-<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( ' (Bewerk)', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( ' ( Bewerk )', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
 
 <?php else : ?>
@@ -106,7 +82,7 @@ if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_ty
 <div class="comment-author vcard" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
 <?php if ( 0 != $args['avatar_size'] ) { echo get_avatar( $comment, $args['avatar_size'] ); }
 printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() ); ?>
-<span class="says">schrijft:</span>
+<span class="says"><?php _e( 'schrijft:', 'mvdk' ); ?></span>
 </div>
 
 <div class="comment-metadata">
@@ -117,7 +93,7 @@ printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() 
 </a>
 <?php edit_comment_link( __( 'Bewerk', 'mvdk' ), '<p class="edit-link">', '</p>' );
 
-if ( $comment->comment_approved == '0' ) { ?><p class="comment-awaiting-moderation">Je reactie wordt beoordeeld voor plaatsing.</p><?php } ?>
+if ( $comment->comment_approved == '0' ) { ?><p class="comment-awaiting-moderation"><?php _e( 'Je reactie wordt beoordeeld voor plaatsing.', 'mvdk' ); ?></p><?php } ?>
 </div>
 </footer>
 
@@ -358,9 +334,10 @@ function mvdk_post_author() { ?>
 //if ( $posts_posted == 1) { printf(__( 'Eén artikel tot nu toe. ', 'mvdk' ) ); }
 //else { printf(__( '%s artikelen tot nu toe. ', 'mvdk' ), the_author_posts() ); }
 // Laat sociale media en andere links zien
-printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">Mijn archief</a></span>',
+printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
 esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) )
+esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) ),
+__( 'Mijn archief', 'mvdk' )
 );
 if ( get_theme_mod( 'mvdk_facebook' ) ) : ?>
 <a href="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Facebook', 'mvdk') ?></a>

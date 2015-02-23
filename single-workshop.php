@@ -43,7 +43,7 @@ echo get_the_term_list( $post->ID, 'workshop-tag', '<div class="entry-tags" item
 ?>
 <div class="entry-related">
 <div class="entry-related-module">
-<h3 class="widget-title">Aanbevolen om te lezen:</h3>
+<h3 class="widget-title"><?php _e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
 <?php
 $get_tags_from_post = get_the_terms( $post->ID, 'workshop-tag' );
 $tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
@@ -64,7 +64,7 @@ printf( __( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></
 ?>
 </ul>
 <?php } else { ?>
-<p>Er zijn geen relevante aanbevelingen..</p>
+<p><?php _e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?>

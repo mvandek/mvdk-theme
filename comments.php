@@ -25,7 +25,7 @@ return;
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 <nav role="navigation" id="comments-nav-below" class="navigation">
-<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'expound' ); ?></h2>
+<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigatie', 'mvdk' ); ?></h2>
 <div class="nav-previous"><?php previous_comments_link( __( '&larr; Oude reacties', 'mvdk' ) ); ?></div>
 <div class="nav-next"><?php next_comments_link( __( 'Nieuwe reacties &rarr;', 'mvdk' ) ); ?></div>
 </nav>
@@ -44,7 +44,7 @@ return;
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 <nav role="navigation" id="comments-nav-below" class="navigation">
-<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'expound' ); ?></h2>
+<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigatie', 'mvdk' ); ?></h2>
 <div class="nav-previous"><?php previous_comments_link( __( '&larr; Oude reacties', 'mvdk' ) ); ?></div>
 <div class="nav-next"><?php next_comments_link( __( 'Nieuwe reacties &rarr;', 'mvdk' ) ); ?></div>
 </nav>
