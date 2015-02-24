@@ -1,0 +1,515 @@
+# WordPress Blank Pot
+# Copyright (C) 2014 ...
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: mvdk-theme v2\n"
+"Report-Msgid-Bugs-To: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
+"POT-Creation-Date: 2012-10-05 10:50+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
+"Language-Team: mvdk-theme team <fotografie@maartenvandekamp.nl>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,"
+"_nc:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:16
+msgid "404: Bestaat niet (meer)"
+msgstr "404: Page not found"
+
+#: 404.php:19
+msgid ""
+"Deze pagina zorgt ervoor dat je geen ingewikkelde foutmelding krijgt. Deze "
+"pagina zie je omdat de pagina die je wil bezoeken niet meer bestaat, of een "
+"andere naam heeft gekregen."
+msgstr ""
+"This page prevents you from seeing a difficult warning. This page appears "
+"because the desired page doesn't exist any more, or has been renamed."
+
+#: 404.php:20
+msgid ""
+"Geef het nog niet op. Je hebt hieronder de zoekfunctie en een lijstje met "
+"meest handige links tot je beschikking om je weg terug te vinden op deze "
+"website!"
+msgstr ""
+"Do not give up! Below you will find a search field, and a list of useful "
+"links to find your way back on this website!"
+
+#: archive.php:23 archive.php:25
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: archive.php:27
+#, php-format
+msgid "Het archief van %s"
+msgstr "The archive of %s"
+
+#: archive.php:29 archive.php:31
+#, php-format
+msgid "Een overzicht van %s"
+msgstr "A resume of %s"
+
+#: archive.php:29
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: archive.php:31
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:33
+#, php-format
+msgid "Alle posts op %s"
+msgstr "All posts from %s"
+
+#: archive.php:33
+msgctxt "daily archives date format"
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: archive.php:36
+msgctxt "post format archive title"
+msgid "Asides"
+msgstr "Asides"
+
+#: archive.php:38
+msgctxt "post format archive title"
+msgid "Galleries"
+msgstr "Galleries"
+
+#: archive.php:40
+msgctxt "post format archive title"
+msgid "Afbeeldingen"
+msgstr "Images"
+
+#: archive.php:42
+msgctxt "post format archive title"
+msgid "Links"
+msgstr "Links"
+
+#: archive.php:45
+#, php-format
+msgid "Overzicht van %s"
+msgstr "A resume of %s"
+
+#: archive.php:49
+#, php-format
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: archive.php:51 inc/extras.php:32
+msgid "Archief"
+msgstr "Archive"
+
+#: comments.php:21
+#, php-format
+msgctxt "comments title"
+msgid "Er is 1 reactie"
+msgid_plural "%1$s reacties"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:39
+msgid "Navigatie voor reacties"
+msgstr "Comment Navigation"
+
+#: comments.php:41
+msgid "Oude reacties"
+msgstr "Old comments"
+
+#: comments.php:44
+msgid "Nieuwe reacties"
+msgstr "New Comments"
+
+#: comments.php:57
+msgid "Reageren is uitgeschakeld"
+msgstr "Comments are closed"
+
+#: content-advertentie.php:23 content-aside.php:21 content-gallery.php:18
+#: content-gastartikel.php:23 content-image.php:18 content-link.php:21
+#: content-portfolio.php:23 content-workshop.php:23 content.php:24
+#: single-advertentie.php:23 single-gastartikel.php:23 single-portfolio.php:23
+#: single-workshop.php:23 single.php:23
+msgid "Bewerken"
+msgstr "Edit"
+
+#: content-image.php:14
+msgid "Lees verder <span class=\"meta-nav\">&raquo;</span>"
+msgstr "Read on <span class=\"meta-nav\">&raquo;</span>"
+
+#: content-page.php:22 image.php:53 page-advertentie.php:25
+#: page-gastartikel.php:25 page-portfolio.php:25 page-workshop.php:25
+#: page.php:24 single-advertentie.php:30 single-gastartikel.php:30
+#: single-workshop.php:30 single.php:30 template-contact-page.php:33
+#: template-full-width.php:24
+msgid "Pagina's:"
+msgstr "Pages"
+
+#: content-page.php:26 image.php:57 page-advertentie.php:29
+#: page-gastartikel.php:29 page-portfolio.php:29 page-workshop.php:29
+#: page.php:28 single-advertentie.php:34 single-gastartikel.php:34
+#: single-workshop.php:34 single.php:34 template-contact-page.php:37
+#: template-full-width.php:28
+msgid "Pagina"
+msgstr "Page"
+
+#: functions.php:68
+msgid "Standaard Menu"
+msgstr "Primary Menu"
+
+#: functions.php:69
+msgid "Sociaal Menu"
+msgstr "Social Menu"
+
+#: header.php:25
+msgid "Ga naar de inhoud van de website"
+msgstr "Skip to site content"
+
+#: header.php:42
+msgid "Menu"
+msgstr "Menu"
+
+#: image.php:64
+msgid " Bewerken "
+msgstr "Edit"
+
+#: image.php:70
+msgctxt "Parent post link"
+msgid ""
+"<span class=\"meta-nav\">Terug naar </span><span class=\"post-title\">"
+"%title</span>"
+msgstr ""
+"<span class=\"meta-nav\">Back to </span><span class=\"post-title\">%title</"
+"span>"
+
+#: inc/customizer.php:16
+msgid "Social Media"
+msgstr "Social Media"
+
+#: inc/customizer.php:18
+msgid "Voeg Social Media knoppen toe in de header van de website"
+msgstr "Add Social Media buttons in the header of the website"
+
+#: inc/customizer.php:27
+msgid "URL van Facebook pagina"
+msgstr "URL of your Facebook Page"
+
+#: inc/customizer.php:39
+msgid "URL van Twitter pagina"
+msgstr "URL of your Twitter Page"
+
+#: inc/customizer.php:51
+msgid "URL van 500px.com pagina"
+msgstr "URL of your 500px.com Page"
+
+#: inc/customizer.php:64
+msgid "URL van Linkedin pagina"
+msgstr "URL of your LinkedIn Page"
+
+#: inc/customizer.php:77
+msgid "URL van Flickr pagina"
+msgstr "URL of your Flickr Page"
+
+#: inc/customizer.php:84
+msgid "Custom Post Type pagina opties"
+msgstr "Custom Post Type Page Options"
+
+#: inc/customizer.php:95
+msgid "Verberg titel en inhoud op Advertentie Page Template"
+msgstr "Hide title and content for Advertentie Page Template"
+
+#: inc/customizer.php:107
+msgid "Verberg titel en inhoud op Gastartikel Page Template"
+msgstr "Hide title and content for Gastartikel Page Template"
+
+#: inc/customizer.php:119
+msgid "Verberg titel en inhoud op Portfolio Page Template"
+msgstr "Hide title and content for Portfolio Page Template"
+
+#: inc/customizer.php:131
+msgid "Verberg titel en inhoud op Workshop Page Template"
+msgstr "Hide title and content for Workshop Page Template"
+
+#: inc/customizer.php:138
+msgid "Instellingen footer website"
+msgstr "Footer settings"
+
+#: inc/customizer.php:150
+msgid "Piwik Site ID"
+msgstr "Piwik Site ID"
+
+#: inc/customizer.php:164
+msgid "Footer tekst"
+msgstr "Footer text"
+
+#: inc/extras.php:31
+msgid "404 Niet gevonden"
+msgstr "404 Not Found"
+
+#: inc/extras.php:33
+#, php-format
+msgid "Zoek resultaat voor %s"
+msgstr "Search result for %s"
+
+#: inc/extras.php:34
+#, php-format
+msgid "Pagina %s"
+msgstr "Page %s"
+
+#: inc/extras.php:105
+msgid "Je naam"
+msgstr "Your Name"
+
+#: inc/extras.php:107
+msgid "Je emailadres"
+msgstr "Your Email Address"
+
+#: inc/extras.php:109
+msgid "Jouw website (Heb je een website, dan kun je die vermelden.)"
+msgstr "Your Website (if you have one, you can mention it here)"
+
+#: inc/extras.php:123
+msgid "Je reactie"
+msgstr "Your Comment"
+
+#: inc/extras.php:125
+msgid ""
+"Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden "
+"in. De velden met <span class=\"required\">*</span> zijn verplicht.<br />Heb "
+"je een algemene vraag over fotografie? Dan kun je die op <a href=\"https://"
+"www.mvdk.nl/stel-een-vraag/\">deze pagina</a> plaatsen."
+msgstr ""
+"Lovely you want to comment! Please fill in the following fields. Those "
+"marked with <span class=\"required\">*</span> are required."
+
+#: inc/extras.php:127
+msgid "Schrijf een reactie"
+msgstr "Add a comment"
+
+#: inc/extras.php:128
+#, php-format
+msgid "Reageer op %s"
+msgstr "Comment on %s"
+
+#: inc/extras.php:129
+msgid "Annuleer mijn reactie"
+msgstr "Cancel Comment"
+
+#: inc/extras.php:130
+msgid "Plaats mijn reactie"
+msgstr "Add Comment"
+
+#: inc/extras.php:158
+#, php-format
+msgid " &mdash; Lees verder %s"
+msgstr " &mdash; Continue Reading %s"
+
+#: inc/extras.php:180
+msgid "Oeps, je hebt een verkeerde gebruikersnaam of wachtwoord ingevoerd."
+msgstr "Whoops, you've entered a wrong username or password"
+
+#: inc/extras.php:228 inc/template-tags.php:329
+msgid "Twitter"
+msgstr "Twitter"
+
+#: inc/extras.php:229 inc/template-tags.php:326
+msgid "Facebook"
+msgstr "Facebook"
+
+#: inc/extras.php:230 inc/template-tags.php:335
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: inc/extras.php:231
+msgid "Google+"
+msgstr "Google+"
+
+#: inc/template-tags.php:22
+msgid "Navigatie voor pagina's"
+msgstr "Page Navigation"
+
+#: inc/template-tags.php:25
+msgid "Terug"
+msgstr "Back"
+
+#: inc/template-tags.php:28
+msgid "Meer"
+msgstr "More"
+
+#: inc/template-tags.php:57
+msgid "Pingback: "
+msgstr "Pinkback:"
+
+#: inc/template-tags.php:57 inc/template-tags.php:77
+msgid "Bewerk"
+msgstr "Edit"
+
+#: inc/template-tags.php:68
+msgid "schrijft"
+msgstr "says"
+
+#: inc/template-tags.php:74
+#, php-format
+msgid "%1$s om %2$s"
+msgstr "%1$s at %2$s"
+
+#: inc/template-tags.php:79
+msgid "Je reactie wordt beoordeeld voor plaatsing."
+msgstr "Your comment will be reviewed"
+
+#: inc/template-tags.php:88 inc/template-tags.php:227
+msgid "Reageer"
+msgstr "Comment on %s"
+
+#: inc/template-tags.php:107
+msgid "Anoniem"
+msgstr "Anonymous"
+
+#: inc/template-tags.php:120
+msgid "Reageer op"
+msgstr "Comment on %s"
+
+#: inc/template-tags.php:178
+msgctxt "Wordt voor publicatiedatum geplaatst."
+msgid "Geplaatst op"
+msgstr "Published on"
+
+#: inc/template-tags.php:185
+msgctxt "Wordt voor weergave schrijver geplaatst."
+msgid "Schrijver"
+msgstr "Author"
+
+#: inc/template-tags.php:193
+msgctxt "Wordt tussen lijst items geplaatst, en er zit een spatie na de komma."
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:207
+msgctxt "Wordt voor weergave categorie geplaatst."
+msgid "Categorie"
+msgstr "Category"
+
+#: inc/template-tags.php:218
+msgctxt "Wordt gebruikt voor grote weergave bijlage."
+msgid "Ware grootte"
+msgstr "Full size"
+
+#: inc/template-tags.php:227
+msgid "1 reactie"
+msgstr "1 comment"
+
+#: inc/template-tags.php:227
+msgid "% reacties"
+msgstr "%s comments"
+
+#: inc/template-tags.php:322
+#, php-format
+msgid "Bekijk het archief van %s"
+msgstr "The archive of %s"
+
+#: inc/template-tags.php:323
+msgid "Mijn archief"
+msgstr "Archive"
+
+#: inc/template-tags.php:332
+msgid "500px.com"
+msgstr "500px.com"
+
+#: inc/template-tags.php:338
+msgid "Flickr"
+msgstr "Flickr"
+
+#: inc/widgets.php:15
+msgid "Verschijnt bovenin de sidebar"
+msgstr "Appears on top of the sidebar"
+
+#: inc/widgets.php:26
+msgid "Verschijnt onderaan de pagina"
+msgstr "Appears at the footer of the page"
+
+#: inc/widgets.php:37
+msgid "Verschijnt onder content, naast gerelateerde artikelen"
+msgstr "Appears under single content, next to recommended articles"
+
+#: inc/widgets.php:48
+msgid "Verschijnt op 404 Page Not Found pagina"
+msgstr "Appears on 404 Page Not Found page"
+
+#: search.php:16
+#, php-format
+msgid "Uw zoekopdracht: %s"
+msgstr "Your search query: %s"
+
+#: single-advertentie.php:46 single-gastartikel.php:46 single-portfolio.php:37
+#: single-workshop.php:46 single.php:47
+msgid "Aanbevolen om te lezen"
+msgstr "Recommended articles"
+
+#: single-advertentie.php:62 single-gastartikel.php:62 single-portfolio.php:54
+#: single-workshop.php:62 single.php:63
+#, php-format
+msgid ""
+"<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></li>"
+msgstr ""
+"<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></li>"
+
+#: single-advertentie.php:67 single-gastartikel.php:67 single-portfolio.php:59
+#: single-workshop.php:67 single.php:68
+msgid "Er zijn geen relevante aanbevelingen"
+msgstr "There are no recommended articles right now"
+
+#: single-advertentie.php:80 single-gastartikel.php:80 single-portfolio.php:74
+#: single-workshop.php:80 single.php:81
+msgid "&laquo; Vorig artikel"
+msgstr "&laquo; Previous Article"
+
+#: single-advertentie.php:81 single-gastartikel.php:81 single-portfolio.php:75
+#: single-workshop.php:81 single.php:82
+msgid "Vorig artikel:"
+msgstr "Previous Article:"
+
+#: single-advertentie.php:82 single-gastartikel.php:82 single-portfolio.php:72
+#: single-workshop.php:82 single.php:83
+msgid "Volgend artikel &raquo;"
+msgstr "Next Article &raquo;"
+
+#: single-advertentie.php:83 single-gastartikel.php:83 single-portfolio.php:73
+#: single-workshop.php:83 single.php:84
+msgid "Volgend artikel:"
+msgstr "Next Article:"
+
+#: single-workshop.php:41
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: taxonomy-post_format.php:25
+#, php-format
+msgid "%s archief"
+msgstr "%s Archive"
+
+#~ msgid "Linkedin"
+#~ msgstr "LinkedIn"
+
+#~ msgid "Google Plus"
+#~ msgstr "Google Plus"
+
+#~ msgid " Bewerk "
+#~ msgstr "Edit"
+
+#~ msgid "Bewerk "
+#~ msgstr "Edit"

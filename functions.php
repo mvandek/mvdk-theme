@@ -65,8 +65,8 @@ add_theme_support( 'social-links', array( 'facebook', 'twitter', 'google_plus' )
 add_filter( 'use_default_gallery_style', '__return_false' );
 // Register Primary Navigation Menu
 register_nav_menus( array(
-'primary_nav' => __( 'Primary Menu', 'mvdk' ),
-'social' => __( 'Social Menu', 'mvdk' ),
+'primary' => __( 'Standaard Menu', 'mvdk' ),
+'social' => __( 'Sociaal Menu', 'mvdk' ),
 ) );
 /*
  * Let WordPress manage the document title.

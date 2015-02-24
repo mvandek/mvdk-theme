@@ -81,7 +81,7 @@ $wp_customize->add_control( 'mvdk_flickr', array(
 ) );
 
 $wp_customize->add_section( 'mvdk_theme_options', array(
-'title'				=> __( 'Custom Post Type Page Options', 'mvdk' ),
+'title'				=> __( 'Custom Post Type pagina opties', 'mvdk' ),
 'priority'			=> 120,
 ) );
 
@@ -92,7 +92,7 @@ $wp_customize->add_setting( 'mvdk_hide_advertentie_page_content', array(
 ) );
 
 $wp_customize->add_control( 'mvdk_hide_advertentie_page_content', array(
-'label'				=> __( 'Hide title and content on Advertentie Page Template', 'mvdk' ),
+'label'				=> __( 'Verberg titel en inhoud op Advertentie Page Template', 'mvdk' ),
 'section'			=> 'mvdk_theme_options',
 'type'				=> 'checkbox',
 ) );
@@ -104,7 +104,7 @@ $wp_customize->add_setting( 'mvdk_hide_gastartikel_page_content', array(
 ) );
 
 $wp_customize->add_control( 'mvdk_hide_gastartikel_page_content', array(
-'label'				=> __( 'Hide title and content on Gastartikel Page Template', 'mvdk' ),
+'label'				=> __( 'Verberg titel en inhoud op Gastartikel Page Template', 'mvdk' ),
 'section'			=> 'mvdk_theme_options',
 'type'				=> 'checkbox',
 ) );
@@ -116,7 +116,7 @@ $wp_customize->add_setting( 'mvdk_hide_portfolio_page_content', array(
 ) );
 
 $wp_customize->add_control( 'mvdk_hide_portfolio_page_content', array(
-'label'				=> __( 'Hide title and content on Portfolio Page Template', 'mvdk' ),
+'label'				=> __( 'Verberg titel en inhoud op Portfolio Page Template', 'mvdk' ),
 'section'			=> 'mvdk_theme_options',
 'type'				=> 'checkbox',
 ) );
@@ -128,14 +128,14 @@ $wp_customize->add_setting( 'mvdk_hide_workshop_page_content', array(
 ) );
 
 $wp_customize->add_control( 'mvdk_hide_workshop_page_content', array(
-'label'				=> __( 'Hide title and content on Workshop Page Template', 'mvdk' ),
+'label'				=> __( 'Verberg titel en inhoud op Workshop Page Template', 'mvdk' ),
 'section'			=> 'mvdk_theme_options',
 'type'				=> 'checkbox',
 ) );
 
 //Add Footer Section
 $wp_customize->add_section( 'mvdk_footer_settings', array(
-'title'				=> __('Footer Settings','mvdk'),
+'title'				=> __('Instellingen footer website','mvdk'),
 'priority'			=> 130,
 ) );
 	

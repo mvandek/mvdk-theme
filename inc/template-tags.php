@@ -19,13 +19,13 @@ return;
 }
 ?>
 <nav class="navigation pagination" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Pagina Navigatie', 'mvdk' ); ?></h2>
+<h2 class="screen-reader-text"><?php _e( 'Navigatie voor pagina\'s', 'mvdk' ); ?></h2>
 <div class="nav-links">
 <?php if ( get_previous_posts_link() ) { ?>
-<div class="nav-previous"><?php previous_posts_link( __( '<span class="meta-nav">&laquo;</span> Terug', 'mvdk' ) ); ?></div>
+<div class="nav-previous"><?php previous_posts_link( __( 'Terug', 'mvdk' ) ); ?></div>
 <?php } ?>
 <?php if ( get_next_posts_link() ) { ?>
-<div class="nav-next"><?php next_posts_link( __( 'Meer <span class="meta-nav">&raquo;</span>', 'mvdk' ) ); ?></div>
+<div class="nav-next"><?php next_posts_link( __( 'Meer', 'mvdk' ) ); ?></div>
 <?php } ?>
 </div>
 </nav>
@@ -37,23 +37,6 @@ return;
 *
 * @return void
 */
-function mvdk_post_nav() {
-// Don't print empty markup if there's nowhere to navigate.
-$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-$next     = get_adjacent_post( false, '', false );
-if ( ! $next && ! $previous ) {
-return;
-}
-?>
-<nav class="navigation post-navigation" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Post navigation', 'mvdk' ); ?></h2>
-<div class="nav-links">
-<?php previous_post_link( '%link', _x( '<div class="nav-previous">&laquo; Vorig artikel</div>', 'Previous post link', 'mvdk' ) ); ?>
-<?php next_post_link( '%link', _x( '<div class="nav-next">Volgend artikel &raquo;</div>', 'Next post link', 'mvdk' ) ); ?>
-</div>
-</nav>
-<?php }
-
 /**
 * Template for comments and pingbacks.
 *
@@ -71,7 +54,7 @@ if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_ty
 
 <li class="post pingback">
 <div class="comment-body">
-<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( ' ( Bewerk )', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( 'Bewerk', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
 
 <?php else : ?>
@@ -82,7 +65,7 @@ if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_ty
 <div class="comment-author vcard" itemprop="creator" itemscope="itemscope" itemtype="http://schema.org/Person">
 <?php if ( 0 != $args['avatar_size'] ) { echo get_avatar( $comment, $args['avatar_size'] ); }
 printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() ); ?>
-<span class="says"><?php _e( 'schrijft:', 'mvdk' ); ?></span>
+<span class="says"><?php _e( 'schrijft', 'mvdk' ); ?></span>
 </div>
 
 <div class="comment-metadata">
@@ -134,7 +117,7 @@ function mvdk_author_comment_reply_link( $link, $args, $comment ) {
 
 	// Replace Reply Link with "Reageer op <Author First Name>"
 	$reply_link_text = $args['reply_text'];
-	$link            = str_replace( $reply_link_text, __('Reageer op', 'mvdk') . ' ' . $author, $link );
+	$link            = str_replace( $reply_link_text, __( 'Reageer op', 'mvdk' ) . ' ' . $author, $link );
 
 	return $link;
 	}
@@ -192,14 +175,14 @@ function mvdk_entry_meta() {
 		);
 
 		printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span><a href="%2$s" rel="bookmark">%3$s</a></span>',
-			_x( 'Geplaatst op', 'Used before publish date.', 'mvdk' ),
+			_x( 'Geplaatst op', 'Wordt voor publicatiedatum geplaatst.', 'mvdk' ),
 			esc_url( get_permalink() ),
 			$time_string
 		);
 	}
 		// if ( is_singular() || is_multi_author() ) {
 			printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s" itemprop="name">%3$s</a></span></span>',
-				_x( 'Schrijver', 'Used before post author name.', 'mvdk' ),
+				_x( 'Schrijver', 'Wordt voor weergave schrijver geplaatst.', 'mvdk' ),
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				get_the_author()
 			);
@@ -207,7 +190,7 @@ function mvdk_entry_meta() {
 	
 
 		if ( 'post' == get_post_type() ) {
-		$categories_list = get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'mvdk' ) );	
+		$categories_list = get_the_category_list( _x( ', ', 'Wordt tussen lijst items geplaatst, en er zit een spatie na de komma.', 'mvdk' ) );	
 		} elseif ( 'portfolio' == get_post_type() ) {
 			$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
 		} elseif ( 'gastartikel' == get_post_type() ) {
@@ -221,7 +204,7 @@ function mvdk_entry_meta() {
 		// if ( $categories_list && mvdk_categorized_blog() ) {
 		if ( $categories_list ) {
 			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
-				_x( 'Categorie', 'Used before category names.', 'mvdk' ),
+				_x( 'Categorie', 'Wordt voor weergave categorie geplaatst.', 'mvdk' ),
 				$categories_list
 			);
 		}
@@ -232,7 +215,7 @@ function mvdk_entry_meta() {
 		$metadata = wp_get_attachment_metadata();
 
 		printf( '<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
-			_x( 'Full size', 'Used before full size attachment link.', 'mvdk' ),
+			_x( 'Ware grootte', 'Wordt gebruikt voor grote weergave bijlage.', 'mvdk' ),
 			esc_url( wp_get_attachment_url() ),
 			$metadata['width'],
 			$metadata['height']
@@ -340,19 +323,19 @@ esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() )
 __( 'Mijn archief', 'mvdk' )
 );
 if ( get_theme_mod( 'mvdk_facebook' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Facebook', 'mvdk') ?></a>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" itemprop="sameAs"><?php _e('Facebook', 'mvdk') ?></a>
 <?php endif;
 if ( get_theme_mod( 'mvdk_twitter' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Twitter', 'mvdk') ?></a>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" itemprop="sameAs"><?php _e('Twitter', 'mvdk') ?></a>
 <?php endif;
 if ( get_theme_mod( 'mvdk_500px' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" itemprop="sameAs"><?php esc_html_e('500px.com', 'mvdk') ?></a>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" itemprop="sameAs"><?php _e('500px.com', 'mvdk') ?></a>
 <?php endif;
 if ( get_theme_mod( 'mvdk_linkedin' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Linkedin', 'mvdk') ?></a>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" itemprop="sameAs"><?php _e( 'LinkedIn' , 'mvdk') ?></a>
 <?php endif;
 if ( get_theme_mod( 'mvdk_flickr' ) ) : ?>
-<a href="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" itemprop="sameAs"><?php esc_html_e('Flickr', 'mvdk') ?></a>
+<a href="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?php echo esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" itemprop="sameAs"><?php _e('Flickr', 'mvdk') ?></a>
 <?php endif; ?>
 </section>
 </section>

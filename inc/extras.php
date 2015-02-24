@@ -228,7 +228,7 @@ function add_social_media_to_profile_contact_information( $fields) {
 $fields['twitter'] = __( 'Twitter', 'mvdk' );
 $fields['facebook'] = __( 'Facebook', 'mvdk' );
 $fields['linkedin'] = __( 'LinkedIn', 'mvdk' );
-$fields['googleplus'] = __( 'Google Plus', 'mvdk' );
+$fields['googleplus'] = __( 'Google+', 'mvdk' );
 // Remove Yahoo IM
 unset($fields['yim']);
 unset($fields['aim']);

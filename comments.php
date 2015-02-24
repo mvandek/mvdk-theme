@@ -23,14 +23,6 @@ return;
 			?>
 		</h2>
 
-<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-<nav role="navigation" id="comments-nav-below" class="navigation">
-<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigatie', 'mvdk' ); ?></h2>
-<div class="nav-previous"><?php previous_comments_link( __( '&larr; Oude reacties', 'mvdk' ) ); ?></div>
-<div class="nav-next"><?php next_comments_link( __( 'Nieuwe reacties &rarr;', 'mvdk' ) ); ?></div>
-</nav>
-<?php endif; // Check for comment navigation ?>
-
 		<ol class="comment-list">
 			<?php
 				wp_list_comments( array(
@@ -43,10 +35,16 @@ return;
 		</ol><!-- .comment-list -->
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-<nav role="navigation" id="comments-nav-below" class="navigation">
-<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigatie', 'mvdk' ); ?></h2>
-<div class="nav-previous"><?php previous_comments_link( __( '&larr; Oude reacties', 'mvdk' ) ); ?></div>
-<div class="nav-next"><?php next_comments_link( __( 'Nieuwe reacties &rarr;', 'mvdk' ) ); ?></div>
+<nav class="navigation comment-navigation" role="navigation">
+<h2 class="screen-reader-text"><?php _e( 'Navigatie voor reacties', 'mvdk' ); ?></h2>
+<?php
+if ( $prev_link = get_previous_comments_link( __( 'Oude reacties', 'mvdk' ) ) ) :
+printf( '<div class="nav-previous">%s</div>', $prev_link );
+endif;
+if ( $next_link = get_next_comments_link( __( 'Nieuwe reacties', 'mvdk' ) ) ) :
+printf( '<div class="nav-next">%s</div>', $next_link );
+endif;
+?>
 </nav>
 <?php endif; // Check for comment navigation ?>
 

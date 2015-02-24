@@ -50,18 +50,18 @@ breadcrumb_trail();
 						<?php
 							the_content();
 							wp_link_pages( array(
-								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'mvdk' ) . '</span>',
+								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
 								'after'       => '</div>',
 								'link_before' => '<span>',
 								'link_after'  => '</span>',
-								'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'mvdk' ) . ' </span>%',
+								'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
 								'separator'   => '<span class="screen-reader-text">, </span>',
 							) );
 						?>
 					</div><!-- .entry-content -->
 
 <footer class="entry-footer">
-<?php edit_post_link( __( 'Bewerk', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php edit_post_link( __( ' Bewerken ', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </footer><!-- .entry-footer -->
 
 <?php
