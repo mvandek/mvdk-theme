@@ -54,7 +54,7 @@ if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_ty
 
 <li class="post pingback">
 <div class="comment-body">
-<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( 'Bewerk', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
 
 <?php else : ?>
@@ -74,7 +74,7 @@ printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() 
 <?php printf( __( '%1$s om %2$s', 'mvdk' ), get_comment_date(), get_comment_time() ); ?>
 </time>
 </a>
-<?php edit_comment_link( __( 'Bewerk', 'mvdk' ), '<p class="edit-link">', '</p>' );
+<?php edit_comment_link( __( 'Bewerken', 'mvdk' ), '<p class="edit-link">', '</p>' );
 
 if ( $comment->comment_approved == '0' ) { ?><p class="comment-awaiting-moderation"><?php _e( 'Je reactie wordt beoordeeld voor plaatsing.', 'mvdk' ); ?></p><?php } ?>
 </div>

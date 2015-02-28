@@ -60,7 +60,7 @@ if( $tag_query->have_posts() ) { ?>
 <ul>
 <?php while ( $tag_query->have_posts() ) {
 $tag_query->the_post();
-printf( __( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', 'mvdk' ), esc_url( get_permalink() ), get_the_title() );
+printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>

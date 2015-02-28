@@ -61,7 +61,7 @@ breadcrumb_trail();
 					</div><!-- .entry-content -->
 
 <footer class="entry-footer">
-<?php edit_post_link( __( ' Bewerken ', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php edit_post_link( __( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </footer><!-- .entry-footer -->
 
 <?php
@@ -81,8 +81,6 @@ breadcrumb_trail();
 						comments_template();
 					endif;
 ?>
-
-
 </main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

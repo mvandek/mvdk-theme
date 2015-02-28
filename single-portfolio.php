@@ -25,6 +25,16 @@ breadcrumb_trail();
 </header>
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
+<?php
+wp_link_pages( array(
+'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
+'after'       => '</div>',
+'link_before' => '<span>',
+'link_after'  => '</span>',
+'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
+'separator'   => '<span class="screen-reader-text">, </span>',
+) );
+?>
 </div>
 <footer class="entry-utility">
 <?php
@@ -51,7 +61,7 @@ if( $tag_query->have_posts() ) { ?>
 <ul>
 <?php while ( $tag_query->have_posts() ) {
 $tag_query->the_post();
-printf( __( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', 'mvdk' ), esc_url( get_permalink() ), get_the_title() );
+printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>

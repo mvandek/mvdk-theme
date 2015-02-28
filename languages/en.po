@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mvdk-theme v2\n"
 "Report-Msgid-Bugs-To: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
-"POT-Creation-Date: 2012-10-05 10:50+0100\n"
+"POT-Creation-Date: 2015-02-28 15:33+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
 "Language-Team: mvdk-theme team <fotografie@maartenvandekamp.nl>\n"
@@ -18,8 +18,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;"
-"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,"
-"_nc:4c,1,2\n"
+"_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ../\n"
 "X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -142,6 +141,7 @@ msgstr "Comments are closed"
 #: content-advertentie.php:23 content-aside.php:21 content-gallery.php:18
 #: content-gastartikel.php:23 content-image.php:18 content-link.php:21
 #: content-portfolio.php:23 content-workshop.php:23 content.php:24
+#: image.php:64 inc/template-tags.php:57 inc/template-tags.php:77
 #: single-advertentie.php:23 single-gastartikel.php:23 single-portfolio.php:23
 #: single-workshop.php:23 single.php:23
 msgid "Bewerken"
@@ -154,16 +154,16 @@ msgstr "Read on <span class=\"meta-nav\">&raquo;</span>"
 #: content-page.php:22 image.php:53 page-advertentie.php:25
 #: page-gastartikel.php:25 page-portfolio.php:25 page-workshop.php:25
 #: page.php:24 single-advertentie.php:30 single-gastartikel.php:30
-#: single-workshop.php:30 single.php:30 template-contact-page.php:33
-#: template-full-width.php:24
+#: single-portfolio.php:30 single-workshop.php:30 single.php:30
+#: template-contact-page.php:33 template-full-width.php:24
 msgid "Pagina's:"
 msgstr "Pages"
 
 #: content-page.php:26 image.php:57 page-advertentie.php:29
 #: page-gastartikel.php:29 page-portfolio.php:29 page-workshop.php:29
 #: page.php:28 single-advertentie.php:34 single-gastartikel.php:34
-#: single-workshop.php:34 single.php:34 template-contact-page.php:37
-#: template-full-width.php:28
+#: single-portfolio.php:34 single-workshop.php:34 single.php:34
+#: template-contact-page.php:37 template-full-width.php:28
 msgid "Pagina"
 msgstr "Page"
 
@@ -182,10 +182,6 @@ msgstr "Skip to site content"
 #: header.php:42
 msgid "Menu"
 msgstr "Menu"
-
-#: image.php:64
-msgid " Bewerken "
-msgstr "Edit"
 
 #: image.php:70
 msgctxt "Parent post link"
@@ -354,10 +350,6 @@ msgstr "More"
 msgid "Pingback: "
 msgstr "Pinkback:"
 
-#: inc/template-tags.php:57 inc/template-tags.php:77
-msgid "Bewerk"
-msgstr "Edit"
-
 #: inc/template-tags.php:68
 msgid "schrijft"
 msgstr "says"
@@ -454,40 +446,32 @@ msgstr "Appears on 404 Page Not Found page"
 msgid "Uw zoekopdracht: %s"
 msgstr "Your search query: %s"
 
-#: single-advertentie.php:46 single-gastartikel.php:46 single-portfolio.php:37
+#: single-advertentie.php:46 single-gastartikel.php:46 single-portfolio.php:47
 #: single-workshop.php:46 single.php:47
 msgid "Aanbevolen om te lezen"
 msgstr "Recommended articles"
 
-#: single-advertentie.php:62 single-gastartikel.php:62 single-portfolio.php:54
-#: single-workshop.php:62 single.php:63
-#, php-format
-msgid ""
-"<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></li>"
-msgstr ""
-"<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></li>"
-
-#: single-advertentie.php:67 single-gastartikel.php:67 single-portfolio.php:59
+#: single-advertentie.php:67 single-gastartikel.php:67 single-portfolio.php:69
 #: single-workshop.php:67 single.php:68
 msgid "Er zijn geen relevante aanbevelingen"
 msgstr "There are no recommended articles right now"
 
-#: single-advertentie.php:80 single-gastartikel.php:80 single-portfolio.php:74
+#: single-advertentie.php:80 single-gastartikel.php:80 single-portfolio.php:84
 #: single-workshop.php:80 single.php:81
 msgid "&laquo; Vorig artikel"
 msgstr "&laquo; Previous Article"
 
-#: single-advertentie.php:81 single-gastartikel.php:81 single-portfolio.php:75
+#: single-advertentie.php:81 single-gastartikel.php:81 single-portfolio.php:85
 #: single-workshop.php:81 single.php:82
 msgid "Vorig artikel:"
 msgstr "Previous Article:"
 
-#: single-advertentie.php:82 single-gastartikel.php:82 single-portfolio.php:72
+#: single-advertentie.php:82 single-gastartikel.php:82 single-portfolio.php:82
 #: single-workshop.php:82 single.php:83
 msgid "Volgend artikel &raquo;"
 msgstr "Next Article &raquo;"
 
-#: single-advertentie.php:83 single-gastartikel.php:83 single-portfolio.php:73
+#: single-advertentie.php:83 single-gastartikel.php:83 single-portfolio.php:83
 #: single-workshop.php:83 single.php:84
 msgid "Volgend artikel:"
 msgstr "Next Article:"
@@ -501,6 +485,27 @@ msgstr ", "
 #, php-format
 msgid "%s archief"
 msgstr "%s Archive"
+
+#~ msgctxt "Parent post link"
+#~ msgid ""
+#~ "<span class=\"meta-nav\">Terug naar</span> <span class=\"post-title\">"
+#~ "%title</span>"
+#~ msgstr ""
+#~ "<span class=\"meta-nav\">Back to </span><span class=\"post-title\">"
+#~ "%title</span>"
+
+#~ msgid "Bewerk"
+#~ msgstr "Edit"
+
+#~ msgid " Bewerken "
+#~ msgstr "Edit"
+
+#~ msgid ""
+#~ "<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></"
+#~ "li>"
+#~ msgstr ""
+#~ "<li><a href=\"%1$s\" rel=\"bookmark\" itemprop=\"relatedLink\">%2$s</a></"
+#~ "li>"
 
 #~ msgid "Linkedin"
 #~ msgstr "LinkedIn"
