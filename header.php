@@ -11,9 +11,9 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="pingback" href="https://www.mvdk.nl/xmlrpc.php">
+<link rel="pingback" href="https://www.maartenvandekamp.nl/xmlrpc.php">
 <link rel="dns-prefetch" href="//staticcdn.nl/">
-<link rel="dns-prefetch" href="//stat.mvdk.nl/">
+<link rel="dns-prefetch" href="//stat.maartenvandekamp.nl/">
 <link rel="dns-prefetch" href="//secure.gravatar.com/">
 <!--[if gte IE 9]>
 <div class="browsehappy">Zoals je kunt zien wordt de website niet bepaald goed weergegeven. Dat komt omdat je een <strong>sterk verouderde</strong> browser gebruikt, waardoor de website niet goed wordt weergegeven. <a href="http://browsehappy.com/">Upgrade je browser</a> als dat mogelijk is om veilig te kunnen internetten en om deze website optimaal te kunnen gebruiken.</div>
