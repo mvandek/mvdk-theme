@@ -1456,7 +1456,8 @@ margin-bottom: 0;
 margin-bottom: 0;
 }
 
-.comment-list li{
+.comment-list > li,
+.children > li{
 margin: 20px 0;
 }
 
