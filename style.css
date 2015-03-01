@@ -1020,7 +1020,6 @@ flex-direction: column;
 
 .content,
 .page-content {
-order: 1;
 width:100%;
 }
 
@@ -1030,7 +1029,6 @@ margin-bottom: 20px;
 
 .sidebar{
 box-sizing: border-box;
-order: 2;
 width:100%;
 }
 
@@ -2016,6 +2014,11 @@ width:1020px
 flex-direction: row;
 }
 
+.content,
+.page-content {
+order: 1;
+}
+
 .content{
 float:left;
 width: 715px;
@@ -2028,6 +2031,7 @@ width:100%
 .sidebar{
 float: right;
 font-size:14px;
+order: 2;
 width:260px;
 }
 
