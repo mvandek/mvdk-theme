@@ -39,12 +39,13 @@ if ( $description || is_customize_preview() ) { ?>
 </div>
 <?php if ( has_nav_menu( 'primary' ) ) : ?>
 <nav id="site-navigation" class="main-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-<button class="menu-toggle" aria-controls="menu-hoofdmenu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
+<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
 <?php
 // Primary navigation menu.
 wp_nav_menu( array(
 'menu_class'     => 'nav-menu',
 'theme_location' => 'primary',
+'menu_id' => 'primary-menu'
 ) );
 ?>
 </nav><!-- .main-navigation -->

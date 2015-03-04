@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mvdk-theme v2\n"
 "Report-Msgid-Bugs-To: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
-"POT-Creation-Date: 2015-02-28 15:33+0100\n"
+"POT-Creation-Date: 2015-03-04 12:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Maarten van de Kamp <fotografie@maartenvandekamp.nl>\n"
 "Language-Team: mvdk-theme team <fotografie@maartenvandekamp.nl>\n"
@@ -287,10 +287,18 @@ msgid ""
 "Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden "
 "in. De velden met <span class=\"required\">*</span> zijn verplicht.<br />Heb "
 "je een algemene vraag over fotografie? Dan kun je die op <a href=\"https://"
-"www.mvdk.nl/stel-een-vraag/\">deze pagina</a> plaatsen."
+"www.maartenvandekamp.nl/stel-een-vraag/\">deze pagina</a> plaatsen."
 msgstr ""
 "Lovely you want to comment! Please fill in the following fields. Those "
 "marked with <span class=\"required\">*</span> are required."
+
+#: inc/extras.php:126
+msgid ""
+"Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres "
+"wordt <strong>niet</strong> openbaar gemaakt."
+msgstr ""
+"Your comment is awaiting moderation. Your email address will <strong>not</"
+"strong> be published."
 
 #: inc/extras.php:127
 msgid "Schrijf een reactie"
@@ -311,8 +319,8 @@ msgstr "Add Comment"
 
 #: inc/extras.php:158
 #, php-format
-msgid " &mdash; Lees verder %s"
-msgstr " &mdash; Continue Reading %s"
+msgid "Lees verder %s"
+msgstr "Continue Reading %s"
 
 #: inc/extras.php:180
 msgid "Oeps, je hebt een verkeerde gebruikersnaam of wachtwoord ingevoerd."
@@ -485,6 +493,18 @@ msgstr ", "
 #, php-format
 msgid "%s archief"
 msgstr "%s Archive"
+
+#~ msgid ""
+#~ "Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande "
+#~ "velden in. De velden met <span class=\"required\">*</span> zijn verplicht."
+#~ "<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a "
+#~ "href=\"https://www.mvdk.nl/stel-een-vraag/\">deze pagina</a> plaatsen."
+#~ msgstr ""
+#~ "Lovely you want to comment! Please fill in the following fields. Those "
+#~ "marked with <span class=\"required\">*</span> are required."
+
+#~ msgid " &mdash; Lees verder %s"
+#~ msgstr " &mdash; Continue Reading %s"
 
 #~ msgctxt "Parent post link"
 #~ msgid ""

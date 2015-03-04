@@ -102,11 +102,11 @@ $req       = get_option( 'require_name_email' );
 $aria_req  = ( $req ? " aria-required='true'" : '' );
 $html_req  = ( $req ? " required='required'" : '' );
 
-$fields['author'] = '<p class="comment-form-author"><label for="author">' . esc_html__( 'Je naam', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="text" id="author" name="author" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields['author'] = '<p class="comment-form-author"><label for="author">' . __( 'Je naam', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="text" id="author" name="author" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
 
-$fields['email'] = '<p class="comment-form-email"><label for="email">' . esc_html__( 'Je emailadres', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
+$fields['email'] = '<p class="comment-form-email"><label for="email">' . __( 'Je emailadres', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
 
-$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website (Heb je een website, dan kun je die vermelden.)', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields['url'] = '<p class="comment-form-url"><label for="url">' . __( 'Jouw website (Heb je een website, dan kun je die vermelden.)', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
 
 return $fields;
 
@@ -122,12 +122,12 @@ function mvdk_comment_defaults( $defaults ) {
 $defaults['comment_field'] = '<p class="comment-form-comment">
 <label for="comment">' . __( 'Je reactie', 'mvdk' ) . '</label>
 <textarea id="comment" name="comment" cols="45" rows="8"></textarea></p>';
-$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.mvdk.nl/stel-een-vraag/">deze pagina</a> plaatsen.' ) . '</p>';
-$defaults['comment_notes_after'] = 'Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.';
-$defaults['title_reply'] = esc_html__( 'Schrijf een reactie' );
+$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.', 'mvdk' ) . '</p>';
+$defaults['comment_notes_after'] = __('Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.');
+$defaults['title_reply'] = __( 'Schrijf een reactie' );
 $defaults['title_reply_to'] = esc_html__( 'Reageer op %s' );
-$defaults['cancel_reply_link'] = esc_html__( 'Annuleer mijn reactie' );
-$defaults['label_submit'] = esc_html__( 'Plaats mijn reactie' );
+$defaults['cancel_reply_link'] = __( 'Annuleer mijn reactie' );
+$defaults['label_submit'] = __( 'Plaats mijn reactie' );
 return $defaults;
 }
 add_filter( 'comment_form_defaults', 'mvdk_comment_defaults' );
@@ -153,9 +153,9 @@ add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 * @since 25-10-2014
 */
 function mvdk_excerpt_more( $more ) {
-    return sprintf( ' <a href="%1$s">%2$s</a>',
+    return sprintf( ' &mdash; <a href="%1$s">%2$s</a>',
         esc_url( get_permalink( get_the_ID() ) ),
-        sprintf( __( ' &mdash; Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
+        sprintf( __( 'Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
         );
 }
 add_filter( 'excerpt_more', 'mvdk_excerpt_more' );
