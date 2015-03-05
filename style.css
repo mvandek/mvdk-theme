@@ -654,8 +654,8 @@ font-size:24px;
 
 .menu-toggle:after {
 content:"\f431";
-line-height: normal;
-padding-left: 6px;
+line-height: 1;
+padding-left: 4px;
 }
 
 .menu-toggle[aria-expanded="true"]:after {
@@ -856,7 +856,7 @@ width: 1px;
 background-color: #f1f1f1;
 color: #21759b;
 display: block;
-font: bold 16px/normal Raleway, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif;
+font: bold 16px/normal "Raleway", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 left: -2000em;
 padding: 15px 23px 14px;
 text-decoration: none;
