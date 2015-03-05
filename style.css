@@ -1009,15 +1009,6 @@ padding: 0 20px;
 margin-bottom: 20px;
 }
 
-.container{
-display: -ms-flexbox;
-display: -webkit-flex;
-display: flex;
--ms-flex-direction: colum;
--webkit-flex-direction: colum;
-flex-direction: column;
-}
-
 .content,
 .page-content {
 width:100%;
@@ -2008,17 +1999,6 @@ margin-top: 20px;
 width:1020px
 }
 
-.container{
--ms-flex-direction: row;
--webkit-flex-direction: row;
-flex-direction: row;
-}
-
-.content,
-.page-content {
-order: 1;
-}
-
 .content{
 float:left;
 width: 715px;
@@ -2031,7 +2011,6 @@ width:100%
 .sidebar{
 float: right;
 font-size:14px;
-order: 2;
 width:260px;
 }
 
