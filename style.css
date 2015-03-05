@@ -136,6 +136,7 @@ outline: 0;
 a[href$=".pdf"]:before,
 a[href$=".doc"]:before,
 a[href$=".docx"]:before,
+.menu-item-has-children > a:after,
 .entry-content a[href^="mailto:"]:before,
 .comment-content a[href^="mailto:"]:before,
 .leave-reply:before,
@@ -1902,6 +1903,12 @@ display:block;
 -ms-flex-direction: row;
 -webkit-flex-direction: row;
 flex-direction: row;
+}
+
+.menu-item-has-children > a:after {
+content: '\f431';
+line-height: 1;
+padding-left: 4px;
 }
 
 .social-navigation li {
