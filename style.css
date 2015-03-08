@@ -1185,11 +1185,6 @@ color:#999
 * 12.4	Posts and Pages
 */
 
-.entry-header > h1{
-font-size: 52px;
-margin-bottom: 0;
-}
-
 .entry-content h1 {
 font-size:36px;
 letter-spacing:-2px;
@@ -1805,6 +1800,11 @@ font-size: 32px;
 }
 .site-description {
 font-size: 26px;
+}
+
+.entry-header > h1{
+font-size: 52px;
+margin-bottom: 0;
 }
 
 }
