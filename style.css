@@ -280,11 +280,12 @@ font-style:italic
 }
 
 blockquote{
+border-bottom:1px solid #494B4C;
+border-top:1px solid #494B4C;
 color:#4e5860;
+font-size: 23px;
 font-style:italic;
-margin:0 0 6px;
-padding:2px 10px;
-border-left:3px solid #6495ED;
+padding:20px 30px;
 }
 
 blockquote p{
