@@ -109,6 +109,10 @@ wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/gene
 }
 // Load main stylesheet
 wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
+// Dequeue the WordPress 4.2 Emoji script
+wp_dequeue_script( 'emoji' );
+// Dequeue the WordPress 4.2 Twemoji script
+wp_dequeue_script( 'twemoji' );
 // Enable jQuery.
 wp_enqueue_script( 'jquery' );
 // Loads JavaScript files
