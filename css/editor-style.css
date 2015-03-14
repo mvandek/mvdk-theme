@@ -106,16 +106,12 @@ font-size: 16px;
 font-style: normal;
 font-weight: normal;
 font-variant: normal;
-line-height: 1.75;
+line-height: 1.65;
 speak: none;
 text-align: center;
 text-decoration: inherit;
 text-transform: none;
 vertical-align: middle;
--webkit-transition:all .1s ease-in-out;
--moz-transition:all .1s ease-in-out;
--o-transition:all .1s ease-in-out;
-transition:all .1s ease-in-out
 }
 
 /**
@@ -125,25 +121,24 @@ transition:all .1s ease-in-out
 body{
 -webkit-touch-callout:none;
 -webkit-font-smoothing:antialiased;
-font-smoothing:antialiased;
--moz-font-smoothing:antialiased;
 -moz-osx-font-smoothing:grayscale;
+font-smoothing:antialiased;
 -webkit-font-feature-settings:"kern";
--moz-font-feature-settings: "kern";
 -ms-font-feature-settings:"kern";
 font-feature-settings:"kern";
 font-kerning: normal;
-text-rendering:optimizeLegibility;
+-webkit-font-variant-ligatures: common-ligatures; /* for iOS and Safari 6 */
+font-variant-ligatures: common-ligatures; /* for up-to-date browsers, including IE10 and Opera 21 */
 -webkit-text-size-adjust:none;
 -moz-text-size-adjust:none;
 -ms-text-size-adjust:none;
 text-size-adjust:none;
--webkit-tap-highlight-color:transparent;
-color:#444;
-font-family: Open Sans, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif;
-font-size: 16px;
-font-weight: 400;
-line-height: 1.75;
+color:#494B4C;
+font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+font-size: 18px;
+font-weight: 300;
+line-height: 1.65;
+text-rendering:optimizeLegibility;
 }
 
 h1,
@@ -198,11 +193,12 @@ font-style:italic
 }
 
 blockquote{
+border-bottom:1px solid #494B4C;
+border-top:1px solid #494B4C;
 color:#4e5860;
+font-size: 23px;
 font-style:italic;
-margin:0 0 6px;
-padding:2px 10px;
-border-left:6px solid rgba(0,83,159,.65)
+padding:20px 30px;
 }
 
 blockquote p{

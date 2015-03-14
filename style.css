@@ -206,7 +206,7 @@ user-select:none;
 color:#494B4C;
 font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 font-size: 18px;
-font-weight: 400;
+font-weight: 300;
 line-height: 1.65;
 text-rendering:optimizeLegibility;
 }
@@ -214,7 +214,7 @@ text-rendering:optimizeLegibility;
 h1{
 font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 font-size:32px;
-font-weight:400;
+font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
 margin-bottom:12px
@@ -223,7 +223,7 @@ margin-bottom:12px
 h2{
 font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 font-size:26px;
-font-weight:400;
+font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
 margin-bottom:12px
@@ -232,7 +232,7 @@ margin-bottom:12px
 h3{
 font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 font-size:23px;
-font-weight:400;
+font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
 margin-bottom:12px
