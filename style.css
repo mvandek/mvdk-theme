@@ -1604,6 +1604,18 @@ text-align: center;
 * 14.0 Media
 */
 
+img.wp-smiley,
+img.emoji {
+border: none;
+display: inline;
+height: 1em;
+margin-top: 0;
+margin-bottom: 0;
+padding: 0;
+vertical-align: -0.1em;
+width: 1em;
+}
+
 audio,
 canvas {
 display: inline-block;

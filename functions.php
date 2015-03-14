@@ -123,6 +123,13 @@ wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
 /**
+ * Remove the action which adds print_emoji_styles() to wp_print_styles. I don't want inline css with !important at all rules.
+ * This code is added via the stylesheet of the theme
+ * 
+ * This function is added in WordPress 4.2
+ */
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+/**
 * Adds the jetpack-portfolio CPT to the loop, to display it between regular posts
 *
 * @since Esplanade 1.0
