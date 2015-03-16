@@ -20,14 +20,14 @@ breadcrumb_trail();
 <?php the_content(); ?>
 </div>
 <?php
-wp_link_pages( array(
+wp_link_pages( [
 'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
 'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
-) );
+] );
 ?>
 <?php endwhile; ?>
 </div>

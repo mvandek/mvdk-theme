@@ -49,14 +49,14 @@ breadcrumb_trail();
 
 						<?php
 							the_content();
-							wp_link_pages( array(
+							wp_link_pages( [
 								'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
 								'after'       => '</div>',
 								'link_before' => '<span>',
 								'link_after'  => '</span>',
 								'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
 								'separator'   => '<span class="screen-reader-text">, </span>',
-							) );
+							] );
 						?>
 					</div><!-- .entry-content -->
 
@@ -66,9 +66,9 @@ breadcrumb_trail();
 
 <?php
 // Previous/next post navigation.
-					the_post_navigation( array(
+					the_post_navigation( [
 						'prev_text' => _x( '<span class="meta-nav">Terug naar </span><span class="post-title">%title</span>', 'Parent post link', 'mvdk' ),
-					) );
+					] );
 ?>
 
 </article>

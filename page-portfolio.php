@@ -21,14 +21,14 @@ breadcrumb_trail();
 <?php the_content(); ?>
 </div>
 <?php
-wp_link_pages( array(
+wp_link_pages( [
 'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
 'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
-) );
+] );
 ?>
 <?php endwhile; // end of the loop. ?>
 <?php endif; ?>
@@ -36,11 +36,11 @@ wp_link_pages( array(
 <?php
 $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 $posts_per_page = get_option( 'mvdk_portfolio_posts_per_page', '10' );
-$args = array(
+$args = [
 'post_type'      => 'portfolio',
 'posts_per_page' => $posts_per_page,
 'paged'          => $paged,
-);
+];
 $project_query = new WP_Query ( $args );
 if ( $project_query -> have_posts() ) :
 ?>

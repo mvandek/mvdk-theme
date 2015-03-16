@@ -24,7 +24,7 @@ wp_reset_postdata(); ?>
 <?php
 $posts = all_posts_archive_page();
 if( $posts->have_posts() ) : while ($posts->have_posts() ) : $posts->the_post(); ?>
-<li><?php echo get_the_date(); ?> &mdash; <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></li>
+<li><?= get_the_date(); ?> &mdash; <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></li>
 <?php
 endwhile;
 endif;

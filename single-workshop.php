@@ -26,14 +26,14 @@ breadcrumb_trail();
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
 <?php
-wp_link_pages( array(
+wp_link_pages( [
 'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
 'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
-) );
+] );
 ?>
 </div>
 <footer class="entry-utility">
@@ -47,13 +47,13 @@ echo get_the_term_list( $post->ID, 'workshop-tag', '<div class="entry-tags" item
 <?php
 $get_tags_from_post = get_the_terms( $post->ID, 'workshop-tag' );
 $tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
-$args = array(
+$args = [
 'tag__in' => $tag_ids,
-'post__not_in' => array($post->ID),
+'post__not_in' => [$post->ID],
 'posts_per_page'=> 5,
 'no_found_rows' => true,
 'cache_results' => false,
-);
+];
 $tag_query = new WP_Query($args);
 if( $tag_query->have_posts() ) { ?>
 <ul>
@@ -76,12 +76,12 @@ wp_reset_postdata();
 </footer>
 <?php mvdk_post_author(); ?>
 <?php
-the_post_navigation( array(
+the_post_navigation( [
 'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . __( 'Vorig artikel:', 'mvdk' ) . '</span> ',
 'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . __( 'Volgend artikel:', 'mvdk' ) . '</span> ',
-) );
+] );
 ?>
 <?php endwhile; ?>
 </div>

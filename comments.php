@@ -25,12 +25,12 @@ return;
 
 		<ol class="comment-list">
 			<?php
-				wp_list_comments( array(
+				wp_list_comments( [
 					'callback'	=> 'mvdk_comment',
 					'style'		=> 'ol',
 					'short_ping'	=> true,
 					'avatar_size'	=> 37,
-				) );
+				] );
 			?>
 		</ol><!-- .comment-list -->
 

@@ -13,12 +13,12 @@ if ( has_nav_menu( 'social' ) ) : ?>
 <nav class="social-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
 <?php
 // Social links navigation menu.
-wp_nav_menu( array(
+wp_nav_menu( [
 'theme_location' => 'social',
 'depth'          => 1,
 'link_before'    => '<span class="screen-reader-text">',
 'link_after'     => '</span>',
-) );
+] );
 ?>
 </nav><!-- .social-navigation -->
 <?php endif;

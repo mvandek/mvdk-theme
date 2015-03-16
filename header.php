@@ -27,13 +27,13 @@
 <div class="site-branding">
 <?php
 if ( is_front_page() && is_home() ) : ?>
-<h1 class="site-title" itemprop="name"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+<h1 class="site-title" itemprop="name"><a href="<?= esc_url( home_url( '/' ) ); ?>" itemprop="url" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 <?php else : ?>
-<p class="site-title" itemprop="name"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+<p class="site-title" itemprop="name"><a href="<?= esc_url( home_url( '/' ) ); ?>" itemprop="url" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 <?php endif;
 $description = get_bloginfo( 'description', 'display' );
 if ( $description || is_customize_preview() ) { ?>
-<p class="site-description" itemprop="description"><?php echo $description; ?></p>
+<p class="site-description" itemprop="description"><?= $description; ?></p>
 <?php } ?>
 <?php get_template_part( 'menu', 'social' ); ?>
 </div>
@@ -42,11 +42,11 @@ if ( $description || is_customize_preview() ) { ?>
 <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
 <?php
 // Primary navigation menu.
-wp_nav_menu( array(
+wp_nav_menu( [
 'menu_class'     => 'nav-menu',
 'theme_location' => 'primary',
 'menu_id' => 'primary-menu'
-) );
+] );
 ?>
 </nav><!-- .main-navigation -->
 <?php endif; ?>

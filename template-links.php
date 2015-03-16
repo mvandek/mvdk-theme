@@ -14,13 +14,13 @@ get_header(); ?>
 breadcrumb_trail();
 } ?>
 <header class="entry-header">
-<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
+<?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
 <div class="entry-content" itemprop="mainContentOfPage">
 <?php the_content();
 endwhile;
 wp_reset_query();
-$args = array(
+$args = [
 'title_li' => false,
 'title_before' => '<h2>',
 'title_after' => '</h2>',
@@ -31,7 +31,7 @@ $args = array(
 'between' => '<br />',
 'show_images' => false,
 'show_rating' => false,
-);
+];
 wp_list_bookmarks( $args ); ?>
 </div>
 </div>
