@@ -119,13 +119,13 @@ $wp_customize->add_control( 'mvdk_hide_portfolio_page_content', [
 'label'				=> __( 'Verberg titel en inhoud op Portfolio Page Template', 'mvdk' ),
 'section'			=> 'mvdk_theme_options',
 'type'				=> 'checkbox',
- );
+] );
 
 $wp_customize->add_setting( 'mvdk_hide_workshop_page_content', [
 'capability'			=> 'edit_theme_options',
 'default'			=> '',
 'sanitize_callback'		=> 'mvdk_sanitize_checkbox',
- );
+] );
 
 $wp_customize->add_control( 'mvdk_hide_workshop_page_content', [
 'label'				=> __( 'Verberg titel en inhoud op Workshop Page Template', 'mvdk' ),
