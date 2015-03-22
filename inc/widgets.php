@@ -44,7 +44,7 @@ register_sidebar(
 register_sidebar(
 [
 'name' => '404 Error Page',
-'id' => '404',
+'id' => 'page-404',
 'description'   => __( 'Verschijnt op 404 Page Not Found pagina', 'mvdk' ),
 'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 'after_widget' => '</aside>',
