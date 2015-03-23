@@ -217,7 +217,6 @@ font-size:32px;
 font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
-margin-bottom:12px
 }
 
 h2{
@@ -226,7 +225,6 @@ font-size:26px;
 font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
-margin-bottom:12px
 }
 
 h3{
@@ -235,7 +233,6 @@ font-size:23px;
 font-weight:300;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
-margin-bottom:12px
 }
 
 h4{
@@ -244,7 +241,6 @@ font-size:19px;
 font-weight:400;
 /* letter-spacing:-.5px; */
 line-height:1.25em;
-margin-bottom:12px
 }
 
 h5{
@@ -264,7 +260,7 @@ line-height:1.25em;
 }
 
 p{
-margin:14px 0
+padding:10px 0
 }
 
 b,
@@ -959,7 +955,7 @@ font-size: 24px;
 font-weight:400;
 letter-spacing:-0.5px;
 line-height: 1.25;
-margin: 16px 0 0 0;
+padding: 16px 0 0 0;
 }
 
 .site-title a{
@@ -969,7 +965,7 @@ color: #333;
 .site-description {
 font-size: 18px;
 line-height: 1;
-margin: 0 0 20px 0;
+padding: 0 0 20px 0;
 }
 
 .site-title,
@@ -1175,7 +1171,6 @@ padding-top: 20px;
 }
 
 .entry-footer{
-margin-top:10px;
 color:#999
 }
 
