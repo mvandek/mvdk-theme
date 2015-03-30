@@ -1062,7 +1062,7 @@ line-height: 1;
 }
 
 .entry-content > p:first-child{
-font-size:24px;
+font-size:1.25em;
 text-align:justify;
 /* line-height:1.9em */
 }
@@ -1205,7 +1205,7 @@ font-size: 21px;
 .page-content h3,
 .entry-content h4,
 .page-content h4 {
-margin-top: 30px;
+margin-top: 0.75em;
 }
 
 .archive-meta p {
