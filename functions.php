@@ -123,6 +123,12 @@ wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
 /**
+ * Remove the action which adds print_emoji_detection_script() to wp_head. I don't want inline javascript that detects if the emoji scrips have to be loaded.
+ * 
+ * This function is added in WordPress 4.2
+ */
+remove_action( 'wp_head' , 'print_emoji_detection_script' );
+/**
  * Remove the action which adds print_emoji_styles() to wp_print_styles. I don't want inline css with !important at all rules.
  * This code is added via the stylesheet of the theme
  * 
