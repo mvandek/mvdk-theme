@@ -97,18 +97,18 @@ add_action( 'after_setup_theme', 'mvdk_theme_setup' );
 * @uses wp_enqueue_scripts() To enqueue scripts
 */
 function mvdk_enqueue_scripts() {
-// Disables l10n.js
-wp_deregister_script('l10n');
+// Load main stylesheet
+wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
 // Add Open Sans fonts, used in the main stylesheet.
-wp_enqueue_style( 'fonts-mvdk-v2-style', get_stylesheet_directory_uri() . '/css/font-style.css', [] );
+wp_enqueue_style( 'fonts-mvdk-v2-style', get_stylesheet_directory_uri() . '/css/font-style.css' );
 // Add Genericons, check first for Jetpack Genericons, then the one delivered with this theme.
 if ( wp_style_is( 'genericons', 'registered' ) ) {
 wp_enqueue_style( 'genericons' );
 } else {
 wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', [], '3.3' );
 }
-// Load main stylesheet
-wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
+// Disables l10n.js
+wp_deregister_script('l10n');
 // Dequeue the WordPress 4.2 Emoji script
 wp_dequeue_script( 'emoji' );
 // Dequeue the WordPress 4.2 Twemoji script
@@ -127,7 +127,8 @@ add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
  * 
  * This function is added in WordPress 4.2
  */
-remove_action( 'wp_head' , 'print_emoji_detection_script' );
+remove_action( 'wp_head', 'print_emoji_detection_script' );
+remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 /**
  * Remove the action which adds print_emoji_styles() to wp_print_styles. I don't want inline css with !important at all rules.
  * This code is added via the stylesheet of the theme
