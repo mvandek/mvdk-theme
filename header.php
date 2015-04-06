@@ -23,8 +23,8 @@
 <body <?php body_class() ?> itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <div class="hfeed site">
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'mvdk' ); ?></a>
-<header id="masthead" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
-<div class="site-branding">
+<header id="masthead" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WebPageElement">
+<div class="site-branding" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
 <?php
 if ( is_front_page() && is_home() ) : ?>
 <h1 class="site-title" itemprop="name"><a href="<?= esc_url( home_url( '/' ) ); ?>" itemprop="url" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
@@ -37,7 +37,6 @@ if ( $description || is_customize_preview() ) { ?>
 <?php } ?>
 <?php get_template_part( 'menu', 'social' ); ?>
 </div>
-<?php if ( has_nav_menu( 'primary' ) ) : ?>
 <nav id="site-navigation" class="main-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
 <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
 <?php
@@ -49,6 +48,5 @@ wp_nav_menu( [
 ] );
 ?>
 </nav><!-- .main-navigation -->
-<?php endif; ?>
 </header>
 <div id="content" class="container">
