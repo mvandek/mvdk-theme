@@ -142,7 +142,7 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 * @since Esplanade 1.0
 */
 function add_custom_post_type_to_loop( $query ) {
-if ( ( is_home() || is_tag() || is_category() || is_author() || is_archive() && !is_post_type_archive( [ 'advertentie', 'gastartikel', 'portfolio', 'workshop' ] ) ) && $query->is_main_query() || is_feed() ) {
+if ( ( is_home() || is_tag() || is_category() || is_author() || is_archive() && !is_post_type_archive( [ 'advertentie', 'gastartikel', 'portfolio' ] ) ) && $query->is_main_query() || is_feed() ) {
 $query->set( 'post_type', [ 'post', 'portfolio', 'gastartikel', 'advertentie' ] );
 return $query;
 }

@@ -30,6 +30,10 @@ function html_schema()
 	{
 		$type = 'SearchResultsPage';
 	}
+	elseif( is_category() || is_tag() || is_archive() )
+	{
+		$type = 'CollectionPage';
+	}
 	else
 	{
 		$type = 'Blog';

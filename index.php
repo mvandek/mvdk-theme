@@ -13,7 +13,7 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
+<main class="content" role="main">
 <div class="entry index">
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
