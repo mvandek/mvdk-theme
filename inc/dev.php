@@ -10,15 +10,15 @@
 function html_schema()
 {
 	$base = 'http://schema.org/';
-	if( is_page( 5 /* type in the ID of your contact page here, 5 is an example */ ) )
+	if( is_page( 175 /* type in the ID of your contact page here, 5 is an example */ ) )
 	{
 		$type = 'ContactPage';
 	}
-	elseif( is_page( 4 /* type in the ID of your about page here, 5 is an example */ ) )
+	elseif( is_page( 102 /* type in the ID of your about page here, 5 is an example */ ) )
 	{
 		$type = 'AboutPage';
 	}
-	elseif( is_singular( array( 'book', 'movie' ) /* add custom post types that describe a single item to this array */ )  )
+	elseif( is_singular( array( 'gastartikel', 'portfolio', 'advertentie' ) /* add custom post types that describe a single item to this array */ )  )
 	{
 		$type = 'ItemPage';
 	}
@@ -32,7 +32,7 @@ function html_schema()
 	}
 	else
 	{
-		$type = 'WebPage';
+		$type = 'Blog';
 	}
 	echo 'itemscope="itemscope" itemtype="' . $base . $type . '"';
 }
