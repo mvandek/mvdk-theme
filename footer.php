@@ -7,7 +7,7 @@
  */
 ?>
 </div>
-<footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+<footer class="footer" role="contentinfo">
 <?php get_sidebar( 'footer' ); ?>
 <?php if ( get_theme_mod( 'mvdk_custom_footer_text' ) ) { ?>
 <div class="copyright"><?= '© ' . date( 'Y' ) . ' ' . esc_html( get_theme_mod( 'mvdk_custom_footer_text' ) ); ?></div>

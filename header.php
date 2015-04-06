@@ -20,7 +20,7 @@
 <![endif]-->
 <?php wp_head(); ?>
 </head>
-<body <?php body_class() ?> itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<body <?php body_class() ?>>
 <div class="hfeed site">
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'mvdk' ); ?></a>
 <header id="masthead" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WebPageElement">
@@ -49,4 +49,4 @@ wp_nav_menu( [
 ?>
 </nav><!-- .main-navigation -->
 </header>
-<div id="content" class="container">
+<div id="content" class="container" <?php html_schema(); ?>>
