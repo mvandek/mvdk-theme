@@ -196,4 +196,4 @@ require get_template_directory() . '/inc/piwik.php';
 /**
  * Load Dev Code.
  */
-require get_template_directory() . '/inc/dev.php';
+//require get_template_directory() . '/inc/dev.php';

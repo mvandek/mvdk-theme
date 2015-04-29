@@ -619,7 +619,7 @@ a {
 -webkit-user-drag:none;
 -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
 -webkit-tap-highlight-color:transparent;
-color:#21759b;
+color:#0073aa;
 background-color:transparent;
 text-decoration:none
 }
@@ -638,9 +638,13 @@ color:#e73420
 .entry-content a[href$=".pdf"]:before,
 .entry-content a[href$=".doc"]:before,
 .entry-content a[href$=".docx"]:before,
+.entry-content a[href$=".xls"]:before,
+.entry-content a[href$=".xlsx"]:before,
 .comment-content a[href$=".pdf"]:before,
 .comment-content a[href$=".doc"]:before,
 .comment-content a[href$=".docx"]:before
+.comment-content a[href$=".xls"]:before,
+.comment-content a[href$=".xlsx"]:before
 {
 content:"\f443";
 font-size:24px;
@@ -673,7 +677,7 @@ position: relative;
 .main-navigation a:focus,
 .main-navigation a:active {
 /* background-color: #004C69; */
-background-color: #21759B;
+background-color: #0073aa;
 color: #fff;
 }
 
@@ -706,7 +710,7 @@ position: relative;
 .main-navigation .current-menu-item > a,
 .main-navigation .current_page_ancestor > a {
 /* background-color: #004C69; */
-background-color: #21759B;
+background-color: #0073aa;
 color: #fff;
 }
 
@@ -746,7 +750,7 @@ margin-right:0
 }
 
 .social-navigation a:before{
-color:#21759b
+color:#0073aa
 }
 
 .social-navigation a:hover:before,
@@ -852,7 +856,7 @@ width: 1px;
 /* must have higher specificity than alternative color schemes inline styles */
 .site .skip-link {
 background-color: #f1f1f1;
-color: #21759b;
+color: #0073aa;
 display: block;
 font: bold 16px/normal Raleway, Helvetica, Arial, sans-serif;
 left: -2000em;
@@ -1154,7 +1158,7 @@ color:#333
 .entry-title a:hover,
 .entry-title a:focus,
 .entry-title a:active{
-color:#21759b
+color:#0073aa
 }
 
 .format-link .entry-title a:after{

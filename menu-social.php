@@ -15,6 +15,7 @@ if ( has_nav_menu( 'social' ) ) : ?>
 // Social links navigation menu.
 wp_nav_menu( [
 'theme_location' => 'social',
+'container'      => false,
 'depth'          => 1,
 'link_before'    => '<span class="screen-reader-text">',
 'link_after'     => '</span>',

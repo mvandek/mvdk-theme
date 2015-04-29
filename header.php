@@ -21,7 +21,7 @@
 <?php wp_head(); ?>
 </head>
 <body <?php body_class() ?>>
-<div class="hfeed site">
+<div class="site">
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'mvdk' ); ?></a>
 <header id="masthead" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WebPageElement">
 <div class="site-branding" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
@@ -44,9 +44,10 @@ if ( $description || is_customize_preview() ) { ?>
 wp_nav_menu( [
 'menu_class'     => 'nav-menu',
 'theme_location' => 'primary',
+'container'      => false,
 'menu_id' => 'primary-menu'
 ] );
 ?>
 </nav><!-- .main-navigation -->
 </header>
-<div id="content" class="container" <?php html_schema(); ?>>
+<div id="content" class="container">
