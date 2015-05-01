@@ -13,7 +13,7 @@ return;
 } else {
 ?>
 <script>
-var _paq=[['setSiteId', <?= esc_html( get_theme_mod( 'mvdk_piwik_site_id' ) ); ?>],['setTrackerUrl', 'http://stat.maartenvandekamp.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];
+var _paq=[['setSiteId', <?= esc_html( get_theme_mod( 'mvdk_piwik_site_id' ) ); ?>],['setTrackerUrl', 'http://stat.mvandek.nl/piwik.php'],['trackPageView'],['enableLinkTracking']];
 (function(d){
 var g=d.createElement('script'),
 s=d.scripts[0];

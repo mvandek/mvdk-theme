@@ -18,8 +18,10 @@ return;
 	<?php if ( have_comments() ) : ?>
 		<h2 class="comments-title">
 			<?php
-				printf( _nx( 'Er is 1 reactie', '%1$s reacties', get_comments_number(), 'comments title', 'mvdk' ),
-					number_format_i18n( get_comments_number() ) );
+				printf(
+						_nx( 'Er is 1 reactie', '%1$s reacties', get_comments_number(), 'comments title', 'mvdk' ),
+						number_format_i18n( get_comments_number() )
+				);
 			?>
 		</h2>
 
@@ -36,7 +38,7 @@ return;
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 <nav class="navigation comment-navigation" role="navigation">
-<h2 class="screen-reader-text"><?php _e( 'Navigatie voor reacties', 'mvdk' ); ?></h2>
+<h2 class="screen-reader-text"><?php esc_html_e( 'Navigatie voor reacties', 'mvdk' ); ?></h2>
 <?php
 if ( $prev_link = get_previous_comments_link( __( 'Oude reacties', 'mvdk' ) ) ) :
 printf( '<div class="nav-previous">%s</div>', $prev_link );
@@ -54,7 +56,7 @@ endif;
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
-		<p class="no-comments"><?php _e( 'Reageren is uitgeschakeld', 'mvdk' ); ?></p>
+		<p class="no-comments"><?php esc_html_e( 'Reageren is uitgeschakeld', 'mvdk' ); ?></p>
 	<?php endif; ?>
 
 	<?php comment_form(); ?>
