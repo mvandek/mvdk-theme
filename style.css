@@ -85,8 +85,10 @@ figure,
 footer,
 header,
 main,
+menu,
 nav,
-section {
+section,
+summary {
 display: block;
 }
 
@@ -380,7 +382,6 @@ hr{
 background-color:#eee;
 border:0;
 box-sizing:border-box;
--moz-box-sizing:border-box;
 height:1px;
 margin-bottom:1.5em
 }
