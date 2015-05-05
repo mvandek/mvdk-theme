@@ -20,35 +20,35 @@ breadcrumb_trail();
 <h1 class="entry-title" itemprop="headline">
 <?php
 	if ( is_category() ) {
-		$title = sprintf( __( '%s', 'mvdk' ), single_cat_title( '', false ) );
+		$title = sprintf( esc_html__( '%s', 'mvdk' ), single_cat_title( '', false ) );
 	} elseif ( is_tag() ) {
-		$title = sprintf( __( '%s', 'mvdk' ), single_tag_title( '', false ) );
+		$title = sprintf( esc_html__( '%s', 'mvdk' ), single_tag_title( '', false ) );
 	} elseif ( is_author() ) {
-		$title = sprintf( __( 'Het archief van %s', 'mvdk' ), '<span class="vcard">' . get_the_author() . '</span>' );
+		$title = sprintf( esc_html__( 'Het archief van %s', 'mvdk' ), '<span class="vcard">' . get_the_author() . '</span>' );
 	} elseif ( is_year() ) {
-		$title = sprintf( __( 'Een overzicht van %s', 'mvdk' ), get_the_date( _x( 'Y', 'yearly archives date format', 'mvdk' ) ) );
+		$title = sprintf( esc_html__( 'Een overzicht van %s', 'mvdk' ), get_the_date( esc_html_x( 'Y', 'yearly archives date format', 'mvdk' ) ) );
 	} elseif ( is_month() ) {
-		$title = sprintf( __( 'Een overzicht van %s', 'mvdk' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'mvdk' ) ) );
+		$title = sprintf( esc_html__( 'Een overzicht van %s', 'mvdk' ), get_the_date( esc_html_x( 'F Y', 'monthly archives date format', 'mvdk' ) ) );
 	} elseif ( is_day() ) {
-		$title = sprintf( __( 'Alle posts op %s', 'mvdk' ), get_the_date( _x( 'F j, Y', 'daily archives date format', 'mvdk' ) ) );
+		$title = sprintf( esc_html__( 'Alle posts op %s', 'mvdk' ), get_the_date( esc_html_x( 'F j, Y', 'daily archives date format', 'mvdk' ) ) );
 	} elseif ( is_tax( 'post_format' ) ) {
 		if ( is_tax( 'post_format', 'post-format-aside' ) ) {
-			$title = _x( 'Asides', 'post format archive title', 'mvdk' );
+			$title = esc_html_x( 'Asides', 'post format archive title', 'mvdk' );
 		} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
-			$title = _x( 'Galleries', 'post format archive title', 'mvdk' );
+			$title = esc_html_x( 'Galleries', 'post format archive title', 'mvdk' );
 		} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
-			$title = _x( 'Afbeeldingen', 'post format archive title', 'mvdk' );
+			$title = esc_html_x( 'Afbeeldingen', 'post format archive title', 'mvdk' );
 		} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
-			$title = _x( 'Links', 'post format archive title', 'mvdk' );
+			$title = esc_html_x( 'Links', 'post format archive title', 'mvdk' );
 		}
 	} elseif ( is_post_type_archive() ) {
-		$title = sprintf( __( 'Overzicht van %s', 'mvdk' ), post_type_archive_title( '', false ) );
+		$title = sprintf( esc_html__( 'Overzicht van %s', 'mvdk' ), post_type_archive_title( '', false ) );
 	} elseif ( is_tax() ) {
 		$tax = get_taxonomy( get_queried_object()->taxonomy );
 		/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */
-		$title = sprintf( __( '%1$s: %2$s', 'mvdk' ), $tax->labels->singular_name, single_term_title( '', false ) );
+		$title = sprintf( esc_html__( '%1$s: %2$s', 'mvdk' ), $tax->labels->singular_name, single_term_title( '', false ) );
 	} else {
-		$title = __( 'Archief', 'mvdk' );
+		$title = esc_html__( 'Archief', 'mvdk' );
 	}
 
 if ( ! empty( $title ) ) {

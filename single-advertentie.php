@@ -27,11 +27,11 @@ breadcrumb_trail();
 <?php the_content(); ?>
 <?php
 wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
+'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
+'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
 ] );
 ?>
@@ -43,7 +43,7 @@ echo get_the_term_list( get_the_ID(), 'post_tag', '<div class="entry-tags" itemp
 ?>
 <div class="entry-related">
 <div class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php esc_html_e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
 <?php
 $get_tags_from_post = get_the_terms( $post->ID, 'post_tag' );
 $tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
@@ -64,7 +64,7 @@ printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>'
 ?>
 </ul>
 <?php } else { ?>
-<p><?php _e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
+<p><?php esc_html_e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?>
@@ -77,10 +77,10 @@ wp_reset_postdata();
 <?php mvdk_post_author(); ?>
 <?php
 the_post_navigation( [
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Vorig artikel:', 'mvdk' ) . '</span> ',
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Volgend artikel:', 'mvdk' ) . '</span> ',
+'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . esc_html__( 'Vorig artikel:', 'mvdk' ) . '</span> ',
+'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . esc_html__( 'Volgend artikel:', 'mvdk' ) . '</span> ',
 ] );
 ?>
 <?php endwhile; ?>

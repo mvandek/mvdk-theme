@@ -19,7 +19,7 @@ return;
 		<h2 class="comments-title">
 			<?php
 				printf(
-						_nx( 'Er is 1 reactie', '%1$s reacties', get_comments_number(), 'comments title', 'mvdk' ),
+						esc_html( _nx( 'Er is 1 reactie', '%1$s reacties', get_comments_number(), 'comments title', 'mvdk' ) ),
 						number_format_i18n( get_comments_number() )
 				);
 			?>
@@ -40,10 +40,10 @@ return;
 <nav class="navigation comment-navigation" role="navigation">
 <h2 class="screen-reader-text"><?php esc_html_e( 'Navigatie voor reacties', 'mvdk' ); ?></h2>
 <?php
-if ( $prev_link = get_previous_comments_link( __( 'Oude reacties', 'mvdk' ) ) ) :
+if ( $prev_link = get_previous_comments_link( esc_html__( 'Oude reacties', 'mvdk' ) ) ) :
 printf( '<div class="nav-previous">%s</div>', $prev_link );
 endif;
-if ( $next_link = get_next_comments_link( __( 'Nieuwe reacties', 'mvdk' ) ) ) :
+if ( $next_link = get_next_comments_link( esc_html__( 'Nieuwe reacties', 'mvdk' ) ) ) :
 printf( '<div class="nav-next">%s</div>', $next_link );
 endif;
 ?>

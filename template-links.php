@@ -6,8 +6,8 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="page-content" role="main">
-<article id="post-<?php the_ID(); ?>"<?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+<main class="page-content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="entry template-links">
 <?php while ( have_posts() ) : the_post(); ?>
 <?php if ( function_exists('breadcrumb_trail') ) {

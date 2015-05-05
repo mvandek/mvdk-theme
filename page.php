@@ -21,11 +21,11 @@ breadcrumb_trail();
 </div>
 <?php
 wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
+'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
+'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
 ] );
 ?>
