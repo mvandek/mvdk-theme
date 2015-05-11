@@ -25,19 +25,6 @@
  */
  
 /**
- * Set default content width based on the theme's layout. This affects the width of post images and embedded media.
- */
-if ( ! isset( $content_width ) )
-$content_width = 715;
-/**
- * Set the content width based on the theme's design and stylesheet.
- */
-function mvdk_content_width() {
-if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) )
-$GLOBALS['content_width'] = 980;
-}
-add_action( 'template_redirect', 'mvdk_content_width' );
-/**
 * Set up theme specific settings
 *
 * @uses add_theme_support() To add support for post thumbnails and automatic feed links.
@@ -91,6 +78,19 @@ add_editor_style( [ 'css/editor-style.css', 'css/font-style.css', 'genericons/ge
 set_user_setting( 'dfw_width', 715 );
 }
 add_action( 'after_setup_theme', 'mvdk_theme_setup' );
+
+/**
+ * Set the content width based on the theme's design and stylesheet.
+ */
+function mvdk_content_width() {
+if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) ) {
+$GLOBALS['content_width'] = 980;
+} else {
+$GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 715 );
+}
+}
+add_action( 'after_setup_theme', 'mvdk_content_width', 0 );
+
 /**
 * Enqueue theme scripts
 *
