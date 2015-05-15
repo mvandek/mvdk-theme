@@ -8,7 +8,7 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="pingback" href="https://www.maartenvandekamp.nl/xmlrpc.php">
