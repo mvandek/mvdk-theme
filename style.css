@@ -196,8 +196,8 @@ font-smoothing:antialiased;
 -ms-font-feature-settings:"kern";
 font-feature-settings:"kern";
 font-kerning: normal;
--webkit-font-variant-ligatures: common-ligatures; /* for iOS and Safari 6 */
-font-variant-ligatures: common-ligatures; /* for up-to-date browsers, including IE10 and Opera 21 */
+/* -webkit-font-variant-ligatures: common-ligatures; */ /* for iOS and Safari 6 */
+/* font-variant-ligatures: common-ligatures; */ /* for up-to-date browsers, including IE10 and Opera 21 */
 -webkit-text-size-adjust:none;
 -moz-text-size-adjust:none;
 -ms-text-size-adjust:none;
@@ -211,7 +211,6 @@ font-family: "Open Sans", Helvetica, Arial, sans-serif;
 font-size: 18px;
 font-weight: 300;
 line-height: 1.65;
-text-rendering:optimizeLegibility;
 }
 
 h1{
@@ -263,7 +262,8 @@ line-height:1.25em;
 }
 
 p{
-padding:10px 0
+padding:10px 0;
+text-rendering: optimizeLegibility
 }
 
 b,
