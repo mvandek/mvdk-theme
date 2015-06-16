@@ -988,6 +988,14 @@ background: #FFF8DC;
 width:100%;
 }
 
+input[type="email"]:invalid {
+outline: red solid 2px;
+}
+
+input[type="email"]:valid {
+outline: lightgreen solid 2px;
+}
+
 /**
 * 12.0 Content
 */
