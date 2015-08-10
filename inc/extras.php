@@ -86,7 +86,7 @@ add_filter( 'wp_mail_from_name', 'new_mail_from_name' );
 * @since februari 2013
 */
 function new_mail_from( $from_email ) {
-$from_email = 'noreply@mvdk.me';
+$from_email = 'postmaster@maartenvandekamp.nl';
 return $from_email;
 }
 add_filter( 'wp_mail_from', 'new_mail_from' );
