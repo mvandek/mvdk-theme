@@ -122,8 +122,8 @@ function mvdk_comment_defaults( $defaults ) {
 $defaults['comment_field'] = '<p class="comment-form-comment">
 <label for="comment">' . esc_html__( 'Je reactie', 'mvdk' ) . '</label>
 <textarea id="comment" name="comment" cols="45" rows="8"></textarea></p>';
-$defaults['comment_notes_before'] = '<p class="comment-notes">' . esc_html__( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.', 'mvdk' ) . '</p>';
-$defaults['comment_notes_after'] = esc_html__('Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.');
+$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.', 'mvdk' ) . '</p>';
+$defaults['comment_notes_after'] = __('Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.');
 $defaults['title_reply'] = esc_html__( 'Schrijf een reactie' );
 $defaults['title_reply_to'] = esc_html__( 'Reageer op %s' );
 $defaults['cancel_reply_link'] = esc_html__( 'Annuleer mijn reactie' );

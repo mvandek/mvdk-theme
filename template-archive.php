@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Site Archive Page
+ * Template Name: Site Archive
  *
  * @package mvdk-theme
  * @since mvdk-theme v2

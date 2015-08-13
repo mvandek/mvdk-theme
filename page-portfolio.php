@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Portfolio Page
+ * Template Name: Portfolio
  *
  * @package mvdk-theme
  * @since mvdk-theme v2

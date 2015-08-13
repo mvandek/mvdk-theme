@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Advertentie Page
+ * Template Name: Advertentie
  *
  * @package mvdk-theme
  * @since mvdk-theme v2

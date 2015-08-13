@@ -160,7 +160,7 @@ $match[3] .= ' size="medium"'; echo do_shortcode_tag( $match );
 
 function mvdk_entry_meta() {
 
-	if ( in_array( get_post_type(), [ 'post', 'attachment', 'portfolio', 'gastartikel', 'advertentie', ] ) ) {
+	if ( in_array( get_post_type(), [ 'post', 'attachment', 'gastartikel', 'advertentie', ] ) ) {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s" itemprop="datePublished">%2$s</time>';
 
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
@@ -187,7 +187,7 @@ function mvdk_entry_meta() {
 				get_the_author()
 			);
 		// }
-	
+
 
 		if ( 'post' == get_post_type() ) {
 		$categories_list = get_the_category_list( esc_html_x( ', ', 'Wordt tussen lijst items geplaatst, en er zit een spatie na de komma.', 'mvdk' ) );	
@@ -195,10 +195,12 @@ function mvdk_entry_meta() {
 			$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
 		} elseif ( 'gastartikel' == get_post_type() ) {
 			$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type' );
+		} elseif ( 'basiskennis' == get_post_type() ) {
+			$categories_list = get_the_term_list( get_the_ID(), 'onderwerp','', ', ' );
 		} elseif ( 'advertentie' == get_post_type() ) {
-		$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
-		}
-		
+                        $categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
+                }
+
 		// if ( $categories_list && mvdk_categorized_blog() ) {
 		if ( $categories_list ) {
 			printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
@@ -274,7 +276,7 @@ add_action( 'save_post', 'mvdk_category_transient_flusher' );
 function all_posts_archive_page() {
 if ( false === ( $all_posts_for_archive = get_transient( 'all_posts_for_archive' ) ) ) {
 $query = [
-'post_type'		=> [ 'post', 'portfolio', 'gastartikel', 'advertentie' ],
+'post_type'		=> [ 'post', 'portfolio', 'basiskennis', 'gastartikel', 'advertentie' ],
 'nopaging'		=> true,
 'ignore_sticky_posts'	=> true,
 'no_found_rows'		=> true,

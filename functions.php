@@ -137,13 +137,13 @@ remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
  */
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 /**
-* Adds the jetpack-portfolio CPT to the loop, to display it between regular posts
+* Adds several Custom Post Types to the loop, to display it between regular posts
 *
 * @since Esplanade 1.0
 */
 function add_custom_post_type_to_loop( $query ) {
-if ( ( is_home() || is_tag() || is_category() || is_author() || is_archive() && !is_post_type_archive( [ 'advertentie', 'gastartikel', 'portfolio' ] ) ) && $query->is_main_query() || is_feed() ) {
-$query->set( 'post_type', [ 'post', 'portfolio', 'gastartikel', 'advertentie' ] );
+if ( ( is_tag() || is_category() || is_author() || is_archive() && !is_post_type_archive( [ 'basiskennis', 'portfolio', 'advertentie', 'gastartikel', ] ) ) && $query->is_main_query() || is_feed() ) {
+$query->set( 'post_type', [ 'post', 'portfolio', 'basiskennis', 'gastartikel', 'advertentie' ] );
 return $query;
 }
 }
@@ -154,7 +154,7 @@ add_action( 'pre_get_posts', 'add_custom_post_type_to_loop' );
  * @since MaartenvandeKamp 1.10 - 28-1-2013
  */
 function mvdk_html5_shiv() { ?>
-<!--[if lt IE 9]><script src="https://www.staticcdn.nl/html5.js" type="text/javascript"></script><![endif]-->
+<!--[if lt IE 9]><script src="https://www.staticcdn.nl/html5.js"></script><![endif]-->
 <?php } // endif;
 add_action( 'wp_print_scripts', 'mvdk_html5_shiv' );
 /**

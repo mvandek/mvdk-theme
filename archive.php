@@ -42,7 +42,7 @@ breadcrumb_trail();
 			$title = esc_html_x( 'Links', 'post format archive title', 'mvdk' );
 		}
 	} elseif ( is_post_type_archive() ) {
-		$title = sprintf( esc_html__( 'Overzicht van %s', 'mvdk' ), post_type_archive_title( '', false ) );
+		$title = sprintf( esc_html__( '%s', 'mvdk' ), post_type_archive_title( '', false ) );
 	} elseif ( is_tax() ) {
 		$tax = get_taxonomy( get_queried_object()->taxonomy );
 		/* translators: 1: Taxonomy singular name, 2: Current taxonomy term */

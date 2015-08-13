@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Gastartikel Page
+ * Template Name: Gastartikel
  *
  * @package mvdk-theme
  * @since mvdk-theme v2

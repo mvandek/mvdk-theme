@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying all single workshops
+ * The template for displaying all single advertenties
  *
  * @package mvdk-theme
  * @since mvdk-theme v2
@@ -8,7 +8,7 @@
 get_header(); ?>
 <main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
-<div class="entry workshop-single">
+<div class="entry gastartikel-single">
 <?php while ( have_posts() ) : the_post(); ?>
 <?php if ( function_exists('breadcrumb_trail') ) {
 breadcrumb_trail();
@@ -27,44 +27,50 @@ breadcrumb_trail();
 <?php the_content(); ?>
 <?php
 wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pagina\'s:', 'mvdk' ) . '</span>',
+'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
 'after'       => '</div>',
 'link_before' => '<span>',
 'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . __( 'Pagina', 'mvdk' ) . ' </span>%',
+'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
 'separator'   => '<span class="screen-reader-text">, </span>',
 ] );
 ?>
 </div>
 <footer class="entry-utility">
 <?php
-echo get_the_term_list( get_the_ID(), 'workshop-type', '<div class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</div>' );
-echo get_the_term_list( $post->ID, 'workshop-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
+echo get_the_term_list( get_the_ID(), 'onderwerp', '<div class="entry-tags" itemprop="keywords">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
 ?>
 <div class="entry-related">
 <div class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php esc_html_e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
 <?php
-$get_tags_from_post = get_the_terms( $post->ID, 'workshop-tag' );
-$tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
+$get_taxonomy_from_post = get_the_terms( $post->ID, 'onderwerp' );
+$taxonomy_ids = wp_list_pluck( $get_taxonomy_from_post, 'term_id' );
 $args = [
-'tag__in' => $tag_ids,
+'cache_results' => false,
+'no_found_rows' => true,
+'orderby'	=> 'rand',
 'post__not_in' => [$post->ID],
 'posts_per_page'=> 5,
-'no_found_rows' => true,
-'cache_results' => false,
+'tax_query' => [
+[
+'taxonomy' => 'onderwerp',
+'field'    => 'term_id',
+'terms'    => $taxonomy_ids
+]
+],
 ];
-$tag_query = new WP_Query($args);
-if( $tag_query->have_posts() ) { ?>
+$term_query = new WP_Query($args);
+if( $term_query->have_posts() ) { ?>
 <ul>
-<?php while ( $tag_query->have_posts() ) {
-$tag_query->the_post();
+<?php while ( $term_query->have_posts() ) {
+$term_query->the_post();
 printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>
 <?php } else { ?>
-<p><?php _e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
+<p><?php esc_html_e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?>
@@ -73,14 +79,15 @@ wp_reset_postdata();
 <?php get_sidebar( 'single' ); ?>
 </div>
 </div>
+
 </footer>
 <?php mvdk_post_author(); ?>
 <?php
 the_post_navigation( [
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Vorig artikel:', 'mvdk' ) . '</span> ',
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Volgend artikel:', 'mvdk' ) . '</span> ',
+'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . esc_html__( 'Vorig artikel:', 'mvdk' ) . '</span> ',
+'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
+'<span class="screen-reader-text">' . esc_html__( 'Volgend artikel:', 'mvdk' ) . '</span> ',
 ] );
 ?>
 <?php endwhile; ?>
