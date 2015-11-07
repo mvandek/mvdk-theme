@@ -6,17 +6,13 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="page-content" role="main">
+<main class="page-content" itemprop="mainContentOfPage">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-<div class="entry page">
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
-<div class="entry-content" itemprop="mainContentOfPage">
+<div class="entry-content" itemprop="text">
 <?php the_content(); ?>
 </div>
 <?php
@@ -30,7 +26,6 @@ wp_link_pages( [
 ] );
 ?>
 <?php endwhile; ?>
-</div>
 </article>
 <?php // If comments are open or we have at least one comment, load up the comment template
 if ( comments_open() || get_comments_number() ) {

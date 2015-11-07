@@ -10,14 +10,16 @@
 <?php if ( has_post_thumbnail() ) : ?>
 <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_post_thumbnail('post-thumbnail', [ "itemprop" => "image" ] ); ?></a>
 <?php endif;?>
+<section class="entry-info">
 <aside>
 <?php the_title( sprintf( '<h2 class="entry-title" itemprop="headline"><a href="%s" rel="bookmark" itemprop="url">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 </aside>
-<div class="entry-content" itemprop="articleBody">
+<div class="entry-content" itemprop="description">
 <?php the_excerpt(); ?>
 </div>
 <aside class="entry-footer">
 <?php mvdk_entry_meta(); ?>
 <?php edit_post_link( esc_html__( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </aside>
+</section>
 </article>

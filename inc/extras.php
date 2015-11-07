@@ -26,8 +26,8 @@ add_filter( 'wpcf7_load_css', '__return_false' );
 function mvdk_breadcrumbs($defaults) {
 $defaults['show_on_front'] = false; // whether to show the breadcrumb on the front page
 $defaults['show_browse'] = false; // whether to show the "browse" text
-$defaults['separator'] = '&#187;'; // separator between items
-$defaults['post_taxonomy']['post'] = 'category';
+// $defaults['separator'] = '&raquo;'; // separator between items
+// $defaults['post_taxonomy']['post'] = 'category';
 $defaults['labels']['error_404'] = esc_html__( '404 Niet gevonden' );
 $defaults['labels']['archives'] = esc_html__( 'Archief' );
 $defaults['labels']['search'] = esc_html__( 'Zoek resultaat voor %s' );
@@ -64,32 +64,13 @@ add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
 function redirect_single_post() {
 if (is_search()) {
 global $wp_query;
-if ($wp_query->post_count == 1) {
+if ($wp_query->post_count === 1) {
 wp_redirect( get_permalink( $wp_query->posts['0']->ID ) );
 }
 }
 }
 add_action('template_redirect', 'redirect_single_post');
-/**
-* Alters the From name header for email sent by WordPress
-*
-* @since februari 2013
-*/
-function new_mail_from_name( $from_name) {
-$from_name = 'Maarten van de Kamp';
-return $from_name;
-}
-add_filter( 'wp_mail_from_name', 'new_mail_from_name' );
-/**
-* Alters the From email header for email sent by WordPress
-*
-* @since februari 2013
-*/
-function new_mail_from( $from_email ) {
-$from_email = 'postmaster@maartenvandekamp.nl';
-return $from_email;
-}
-add_filter( 'wp_mail_from', 'new_mail_from' );
+
 /**
 * Filters the author and email field to add a custom "required" message.
 *
@@ -106,42 +87,19 @@ $fields['author'] = '<p class="comment-form-author"><label for="author">' . esc_
 
 $fields['email'] = '<p class="comment-form-email"><label for="email">' . esc_html__( 'Je emailadres', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
 
-$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website (Heb je een website, dan kun je die vermelden.)', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
 
 return $fields;
 
 }
 add_filter( 'comment_form_default_fields', 'mvdk_comment_fields' );
 /**
- * Filters the defaults from the comment field to a custom option
- *
- * @param array $defaults.
- * @return array $defaults
- */
-function mvdk_comment_defaults( $defaults ) {
-$defaults['comment_field'] = '<p class="comment-form-comment">
-<label for="comment">' . esc_html__( 'Je reactie', 'mvdk' ) . '</label>
-<textarea id="comment" name="comment" cols="45" rows="8"></textarea></p>';
-$defaults['comment_notes_before'] = '<p class="comment-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.', 'mvdk' ) . '</p>';
-$defaults['comment_notes_after'] = __('Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.');
-$defaults['title_reply'] = esc_html__( 'Schrijf een reactie' );
-$defaults['title_reply_to'] = esc_html__( 'Reageer op %s' );
-$defaults['cancel_reply_link'] = esc_html__( 'Annuleer mijn reactie' );
-$defaults['label_submit'] = esc_html__( 'Plaats mijn reactie' );
-return $defaults;
-}
-add_filter( 'comment_form_defaults', 'mvdk_comment_defaults' );
-
-/**
 * Change the number of words shown in excerps
 *
 * @since Esplanade 1.0
 */
 function mvdk_excerpt_length( $length ) {
-if( has_post_format( 'aside' ) ) {
 return 36;
-} else
-return 50;
 }
 add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 /**
@@ -152,11 +110,11 @@ add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 *
 * @since 25-10-2014
 */
-function mvdk_excerpt_more( $more ) {
-    return sprintf( ' &mdash; <a href="%1$s">%2$s</a>',
-        esc_url( get_permalink( get_the_ID() ) ),
-        sprintf( esc_html__( 'Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . get_the_title( get_the_ID() ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
-        );
+function mvdk_excerpt_more() {
+return sprintf( ' &mdash; <a href="%1$s">%2$s</a>',
+esc_url( get_permalink( get_the_ID() ) ),
+sprintf( esc_html_x( 'Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . esc_html( get_the_title( get_the_ID() ) ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
+);
 }
 add_filter( 'excerpt_more', 'mvdk_excerpt_more' );
 /**
@@ -236,3 +194,12 @@ unset($fields['jabber']);
 return $fields;
 }
 add_filter( 'user_contactmethods' , 'add_social_media_to_profile_contact_information' );
+
+/**
+* Instead of an extra file that has to be loaded, whilst very small, is still one download to much.
+* This filter replaces the extra file with an base64 encoded 1x1 gif file.
+*
+*/
+add_filter( 'lazyload_images_placeholder_image', function( $placeholder_image ) {
+return 'data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=';
+});

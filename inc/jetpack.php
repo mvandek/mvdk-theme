@@ -11,12 +11,6 @@ function mvdk_jetpack_setup() {
 	// This theme supports Portfolios
 	add_theme_support( 'portfolio' );
 
-        // This theme supports Jetpack Testimonials
-	// add_theme_support( 'jetpack-testimonial' );
-
-	// This theme supports Workshops
-	add_theme_support( 'workshop' );
-
 	// This theme supports Workshops
 	add_theme_support( 'gastartikel' );
 
@@ -27,3 +21,6 @@ function mvdk_jetpack_setup() {
 	add_theme_support( 'jetpack-responsive-videos' );
 }
 add_action( 'after_setup_theme', 'mvdk_jetpack_setup' );
+
+// Will add a checkbox option to every new post of whether or not to email the post to subscribers.
+add_filter( 'jetpack_allow_per_post_subscriptions', '__return_true' );

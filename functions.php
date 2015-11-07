@@ -23,7 +23,7 @@
  * @package mvdk-theme
  * @since mvdk-theme v2
  */
- 
+
 /**
 * Set up theme specific settings
 *
@@ -43,18 +43,35 @@ function mvdk_theme_setup() {
  * to change 'mvdk' to the name of your theme in all the template files
  */
 load_theme_textdomain( 'mvdk', get_template_directory() . '/languages' );
+
 // Automatically add feed links to document head
 add_theme_support( 'automatic-feed-links' );
+
 // Switches default core markup for search form to output valid HTML5.
-add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ] );
-add_theme_support( 'social-links', [ 'facebook', 'twitter', 'google_plus' ] );
+add_theme_support( 'html5', [
+'search-form',
+'comment-form',
+'comment-list',
+'gallery',
+'caption',
+] );
+
+add_theme_support( 'social-links', [
+'facebook',
+'twitter',
+'google_plus',
+] );
+
 // This theme uses its own gallery styles.
 add_filter( 'use_default_gallery_style', '__return_false' );
+
 // Register Primary Navigation Menu
 register_nav_menus( [
 'primary' => __( 'Standaard Menu', 'mvdk' ),
 'social' => __( 'Sociaal Menu', 'mvdk' ),
+'footer' => __( 'Footer Menu', 'mvdk' ),
 ] );
+
 /*
  * Let WordPress manage the document title.
  * By adding theme support, we declare that this theme does not use a
@@ -62,20 +79,24 @@ register_nav_menus( [
  * provide it for us.
  */
 add_theme_support( 'title-tag' );
+
 // Add support for Post Formats
 add_theme_support( 'post-formats', [ 'gallery', 'image', 'link', 'aside' ] );
+
 // Add support for post thumbnails and custom image sizes specific to theme locations
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 270, 200, true );
+
 // Add support for custom image sizes specific to theme locations
 add_image_size( 'attachment-thumb', 700, 9999 ); // no crop flag, unlimited height
+
 // Styles the post editor
 add_editor_style( [ 'css/editor-style.css', 'css/font-style.css', 'genericons/genericons.css' ] );
 
 /**
  * Set max width of full screen visual editor to match content width
  */
-set_user_setting( 'dfw_width', 715 );
+set_user_setting( 'dfw_width', 768 );
 }
 add_action( 'after_setup_theme', 'mvdk_theme_setup' );
 
@@ -84,9 +105,9 @@ add_action( 'after_setup_theme', 'mvdk_theme_setup' );
  */
 function mvdk_content_width() {
 if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) ) {
-$GLOBALS['content_width'] = 980;
+$GLOBALS['content_width'] = 1056;
 } else {
-$GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 715 );
+$GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 768 );
 }
 }
 add_action( 'after_setup_theme', 'mvdk_content_width', 0 );
@@ -102,29 +123,22 @@ wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
 // Add Open Sans fonts, used in the main stylesheet.
 wp_enqueue_style( 'fonts-mvdk-v2-style', get_stylesheet_directory_uri() . '/css/font-style.css' );
 // Add Genericons, check first for Jetpack Genericons, then the one delivered with this theme.
-if ( wp_style_is( 'genericons', 'registered' ) ) {
-wp_enqueue_style( 'genericons' );
-} else {
 wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', [], '3.3' );
-}
 // Disables l10n.js
 wp_deregister_script('l10n');
-// Dequeue the WordPress 4.2 Emoji script
-wp_dequeue_script( 'emoji' );
-// Dequeue the WordPress 4.2 Twemoji script
-wp_dequeue_script( 'twemoji' );
-// Enable jQuery.
-wp_enqueue_script( 'jquery' );
+// Load the html5 shiv.
+wp_enqueue_script( 'mvdk-html5', 'https://www.staticcdn.nl/html5.js', array(), '3' );
+wp_script_add_data( 'mvdk-html5', 'conditional', 'lt IE 9' );
 // Loads JavaScript files
+wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', ['jquery'], '20150218', true );
 wp_enqueue_script( 'navigation-script', get_template_directory_uri() . '/js/navigation.js', ['jquery'], '20150101', true );
-wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', [], '20150218', true );
 if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
 /**
  * Remove the action which adds print_emoji_detection_script() to wp_head. I don't want inline javascript that detects if the emoji scrips have to be loaded.
- * 
+ *
  * This function is added in WordPress 4.2
  */
 remove_action( 'wp_head', 'print_emoji_detection_script' );
@@ -132,7 +146,7 @@ remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 /**
  * Remove the action which adds print_emoji_styles() to wp_print_styles. I don't want inline css with !important at all rules.
  * This code is added via the stylesheet of the theme
- * 
+ *
  * This function is added in WordPress 4.2
  */
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -142,21 +156,12 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 * @since Esplanade 1.0
 */
 function add_custom_post_type_to_loop( $query ) {
-if ( ( is_tag() || is_category() || is_author() || is_archive() && !is_post_type_archive( [ 'basiskennis', 'portfolio', 'advertentie', 'gastartikel', ] ) ) && $query->is_main_query() || is_feed() ) {
-$query->set( 'post_type', [ 'post', 'portfolio', 'basiskennis', 'gastartikel', 'advertentie' ] );
+if ( ( is_tag() || is_category() || is_author() || is_search() || is_archive() && !is_post_type_archive( [ 'basiskennis', 'fotobewerking', 'portfolio', 'fotoapparatuur', 'praktijk', 'advertentie', 'gastartikel', ] ) ) && $query->is_main_query() || is_feed() ) {
+$query->set( 'post_type', [ 'post', 'basiskennis', 'fotobewerking', 'portfolio', 'praktijk', 'gastartikel', 'advertentie' ] );
 return $query;
 }
 }
 add_action( 'pre_get_posts', 'add_custom_post_type_to_loop' );
-/**
- * Outputs the html5.js script with IE conditionals
- *
- * @since MaartenvandeKamp 1.10 - 28-1-2013
- */
-function mvdk_html5_shiv() { ?>
-<!--[if lt IE 9]><script src="https://www.staticcdn.nl/html5.js"></script><![endif]-->
-<?php } // endif;
-add_action( 'wp_print_scripts', 'mvdk_html5_shiv' );
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
@@ -190,10 +195,6 @@ require get_template_directory() . '/inc/widgets.php';
  */
 require get_template_directory() . '/inc/jetpack.php';
 /**
- * Load Piwik Tracking Code.
- */
-require get_template_directory() . '/inc/piwik.php';
-/**
  * Load Dev Code.
  */
-//require get_template_directory() . '/inc/dev.php';
+require get_template_directory() . '/inc/dev.php';

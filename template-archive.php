@@ -6,13 +6,9 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="page-content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<div class="entry template-archive">
+<main class="page-content">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/CollectionPage">
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>

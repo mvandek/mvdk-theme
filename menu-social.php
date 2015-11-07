@@ -10,7 +10,7 @@
  * @since   Independent Publisher 1.0
  */
 if ( has_nav_menu( 'social' ) ) : ?>
-<nav class="social-navigation" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+<nav class="social-navigation" aria-label="<?php _e( 'Social Links Menu', 'mvdk' ); ?>" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
 <?php
 // Social links navigation menu.
 wp_nav_menu( [

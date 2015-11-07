@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Contact Page
+ * Template Name: Contact Form 7
  *
  * @package mvdk-theme
  * @since mvdk-theme v2
@@ -15,13 +15,9 @@ wpcf7_enqueue_styles();
 * Nodig voor de contact formulieren van Contact Form 7, anders worden de css en js bestanden niet geladen.
 */
 get_header(); ?>
-<main class="page-content" role="main" itemscope="itemscope" itemtype="http://schema.org/ContactPage">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
-<div class="entry page">
+<main class="page-content" itemprop="mainContentOfPage">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/ContactPage">
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
@@ -39,7 +35,6 @@ wp_link_pages( [
 ] );
 ?>
 <?php endwhile; ?>
-</div>
 </article>
 </main>
 <?php get_footer(); ?>

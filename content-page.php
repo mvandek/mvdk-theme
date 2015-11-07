@@ -7,10 +7,6 @@
  */
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> >
-<div class="entry page">
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
@@ -27,5 +23,4 @@ wp_link_pages( [
 'separator'   => '<span class="screen-reader-text">, </span>',
 ] );
 ?>
-</div>
 </article>

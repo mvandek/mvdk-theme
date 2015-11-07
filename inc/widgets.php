@@ -10,46 +10,57 @@
 function mvdk_widgets_init() {
 register_sidebar(
 [
-'name' => 'Sidebar',
-'id' => 'sidebar-1',
+'name' => __( 'Sidebar Top', 'mvdk' ),
+'id' => 'sidebar-10',
 'description'   => __( 'Verschijnt bovenin de sidebar', 'mvdk' ),
-'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-'after_widget' => '</aside>',
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
+'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
 'after_title' => '</h3>'
 ]
 );
 register_sidebar(
 [
-'name' => 'Footer',
-'id' => 'sidebar-2',
+'name' => __( 'Sidebar Bottom', 'mvdk' ),
+'id' => 'sidebar-15',
+'description'   => __( 'Verschijnt onderin de sidebar', 'mvdk' ),
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
+'after_widget' => '</section>',
+'before_title' => '<h3 class="widget-title">',
+'after_title' => '</h3>'
+]
+);
+register_sidebar(
+[
+'name' => __( 'Footer', 'mvdk' ),
+'id' => 'sidebar-20',
 'description'   => __( 'Verschijnt onderaan de pagina', 'mvdk' ),
-'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-'after_widget' => '</aside>',
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
+'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
 'after_title' => '</h3>'
 ]
 );
 register_sidebar(
 [
-'name' => 'Single Post - Below Content',
-'id' => 'sidebar-3',
+'name' => __( 'Single Post - Below Content', 'mvdk' ),
+'id' => 'sidebar-30',
 'description'   => __( 'Verschijnt onder content, naast gerelateerde artikelen', 'mvdk' ),
-'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-'after_widget' => '</aside>',
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
+'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
 'after_title' => '</h3>'
 ]
 );
 register_sidebar(
 [
-'name' => '404 Error Page',
+'name' => __( '404 Error Page', 'mvdk' ),
 'id' => 'page-404',
 'description'   => __( 'Verschijnt op 404 Page Not Found pagina', 'mvdk' ),
-'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-'after_widget' => '</aside>',
-'before_title' => '<h3 class="widget-title">',
-'after_title' => '</h3>'
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
+'after_widget' => '</section>',
+'before_title' => '<h2 class="widget-title">',
+'after_title' => '</h2>'
 ]
 );
 }

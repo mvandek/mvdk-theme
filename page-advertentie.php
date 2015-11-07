@@ -6,12 +6,8 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/Blog">
-<div class="entry page advertentie">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
+<main class="content" itemprop="mainContentOfPage">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/Blog">
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
@@ -51,7 +47,6 @@ if ( $project_query -> have_posts() ) :
 <?php else : ?>
 <?php get_template_part( 'content', 'none' ); ?>
 <?php endif; ?>
-</div>
 </main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

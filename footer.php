@@ -7,15 +7,32 @@
  */
 ?>
 </div>
-<footer class="footer" role="contentinfo">
+<footer class="footer">
+
 <?php get_sidebar( 'footer' ); ?>
+
 <?php if ( get_theme_mod( 'mvdk_custom_footer_text' ) ) { ?>
 <div class="copyright"><?= '© ' . date( 'Y' ) . ' ' . esc_html( get_theme_mod( 'mvdk_custom_footer_text' ) ); ?></div>
 <?php } ?>
-<div class="legal-info"><a href="https://www.maartenvandekamp.nl/over/privacy/" rel="nofollow">Privacy</a> en <a href="https://www.maartenvandekamp.nl/over/privacy/cookies/" rel="nofollow">cookies</a> | <a href="https://www.maartenvandekamp.nl/over/auteursrecht/" rel="nofollow">Auteursrechterlijk beschermd</a></div>
+
+<?php if ( has_nav_menu( 'footer' ) ) : ?>
+<!-- .footer-navigation -->
+<nav class="footer-navigation" aria-label="<?php _e( 'Footer Menu', 'mvdk' ); ?>" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+<?php
+// Social links navigation menu.
+wp_nav_menu( [
+'theme_location' => 'footer',
+'container'      => false,
+'depth'          => 1,
+] );
+?>
+</nav>
+<!-- .footer-navigation -->
+<?php endif; ?>
+
 </footer>
-</div>
-<?php if( !is_user_logged_in() ) { piwiktracker(); } ?>
+
 <?php wp_footer(); ?>
+
 </body>
 </html>

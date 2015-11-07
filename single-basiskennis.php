@@ -6,13 +6,10 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+<main class="content" itemprop="mainContentOfPage">
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
-<div class="entry gastartikel-single">
+
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <?php if( is_preview() ) { ?>
 <div class="alert alert-info"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</div>
 <?php } ?>
@@ -38,60 +35,74 @@ wp_link_pages( [
 </div>
 <footer class="entry-utility">
 <?php
-echo get_the_term_list( get_the_ID(), 'onderwerp', '<div class="entry-tags" itemprop="keywords">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
+$terms = get_the_terms( get_the_ID() , 'onderwerp' );
+if( $terms && ! is_wp_error( $terms ) ) {
+echo get_the_term_list( get_the_ID(), 'onderwerp', '<div class="entry-terms taxonomy-onderwerp" itemprop="articleSection">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
+}
+?>
+<?php
+$terms = get_the_terms( get_the_ID() , 'software' );
+if( $terms && ! is_wp_error( $terms ) ) {
+echo get_the_term_list( get_the_ID(), 'software', '<div class="entry-terms taxonomy-software" itemprop="keywords">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
+}
 ?>
 <div class="entry-related">
-<div class="entry-related-module">
-<h3 class="widget-title"><?php esc_html_e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
+<section class="entry-related-module">
+<h3 class="widget-title"><?php _e( 'Relevante artikelen', 'mvdk' ); ?></h3>
 <?php
-$get_taxonomy_from_post = get_the_terms( $post->ID, 'onderwerp' );
-$taxonomy_ids = wp_list_pluck( $get_taxonomy_from_post, 'term_id' );
-$args = [
+$get_terms_from_post = get_the_terms( $post->ID, array ('onderwerp', 'software', ) );
+$taxonomy_ids = wp_list_pluck( $get_terms_from_post, 'term_id' );
+$term_args = [
 'cache_results' => false,
 'no_found_rows' => true,
-'orderby'	=> 'rand',
 'post__not_in' => [$post->ID],
 'posts_per_page'=> 5,
 'tax_query' => [
+'relation' => 'OR',
 [
 'taxonomy' => 'onderwerp',
 'field'    => 'term_id',
 'terms'    => $taxonomy_ids
-]
+],
+[
+'taxonomy' => 'software',
+'field'    => 'term_id',
+'terms'    => $taxonomy_ids
+],
 ],
 ];
-$term_query = new WP_Query($args);
+$term_query = new WP_Query($term_args);
 if( $term_query->have_posts() ) { ?>
 <ul>
 <?php while ( $term_query->have_posts() ) {
 $term_query->the_post();
-printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
+printf( '<li><a href="%1$s" rel="bookmark">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>
 <?php } else { ?>
-<p><?php esc_html_e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
+<p><?php _e( 'Er zijn nog geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?>
-</div>
-<div class="entry-related-module">
+</section>
+<section class="entry-related-module">
 <?php get_sidebar( 'single' ); ?>
-</div>
+</section>
 </div>
 
 </footer>
 <?php mvdk_post_author(); ?>
 <?php
 the_post_navigation( [
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
+'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Vorig artikel', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . esc_html__( 'Vorig artikel:', 'mvdk' ) . '</span> ',
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
+'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . esc_html__( 'Volgend artikel:', 'mvdk' ) . '</span> ',
 ] );
 ?>
 <?php endwhile; ?>
-</div>
+
 </article>
 <?php
 // If comments are open or we have at least one comment, load up the comment template
@@ -100,5 +111,5 @@ comments_template();
 }
 ?>
 </main>
-<?php get_sidebar(); ?>
+<?php // get_sidebar(); ?>
 <?php get_footer(); ?>

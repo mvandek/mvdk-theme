@@ -6,13 +6,9 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="workExample" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-<div class="entry portfolio-single">
+<main class="content" itemprop="mainContentOfPage">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 <?php if( is_preview() ) : ?>
 <div class="alert alert-info"><strong>Let op:</strong> Je bekijkt een preview, dit artikel is nog niet gepubliceerd!</div>
 <?php endif; ?>
@@ -25,6 +21,7 @@ breadcrumb_trail();
 </header>
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
+</div>
 <?php
 wp_link_pages( [
 'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
@@ -35,58 +32,56 @@ wp_link_pages( [
 'separator'   => '<span class="screen-reader-text">, </span>',
 ] );
 ?>
-</div>
 <footer class="entry-utility">
 <?php
-// echo get_the_term_list( get_the_ID(), 'portfolio-type', '<span class="cpt-links">', _x( ', ', 'Used between list items, there is a space after the comma.', 'harmonic' ), '</span>' );
-// echo get_the_term_list( $post->ID, 'portfolio-tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
-echo get_the_term_list( get_the_ID(), 'post_tag', '<div class="entry-tags" itemprop="keywords">', ' ', '</div>' );
+$tags_list = get_the_tag_list( '', esc_html__( ' ', 'mvdk' ) );
+if ( $tags_list ) {
+printf( '<div class="entry-terms taxonomy-post-tag" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $tags_list ); // WPCS: XSS OK.
+}
 ?>
 <div class="entry-related">
-<div class="entry-related-module">
+<section class="entry-related-module">
 <h3 class="widget-title"><?php esc_html_e( 'Aanbevolen om te lezen', 'mvdk' ); ?></h3>
 <?php
-//$get_tags_from_post = get_the_terms( $post->ID, 'portfolio-tag' );
-$get_tags_from_post = get_the_terms( $post->ID, 'post_tag' );
-$get_tag_ids = wp_list_pluck( $get_tags_from_post, 'term_id' );
-$args = [
-'tag__in' => $get_tag_ids,
+$get_terms_from_post = get_the_terms( $post->ID, 'post_tag' );
+$term_ids = wp_list_pluck( $get_terms_from_post, 'term_id' );
+$term_args = [
+'tag__in' => $term_ids,
 'post__not_in' => [$post->ID],
 'posts_per_page'=> 5,
 'no_found_rows' => true,
 'cache_results' => false,
 ];
-$tag_query = new WP_Query($args);
-if( $tag_query->have_posts() ) { ?>
+$term_query = new WP_Query($term_args);
+if( $term_query->have_posts() ) { ?>
 <ul>
-<?php while ( $tag_query->have_posts() ) {
-$tag_query->the_post();
-printf( '<li><a href="%1$s" rel="bookmark" itemprop="relatedLink">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
+<?php while ( $term_query->have_posts() ) {
+$term_query->the_post();
+printf( '<li><a href="%1$s" rel="bookmark">%2$s</a></li>', esc_url( get_permalink() ), get_the_title() );
 }
 ?>
 </ul>
 <?php } else { ?>
-<p><?php esc_html_e( 'Er zijn geen relevante aanbevelingen', 'mvdk' ); ?></p>
+<p><?php _e( 'Er zijn nog geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?>
-</div>
-<div class="entry-related-module">
+</section>
+<section class="entry-related-module">
 <?php get_sidebar( 'single' ); ?>
-</div>
+</section>
 </div>
 </footer>
 <?php mvdk_post_author(); ?>
 <?php
 the_post_navigation( [
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel &raquo;', 'mvdk' ) . '</span> ' .
+'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Volgend artikel', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . esc_html__( 'Volgend artikel:', 'mvdk' ) . '</span> ',
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( '&laquo; Vorig artikel', 'mvdk' ) . '</span> ' .
+'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Vorig artikel', 'mvdk' ) . '</span> ' .
 '<span class="screen-reader-text">' . esc_html__( 'Vorig artikel:', 'mvdk' ) . '</span> ',
 ] );
 ?>
 <?php endwhile;?>
-</div>
 </article>
 <?php
 // If comments are open or we have at least one comment, load up the comment template
@@ -95,5 +90,5 @@ comments_template();
 }
 ?>
 </main>
-<?php get_sidebar(); ?>
+<?php // get_sidebar(); ?>
 <?php get_footer(); ?>

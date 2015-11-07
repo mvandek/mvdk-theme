@@ -8,14 +8,9 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="main">
-
-<div class="entry">
+<main class="content">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <?php while ( have_posts() ) : the_post(); ?>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
 
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>

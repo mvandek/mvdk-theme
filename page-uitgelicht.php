@@ -6,31 +6,17 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemscope="itemscope" itemtype="http://schema.org/CreativeWork">
-<div class="entry page portfolio">
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
+<main class="content" itemprop="mainContentOfPage">
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="itemscope" itemtype="http://schema.org/Blog">
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
 <?php while ( have_posts() ) : the_post(); ?>
-<div class="entry-content" itemprop="mainContentOfPage">
+<div class="entry-content">
 <?php the_content(); ?>
 </div>
-<?php
-wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
-'after'       => '</div>',
-'link_before' => '<span>',
-'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
-'separator'   => '<span class="screen-reader-text">, </span>',
-] );
-?>
 <?php endwhile; // end of the loop. ?>
-</article>
+</div>
 <?php
 
 // Uitgelicht Query
@@ -43,7 +29,7 @@ else :
 endif;
 
 $args = array(
-	'post_type'	 => array( 'post', 'basiskennis', 'portfolio'),
+	'post_type'	 => array( 'post', 'basiskennis', 'fotobewerking', 'praktijk', 'portfolio' ),
 	'paged'          => $paged,
 	'posts_per_page' => 5,
 	'meta_query' => array(
@@ -66,14 +52,14 @@ if ( $wp_query->max_num_pages < 2 ) {
 return;
 }
 ?>
-<nav class="navigation pagination" role="navigation">
-<h2 class="screen-reader-text"><?php esc_html_e( 'Navigatie voor pagina\'s', 'mvdk' ); ?></h2>
+<nav class="navigation pagination">
+<h2 class="screen-reader-text"><?php _e( 'Navigatie voor pagina\'s', 'mvdk' ); ?></h2>
 <div class="nav-links">
 <?php if ( get_previous_posts_link() ) { ?>
-<div class="nav-previous"><?php previous_posts_link( esc_html__( 'Terug', 'mvdk' ) ); ?></div>
+<div class="nav-previous"><?php previous_posts_link( __( 'Terug', 'mvdk' ) ); ?></div>
 <?php } ?>
 <?php if ( get_next_posts_link() ) { ?>
-<div class="nav-next"><?php next_posts_link( esc_html__( 'Meer', 'mvdk' ) ); ?></div>
+<div class="nav-next"><?php next_posts_link( __( 'Meer', 'mvdk' ) ); ?></div>
 <?php } ?>
 </div>
 </nav>
@@ -82,7 +68,6 @@ return;
 <?php else : ?>
 <?php get_template_part( 'content', 'none' ); ?>
 <?php endif; ?>
-</div>
 </main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

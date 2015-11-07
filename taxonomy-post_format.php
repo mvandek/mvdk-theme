@@ -15,11 +15,7 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/CollectionPage">
-<div class="entry taxonomy">
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
+<main class="content" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
 <?php if ( have_posts() ) : ?>
 <header class="entry-header">
 <h1 class="entry-title" itemprop="headline"><?php printf( esc_html__( '%s archief', 'mvdk' ), '<span>' . get_post_format_string( get_post_format() ) . '</span>' ); ?></h1>
@@ -31,7 +27,6 @@ mvdk_paging_nav();
 else :
 get_template_part( 'content', 'none' );
 endif; ?>
-</div>
 </main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

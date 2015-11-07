@@ -6,6 +6,6 @@
  * @since mvdk-theme v2
  */
 ?>
-<aside id="sidebar" class="sidebar" role="complementary" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+<aside id="sidebar" class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
 <?php get_sidebar( 'front-page' ); ?>
 </aside>
