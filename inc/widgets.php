@@ -10,9 +10,9 @@
 function mvdk_widgets_init() {
 register_sidebar(
 [
-'name' => __( 'Sidebar Top', 'mvdk' ),
+'name' => esc_html__( 'Sidebar Top', 'mvdk' ),
 'id' => 'sidebar-10',
-'description'   => __( 'Verschijnt bovenin de sidebar', 'mvdk' ),
+'description'   => esc_html__( 'Verschijnt bovenin de sidebar', 'mvdk' ),
 'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
@@ -21,9 +21,9 @@ register_sidebar(
 );
 register_sidebar(
 [
-'name' => __( 'Sidebar Bottom', 'mvdk' ),
+'name' => esc_html__( 'Sidebar Bottom', 'mvdk' ),
 'id' => 'sidebar-15',
-'description'   => __( 'Verschijnt onderin de sidebar', 'mvdk' ),
+'description'   => esc_html__( 'Verschijnt onderin de sidebar', 'mvdk' ),
 'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
@@ -32,9 +32,9 @@ register_sidebar(
 );
 register_sidebar(
 [
-'name' => __( 'Footer', 'mvdk' ),
+'name' => esc_html__( 'Footer', 'mvdk' ),
 'id' => 'sidebar-20',
-'description'   => __( 'Verschijnt onderaan de pagina', 'mvdk' ),
+'description'   => esc_html__( 'Verschijnt onderaan de pagina', 'mvdk' ),
 'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
@@ -43,9 +43,9 @@ register_sidebar(
 );
 register_sidebar(
 [
-'name' => __( 'Single Post - Below Content', 'mvdk' ),
+'name' => esc_html__( 'Single Post - Below Content', 'mvdk' ),
 'id' => 'sidebar-30',
-'description'   => __( 'Verschijnt onder content, naast gerelateerde artikelen', 'mvdk' ),
+'description'   => esc_html__( 'Verschijnt onder content, naast gerelateerde artikelen', 'mvdk' ),
 'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
@@ -54,9 +54,20 @@ register_sidebar(
 );
 register_sidebar(
 [
-'name' => __( '404 Error Page', 'mvdk' ),
+'name' => esc_html__( 'Search Sidebar', 'mvdk' ),
+'id' => 'sidebar-search',
+'description'   => esc_html__( 'Verschijnt onder sidebar Single Post - Below Content', 'mvdk' ),
+'before_widget' => '<section id="%1$s" class="widget entry-related-module %2$s">',
+'after_widget' => '</section>',
+'before_title' => '<h3 class="widget-title">',
+'after_title' => '</h3>'
+]
+);
+register_sidebar(
+[
+'name' => esc_html__( '404 Error Page', 'mvdk' ),
 'id' => 'page-404',
-'description'   => __( 'Verschijnt op 404 Page Not Found pagina', 'mvdk' ),
+'description'   => esc_html__( 'Verschijnt op 404 Page Not Found pagina', 'mvdk' ),
 'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h2 class="widget-title">',

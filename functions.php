@@ -42,10 +42,10 @@ function mvdk_theme_setup() {
  * If you're building a theme based on mvdk, use a find and replace
  * to change 'mvdk' to the name of your theme in all the template files
  */
-load_theme_textdomain( 'mvdk', get_template_directory() . '/languages' );
+// load_theme_textdomain( 'mvdk', get_template_directory() . '/languages' );
 
 // Automatically add feed links to document head
-add_theme_support( 'automatic-feed-links' );
+// add_theme_support( 'automatic-feed-links' );
 
 // Switches default core markup for search form to output valid HTML5.
 add_theme_support( 'html5', [
@@ -60,6 +60,7 @@ add_theme_support( 'social-links', [
 'facebook',
 'twitter',
 'google_plus',
+'linkedin',
 ] );
 
 // This theme uses its own gallery styles.
@@ -96,72 +97,83 @@ add_editor_style( [ 'css/editor-style.css', 'css/font-style.css', 'genericons/ge
 /**
  * Set max width of full screen visual editor to match content width
  */
-set_user_setting( 'dfw_width', 768 );
+set_user_setting( 'dfw_width', 790 );
 }
 add_action( 'after_setup_theme', 'mvdk_theme_setup' );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
-function mvdk_content_width() {
-if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) ) {
-$GLOBALS['content_width'] = 1056;
-} else {
-$GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 768 );
-}
-}
-add_action( 'after_setup_theme', 'mvdk_content_width', 0 );
-
+add_filter( 'after_setup_theme', function() {
+//if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-//page.php' ) || is_page_template( 'template-links.php' ) ) {
+//$GLOBALS['content_width'] = 1056;
+//} else {
+$GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 790 );
+//}
+} );
 /**
 * Enqueue theme scripts
 *
 * @uses wp_enqueue_scripts() To enqueue scripts
 */
-function mvdk_enqueue_scripts() {
+add_filter( 'wp_enqueue_scripts', function() {
+
 // Load main stylesheet
-wp_enqueue_style( 'site-mvdk-v2-style', get_stylesheet_uri() );
+wp_enqueue_style( 'mvdk-v2-stylesheet', get_stylesheet_uri() );
+
+if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'subscriptions' ) ) {
+$jetpack_subscription_css = "#subscribe-email input {width: 100%;} .comment-subscription-form .subscribe-label {display: inline !important;}";
+wp_add_inline_style( 'mvdk-v2-stylesheet', $jetpack_subscription_css );
+}
+
 // Add Open Sans fonts, used in the main stylesheet.
-wp_enqueue_style( 'fonts-mvdk-v2-style', get_stylesheet_directory_uri() . '/css/font-style.css' );
+// wp_enqueue_style( 'fonts-mvdk-v2-style', get_template_directory_uri() . '/css/font-style.css' );
+
 // Add Genericons, check first for Jetpack Genericons, then the one delivered with this theme.
 wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', [], '3.3' );
+
+// Remove jQuery scripts
+// wp_deregister_script( 'jquery' );
+// wp_deregister_script('jquery-migrate');
+// Device Pixels support
+
+// This improves the resolution of gravatars and wordpress.com uploads on hi-res and zoomed browsers. We only have gravatars so we should be ok without it.
+wp_deregister_script('devicepx');
+wp_dequeue_script('devicepx');
+
 // Disables l10n.js
 wp_deregister_script('l10n');
+
 // Load the html5 shiv.
-wp_enqueue_script( 'mvdk-html5', 'https://www.staticcdn.nl/html5.js', array(), '3' );
+wp_enqueue_script( 'mvdk-html5', get_template_directory_uri() . '/js/html5.js', [], '3.7.3' );
 wp_script_add_data( 'mvdk-html5', 'conditional', 'lt IE 9' );
+
 // Loads JavaScript files
-wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', ['jquery'], '20150218', true );
-wp_enqueue_script( 'navigation-script', get_template_directory_uri() . '/js/navigation.js', ['jquery'], '20150101', true );
-if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
+wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', ['jquery'], false, true );
+wp_enqueue_script( 'navigation-script', get_template_directory_uri() . '/js/navigation.js', ['jquery'], false, true );
+
+if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 wp_enqueue_script( 'comment-reply' );
 }
-add_action( 'wp_enqueue_scripts', 'mvdk_enqueue_scripts' );
-/**
- * Remove the action which adds print_emoji_detection_script() to wp_head. I don't want inline javascript that detects if the emoji scrips have to be loaded.
- *
- * This function is added in WordPress 4.2
- */
-remove_action( 'wp_head', 'print_emoji_detection_script' );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-/**
- * Remove the action which adds print_emoji_styles() to wp_print_styles. I don't want inline css with !important at all rules.
- * This code is added via the stylesheet of the theme
- *
- * This function is added in WordPress 4.2
- */
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
+} );
 /**
 * Adds several Custom Post Types to the loop, to display it between regular posts
 *
 * @since Esplanade 1.0
 */
-function add_custom_post_type_to_loop( $query ) {
-if ( ( is_tag() || is_category() || is_author() || is_search() || is_archive() && !is_post_type_archive( [ 'basiskennis', 'fotobewerking', 'portfolio', 'fotoapparatuur', 'praktijk', 'advertentie', 'gastartikel', ] ) ) && $query->is_main_query() || is_feed() ) {
-$query->set( 'post_type', [ 'post', 'basiskennis', 'fotobewerking', 'portfolio', 'praktijk', 'gastartikel', 'advertentie' ] );
+add_action('pre_get_posts', function($query) {
+if ( ( is_archive() && ! is_post_type_archive() ) && $query->is_main_query() ) {
+set_query_var( 'post_type', [
+'post',
+'basiskennis',
+'fotobewerking',
+'portfolio',
+'praktijk',
+'gastartikel',
+] );
 return $query;
 }
-}
-add_action( 'pre_get_posts', 'add_custom_post_type_to_loop' );
+} );
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
@@ -170,10 +182,9 @@ add_action( 'pre_get_posts', 'add_custom_post_type_to_loop' );
  * @param string $html Search form HTML.
  * @return string Modified search form HTML.
  */
-function mvdk_search_form_modify( $html ) {
+add_filter('get_search_form', function($html) {
 return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
-}
-add_filter( 'get_search_form', 'mvdk_search_form_modify' );
+} );
 /**
  * Custom functions that act independently of the theme templates.
  */
@@ -193,8 +204,12 @@ require get_template_directory() . '/inc/widgets.php';
 /**
  * Load Jetpack compatibility file.
  */
-require get_template_directory() . '/inc/jetpack.php';
+if ( defined( 'JETPACK__VERSION' ) ) {
+	require get_template_directory() . '/inc/jetpack.php';
+}
 /**
  * Load Dev Code.
  */
 require get_template_directory() . '/inc/dev.php';
+
+require get_template_directory() . '/inc/vip-caching.php';

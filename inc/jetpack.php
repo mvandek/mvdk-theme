@@ -8,6 +8,15 @@
 
 function mvdk_jetpack_setup() {
 
+// Add theme support for Infinite Scroll.
+//	add_theme_support( 'infinite-scroll', array(
+//		'type'           => 'click',
+//		'footer_widgets' => 'footer',
+//		'container' 	 => 'infinite-scroll',
+//		'render'    	 => 'mvdk_infinite_scroll_render',
+//		'footer'    	 => 'footer',
+//	) );
+
 	// This theme supports Portfolios
 	add_theme_support( 'portfolio' );
 

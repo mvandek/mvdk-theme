@@ -35,13 +35,13 @@ wp_link_pages( [
 <footer class="entry-utility">
 <?php
 $tags_list = get_the_tag_list( '', esc_html__( ' ', 'mvdk' ) );
-if ( $tags_list ) {
+if( $tags_list && ! is_wp_error( $tags_list ) ) {
 printf( '<div class="entry-terms taxonomy-post-tag" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $tags_list ); // WPCS: XSS OK.
 }
 ?>
 <div class="entry-related">
 <section class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Relevante artikelen', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php _e( 'Blijf ontdekken!', 'mvdk' ); ?></h3>
 <?php
 $get_terms_from_post = get_the_terms( $post->ID, 'post_tag' );
 $term_ids = wp_list_pluck( $get_terms_from_post, 'term_id' );
@@ -71,6 +71,13 @@ wp_reset_postdata();
 <?php get_sidebar( 'single' ); ?>
 </section>
 </div>
+
+<?php if( is_active_sidebar( 'sidebar-search' ) ) : ?>
+<div class="entry-related">
+<?php dynamic_sidebar( 'sidebar-search' ) ; ?>
+</div>
+<?php endif; ?>
+
 </footer>
 <?php mvdk_post_author(); ?>
 <?php

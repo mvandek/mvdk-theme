@@ -11,11 +11,13 @@ get_header(); ?>
 <header class="entry-header">
 <?php the_title( '<h1 class="entry-title" itemprop="headline">', '</h1>' ); ?>
 </header>
+<?php if ( ! is_paged() ) { ?>
 <?php while ( have_posts() ) : the_post(); ?>
 <div class="entry-content">
 <?php the_content(); ?>
 </div>
 <?php endwhile; // end of the loop. ?>
+<?php } // End of checking function is_paged() ?>
 </div>
 <?php
 
@@ -29,18 +31,24 @@ else :
 endif;
 
 $args = array(
-	'post_type'	 => array( 'post', 'basiskennis', 'fotobewerking', 'praktijk', 'portfolio' ),
+	'post_type'	 => array( 'basiskennis', 'fotobewerking', 'praktijk', ),
 	'paged'          => $paged,
 	'posts_per_page' => 5,
 	'meta_query' => array(
 		array(
-			'key' => 'uitgelicht_selecteer_het_vinkje_om_dit_artikel_uitgelicht_te_maken',
-			'value' => 'selecteer-het-vinkje-om-dit-artikel-uitgelicht-te-maken',
-			'compare' => '='
+			'key' => 'uitgelicht_maak-deze-post-uitgelicht',
+			'value' => '1',
+			'compare' => '=',
+			'type'      => 'BINARY',
 		)
 	)
 );
 $wp_query = new WP_Query ( $args );
+
+// Update the thumbnail cache
+update_post_thumbnail_cache( $wp_query );
+
+// Loop
 if ( $wp_query -> have_posts() ) :
 ?>
 <?php while ( $wp_query -> have_posts() ) : $wp_query -> the_post(); ?>

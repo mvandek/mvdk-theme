@@ -15,16 +15,6 @@ get_header(); ?>
 <div class="entry-content" itemprop="text">
 <?php the_content(); ?>
 </div>
-<?php
-wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
-'after'       => '</div>',
-'link_before' => '<span>',
-'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
-'separator'   => '<span class="screen-reader-text">, </span>',
-] );
-?>
 <?php endwhile; ?>
 </article>
 <?php // If comments are open or we have at least one comment, load up the comment template

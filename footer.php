@@ -7,7 +7,7 @@
  */
 ?>
 </div>
-<footer class="footer">
+<footer id="footer" class="footer">
 
 <?php get_sidebar( 'footer' ); ?>
 
@@ -33,6 +33,18 @@ wp_nav_menu( [
 </footer>
 
 <?php wp_footer(); ?>
+
+<!-- <?php echo get_num_queries(); ?> queries in <?php timer_stop(1); ?> seconden. -->
+
+<script>
+$(document).on("click", '[target="_blank"]', function (e) {
+    var w = window.open();
+    e.stopPropagation;
+    e.preventDefault();
+    w.opener = null;
+    w.location = this.href;
+});
+</script>
 
 </body>
 </html>

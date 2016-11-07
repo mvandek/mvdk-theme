@@ -42,7 +42,7 @@ $args = array(
   'show_count'   => $show_count,
   'pad_counts'   => $pad_counts,
   'hierarchical' => $hierarchical,
-  'title_li'     => $title
+  'title_li'     => $title,
 );
 ?>
 

@@ -15,17 +15,9 @@ get_header(); ?>
 <div class="entry-content" itemprop="mainContentOfPage">
 <?php the_content(); ?>
 </div>
+<footer>
 <p>Laatst bijgewerkt: <span itemprop="lastReviewed"><?php the_modified_date(); ?></span></p>
-<?php
-wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
-'after'       => '</div>',
-'link_before' => '<span>',
-'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
-'separator'   => '<span class="screen-reader-text">, </span>',
-] );
-?>
+</footer>
 <?php endwhile; ?>
 </article>
 <?php

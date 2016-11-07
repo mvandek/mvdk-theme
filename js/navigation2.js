@@ -5,10 +5,15 @@
  * support for dropdown menus.
  */
 ( function() {
-	var container, button, menu, links, subMenus;
+	var container, mobileContainer, button, buttonLabel, menu, mobileMenu, links, subMenus, expanders;
 
 	container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
+		return;
+	}
+
+	mobileContainer = document.getElementById( 'mobile-navigation' );
+	if ( ! mobileContainer ) {
 		return;
 	}
 
@@ -18,6 +23,8 @@
 	}
 
 	menu = container.getElementsByTagName( 'ul' )[0];
+	mobileMenu = mobileContainer.getElementsByTagName( 'ul' )[0];
+	buttonLabel = button.innerHTML;
 
 	// Hide menu toggle button if menu is empty and return early.
 	if ( 'undefined' === typeof menu ) {
@@ -31,20 +38,23 @@
 	}
 
 	button.onclick = function() {
-		if ( -1 !== container.className.indexOf( 'toggled-on' ) ) {
-			container.className = container.className.replace( ' toggled-on', '' );
+		if ( -1 !== mobileContainer.className.indexOf( 'toggled' ) ) {
+			mobileContainer.className = container.className.replace( ' toggled', 'inner' );
 			button.setAttribute( 'aria-expanded', 'false' );
-			menu.setAttribute( 'aria-expanded', 'false' );
+			mobileMenu.setAttribute( 'aria-expanded', 'false' );
+			button.innerHTML = buttonLabel;
 		} else {
-			container.className += ' toggled-on';
+			mobileContainer.className += ' toggled inner';
 			button.setAttribute( 'aria-expanded', 'true' );
-			menu.setAttribute( 'aria-expanded', 'true' );
+			mobileMenu.setAttribute( 'aria-expanded', 'true' );
+			button.innerHTML = button.getAttribute( 'data-close-label' );
 		}
 	};
 
 	// Get all the link elements within the menu.
-	links    = menu.getElementsByTagName( 'a' );
-	subMenus = menu.getElementsByTagName( 'ul' );
+	links     = menu.getElementsByTagName( 'a' );
+	subMenus  = menu.getElementsByTagName( 'ul' );
+	expanders = mobileMenu.getElementsByClassName( 'dropdown-toggle' );
 
 	// Set menu items with submenus to aria-haspopup="true".
 	for ( var i = 0, len = subMenus.length; i < len; i++ ) {
@@ -55,6 +65,24 @@
 	for ( i = 0, len = links.length; i < len; i++ ) {
 		links[i].addEventListener( 'focus', toggleFocus, true );
 		links[i].addEventListener( 'blur', toggleFocus, true );
+	}
+
+	// Setup expander click events
+	for (i = 0, len = expanders.length; i < len; i++ ) {
+		expanders[i].onclick = function() {
+			if ( 'true' === this.getAttribute( 'aria-expanded' ) ) {
+				this.setAttribute( 'aria-expanded', 'false' );
+				this.parentNode.setAttribute( 'aria-expanded', 'false' );
+			} else {
+				this.setAttribute( 'aria-expanded', 'true' );
+				this.parentNode.setAttribute( 'aria-expanded', 'true' );
+			}
+		}
+		expanders[i].focus = function() {
+			var event = document.createEvent( 'HTMLEvents' );
+			event.initEvent( 'blur', true, false );
+			this.dispatchEvent(event);
+		}
 	}
 
 	/**
@@ -78,35 +106,5 @@
 			self = self.parentElement;
 		}
 	}
-
-	// Fix child menus for touch devices.
-	( function( container ) {
-		var touchStartFn, i,
-		    parentLink = container.querySelectorAll( '.menu-item-has-children > a, .page_item_has_children > a' );
-
-		if ( 'ontouchstart' in window ) {
-			touchStartFn = function( e ) {
-				var menuItem = this.parentNode, i;
-
-				if ( ! menuItem.classList.contains( 'focus' ) ) {
-					e.preventDefault();
-					for ( i = 0; i < menuItem.parentNode.children.length; ++i ) {
-						if ( menuItem === menuItem.parentNode.children[i] ) {
-							continue;
-						}
-						menuItem.parentNode.children[i].classList.remove( 'focus' );
-					}
-					menuItem.classList.add( 'focus' );
-				} else {
-					menuItem.classList.remove( 'focus' );
-				}
-			};
-
-			for ( i = 0; i < parentLink.length; ++i ) {
-				parentLink[i].addEventListener( 'touchstart', touchStartFn, false )
-			}
-		}
-	}( container ) );
-
-
 } )();
+

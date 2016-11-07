@@ -100,31 +100,30 @@ endif;
  * Change the comment reply link to use 'Reply to [Author First Name]'
  */
 function mvdk_author_comment_reply_link( $link, $args, $comment ) {
-	$comment = get_comment( $comment );
+$comment = get_comment( $comment );
 
-	// If no comment author is blank, use 'Anoniem'
-	if ( empty( $comment->comment_author ) ) {
-		if ( ! empty( $comment->user_id ) ) {
-			$user   = get_userdata( $comment->user_id );
-			$author = $user->user_login;
-		} else {
-			$author = __( 'Anoniem', 'independent-publisher' );
-		}
+// If no comment author is blank, use 'Anoniem'
+if ( ! empty( $comment->comment_author ) ) {
+	$author = $comment->comment_author;
+} else {
+	if ( ! empty( $comment->user_id ) ) {
+		$user   = get_userdata( $comment->user_id );
+		$author = $user->user_login;
 	} else {
-		$author = $comment->comment_author;
+		$author = __( 'Anoniem', 'independent-publisher' );
 	}
+}
 
-	// If the user provided more than a first name, use only first name
-		if ( strpos( $author, ' ' ) ) {
-			$author = substr( $author, 0, strpos( $author, ' ' ) );
-		}
+// If the user provided more than a first name, use only first name
+//	if ( strpos( $author, ' ' ) ) {
+//		$author = substr( $author, 0, strpos( $author, ' ' ) );
+//	}
 
-	// Replace Reply Link with "Reageer op <Author First Name>"
-	$reply_link_text = $args['reply_text'];
-	$link            = str_replace( $reply_link_text, esc_html__( 'Reageer op', 'mvdk' ) . ' ' . $author, $link );
-
-	return $link;
-	}
+// Replace Reply Link with "Reageer op <Author First Name>"
+$reply_link_text = $args['reply_text'];
+$link            = str_replace( $reply_link_text, esc_html__( 'Reageer op', 'mvdk' ) . ' ' . $author, $link );
+return $link;
+}
 add_filter( 'comment_reply_link', 'mvdk_author_comment_reply_link', 420, 4 );
 
 /**
@@ -143,82 +142,59 @@ function mvdk_get_first_url() {
 $has_url = get_url_in_content( get_the_content() );
 return $has_url ? $has_url : apply_filters( 'the_permalink', get_permalink() );
 }
-/**
- * Displays first gallery from post content. Changes image size from thumbnail
- * to large, to display a larger first image.
- *
- * @since 20-02-2013
- *
- * @return void
- */
-function mvdk_featured_gallery() {
-$pattern = get_shortcode_regex();
-if ( preg_match( "/$pattern/s", get_the_content(), $match ) ) {
-if ( 'gallery' === $match[2] ) {
-if ( ! strpos( $match[3], 'size' ) ) {
-$match[3] .= ' size="medium"'; echo do_shortcode_tag( $match );
-}
-}
-}
-}
 
 function mvdk_entry_meta() {
-
-if ( in_array( get_post_type(), [ 'post', 'attachment', 'basiskennis', 'fotobewerking', 'praktijk', 'fotoapparatuur', 'portfolio', 'gastartikel', 'advertentie', ] ) ) {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s" itemprop="datePublished">%2$s</time>';
-
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 		$time_string = '<time class="entry-date published" datetime="%1$s" itemprop="datePublished">%2$s</time><time class="updated" datetime="%3$s" itemprop="dateModified">%4$s</time>';
 	}
 
 	$time_string = sprintf( $time_string,
 		esc_attr( get_the_date( 'c' ) ),
-		get_the_date(),
+		esc_html( get_the_date() ),
 		esc_attr( get_the_modified_date( 'c' ) ),
-		get_the_modified_date()
+		esc_html( get_the_modified_date() )
 	);
 
-	printf( '<span class="posted-on"><span class="screen-reader-text">%1$s </span>%2$s</span>',
-		_x( 'Geplaatst op', 'Wordt voor publicatiedatum geplaatst.', 'mvdk' ),
+	printf( '<span class="posted-on">%1$s %2$s</span>',
+		esc_html_x( 'Geschreven op', 'Wordt voor publicatiedatum geplaatst.', 'mvdk' ),
 		$time_string
 	);
-}
 
-// if ( is_singular() || is_multi_author() ) {
-	printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s </span><a class="url fn n" href="%2$s" itemprop="name">%3$s</a></span></span>',
-		_x( 'Auteur', 'Wordt voor weergave schrijver geplaatst.', 'mvdk' ),
-		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_html( get_the_author() )
-		);
-// }
+printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s</span> <a class="url fn n" href="%2$s" itemscope="itemscope" itemtype="https://schema.org/Person" itemprop="author"><span itemprop="name">%3$s</span></a></span></span>',
+	_x( 'Geschreven door', 'Wordt voor weergave schrijver geplaatst.', 'mvdk' ),
+	esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+	esc_html( get_the_author() )
+	);
 
-
-if ( 'post' === get_post_type() ) {
-	$categories_list = get_the_category_list( _x( ', ', 'Wordt tussen lijst items geplaatst, en er zit een spatie na de komma.', 'mvdk' ) );	
-} elseif ( 'portfolio' === get_post_type() ) {
-	$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
-} elseif ( in_array( get_post_type(), [ 'basiskennis', 'fotobewerking', 'praktijk', ] ) ) {
-	$categories_list = get_the_term_list( get_the_ID(), 'onderwerp','', ', ' );
-} elseif ( 'gastartikel' === get_post_type() ) {
-	$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type' );
-} elseif ( 'advertentie' === get_post_type() ) {
-	$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
-}
+//if( is_singular() ) {
+//if ( 'post' === get_post_type() ) {
+//	$categories_list = get_the_term_list( get_the_ID(), 'category', '', ', ' );
+//} elseif ( 'portfolio' === get_post_type() ) {
+//	$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
+//} elseif ( in_array( get_post_type(), [ 'basiskennis', 'fotobewerking', 'praktijk', ] ) ) {
+//	$categories_list = get_the_term_list( get_the_ID(), ['onderwerp', 'software',] ,'', ', ' );
+//} elseif ( 'gastartikel' === get_post_type() ) {
+//	$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type' );
+//} elseif ( 'advertentie' === get_post_type() ) {
+//	$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
+//}
 
 // if ( $categories_list && mvdk_categorized_blog() ) {
-if ( $categories_list ) {
-	printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
-		_x( 'Categorie', 'Wordt voor weergave categorie geplaatst.', 'mvdk' ),
-		$categories_list
-	);
-}
+//if ( $categories_list ) {
+//	printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
+//		_x( 'Categorie', 'Wordt voor weergave categorie geplaatst.', 'mvdk' ),
+//		$categories_list
+//	);
+//}
+//} // Einde if( is_singular() )
 
 if ( is_attachment() && wp_attachment_is_image() ) {
 	// Retrieve attachment metadata.
 	$metadata = wp_get_attachment_metadata();
 
 	printf( '<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
-		_x( 'Ware grootte', 'Wordt gebruikt voor grote weergave bijlage.', 'mvdk' ),
+		_x( 'Volledige grootte', 'Wordt gebruikt voor grote weergave bijlage.', 'mvdk' ),
 		esc_url( wp_get_attachment_url() ),
 		$metadata['width'],
 		$metadata['height']
@@ -227,7 +203,7 @@ if ( is_attachment() && wp_attachment_is_image() ) {
 
 if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 	echo '<span class="comments-link" itemprop="commentCount">';
-	comments_popup_link( esc_html__( 'Reageer', 'mvdk' ), esc_html__( '1 reactie', 'mvdk' ), esc_html__( '% reacties', 'mvdk' ) );
+	comments_popup_link( esc_html__( '0', 'mvdk' ), esc_html__( '1', 'mvdk' ), esc_html__( '%', 'mvdk' ) );
 	echo '</span>';
 }
 }
@@ -250,13 +226,7 @@ $all_the_cool_cats = get_categories( [
 $all_the_cool_cats = count( $all_the_cool_cats );
 set_transient( 'all_the_cool_cats', $all_the_cool_cats );
 }
-if ( $all_the_cool_cats > 1 ) {
-// This blog has more than 1 category so mvdk_categorized_blog should return true
-return true;
-} else {
-// This blog has only 1 category so mvdk_categorized_blog should return false
-return false;
-}
+return ( $all_the_cool_cats > 1 );
 }
 /**
  * Flush out the transients used in mvdk_categorized_blog
@@ -269,15 +239,21 @@ return;
 }
 delete_transient( 'all_the_cool_cats' );
 }
-add_action( 'edit_category', 'mvdk_category_transient_flusher' );
+add_action( 'delete_category', 'mvdk_category_transient_flusher' );
 add_action( 'save_post', 'mvdk_category_transient_flusher' );
+add_action( 'delete_post', 'all_posts_archive_page_transient_flusher' );
 /**
  * Retrieve all posts from database and store them for 24h in a transient for the archive page
  *
  * @since 9-3-2013
  */
 function all_posts_archive_page() {
-if ( false === ( $all_posts_for_archive = get_transient( 'all_posts_for_archive' ) ) ) {
+$all_posts_archive_page_transient = get_transient( 'all_posts_for_archive' );
+if( ! empty( $all_posts_archive_page_transient) ) {
+// The function will return here every time after the first time it is run, until the transient expires.
+return $all_posts_archive_page_transient;
+// Nope!  We gotta make a call.
+} else {
 $query = [
 'post_type'		=> [ 'post', 'basiskennis', 'fotobewerking', 'praktijk', 'portfolio', 'gastartikel', 'advertentie' ],
 'nopaging'		=> true,
@@ -301,6 +277,7 @@ function all_posts_archive_page_transient_flusher() {
 delete_transient( 'all_posts_for_archive' );
 }
 add_action( 'save_post', 'all_posts_archive_page_transient_flusher' );
+add_action( 'delete_post', 'all_posts_archive_page_transient_flusher' );
 /**
 * Display author box
 *
@@ -321,28 +298,102 @@ function mvdk_post_author() { ?>
 //if ( $posts_posted == 1) { printf(__( 'Eén artikel tot nu toe. ', 'mvdk' ) ); }
 //else { printf(__( '%s artikelen tot nu toe. ', 'mvdk' ), the_author_posts() ); }
 // Laat sociale media en andere links zien
-printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
-esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) ),
-__( 'Mijn archief', 'mvdk' )
-);
-if ( get_theme_mod( 'mvdk_facebook' ) ) : ?>
-<a href="<?= esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?= esc_url( get_theme_mod( 'mvdk_facebook' ) ); ?>" itemprop="sameAs"><?php _e('Facebook', 'mvdk') ?></a>
-<?php endif;
-if ( get_theme_mod( 'mvdk_twitter' ) ) : ?>
-<a href="<?= esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?= esc_url( get_theme_mod( 'mvdk_twitter' ) ); ?>" itemprop="sameAs"><?php _e('Twitter', 'mvdk') ?></a>
-<?php endif;
-if ( get_theme_mod( 'mvdk_500px' ) ) : ?>
-<a href="<?= esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?= esc_url( get_theme_mod( 'mvdk_500px' ) ); ?>" itemprop="sameAs"><?php _e('500px.com', 'mvdk') ?></a>
-<?php endif;
-if ( get_theme_mod( 'mvdk_linkedin' ) ) : ?>
-<a href="<?= esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?= esc_url( get_theme_mod( 'mvdk_linkedin' ) ); ?>" itemprop="sameAs"><?php _e( 'LinkedIn' , 'mvdk') ?></a>
-<?php endif;
-if ( get_theme_mod( 'mvdk_flickr' ) ) : ?>
-<a href="<?= esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" target="_blank" rel="external nofollow" class="external-link" title="<?= esc_url( get_theme_mod( 'mvdk_flickr' ) ); ?>" itemprop="sameAs"><?php _e('Flickr', 'mvdk') ?></a>
-<?php endif; ?>
+//printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
+//esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+//esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) ),
+//__( 'Mijn archief', 'mvdk' )
+//);
+?>
 </div>
 </div>
 </section>
 <?php
+}
+
+function basiskennis_posts_for_front_page() {
+$basiskennis_posts_for_front_page_transient = get_transient( 'basiskennis_posts_for_front_page' );
+if( ! empty( $basiskennis_posts_for_front_page_transient) ) {
+// The function will return here every time after the first time it is run, until the transient expires.
+return $basiskennis_posts_for_front_page_transient;
+// Nope!  We gotta make a call.
+} else {
+$query = [
+'post_type'             => 'basiskennis',
+'ignore_sticky_posts'   => true,
+'posts_per_page'        => 8,
+'no_found_rows'         => true,
+'cache_results'         => false,
+];
+$retrieve_8_basiskennis_posts = new WP_Query($query);
+// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
+set_transient( 'basiskennis_posts_for_front_page', $retrieve_8_basiskennis_posts );
+}
+// do normal loop stuff
+return $retrieve_8_basiskennis_posts;
+}
+
+function praktijk_posts_for_front_page() {
+$praktijk_posts_for_front_page_transient = get_transient( 'praktijk_posts_for_front_page' );
+if( ! empty( $praktijk_posts_for_front_page_transient) ) {
+// The function will return here every time after the first time it is run, until the transient expires.
+return $praktijk_posts_for_front_page_transient;
+// Nope!  We gotta make a call.
+} else {
+$query = [
+'post_type'             => 'praktijk',
+'ignore_sticky_posts'   => true,
+'posts_per_page'        => 8,
+'no_found_rows'         => true,
+'cache_results'         => false,
+];
+$retrieve_8_praktijk_posts = new WP_Query($query);
+// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
+set_transient( 'praktijk_posts_for_front_page', $retrieve_8_praktijk_posts );
+}
+// do normal loop stuff
+return $retrieve_8_praktijk_posts;
+}
+
+function fotobewerking_posts_for_front_page() {
+$fotobewerking_posts_for_front_page_transient = get_transient( 'fotobewerking_posts_for_front_page' );
+if( ! empty( $fotobewerking_posts_for_front_page_transient) ) {
+// The function will return here every time after the first time it is run, until the transient expires.
+return $fotobewerking_posts_for_front_page_transient;
+// Nope!  We gotta make a call.
+} else {
+$query = [
+'post_type'             => 'fotobewerking',
+'ignore_sticky_posts'   => true,
+'posts_per_page'        => 8,
+'no_found_rows'         => true,
+'cache_results'         => false,
+];
+$retrieve_8_fotobewerking_posts = new WP_Query($query);
+// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
+set_transient( 'fotobewerking_posts_for_front_page', $retrieve_8_fotobewerking_posts );
+}
+// do normal loop stuff
+return $retrieve_8_fotobewerking_posts;
+}
+
+function blog_posts_for_front_page() {
+$blog_posts_for_front_page_transient = get_transient( 'blog_posts_for_front_page' );
+if( ! empty( $blog_posts_for_front_page_transient) ) {
+// The function will return here every time after the first time it is run, until the transient expires.
+return $blog_posts_for_front_page_transient;
+// Nope!  We gotta make a call.
+} else {
+$query = [
+'post_type'             => 'post',
+'ignore_sticky_posts'   => true,
+'posts_per_page'        => 8,
+'no_found_rows'         => true,
+'cache_results'         => false,
+];
+$retrieve_8_blog_posts = new WP_Query($query);
+// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
+set_transient( 'blog_posts_for_front_page', $retrieve_8_blog_posts );
+}
+// do normal loop stuff
+return $retrieve_8_blog_posts;
 }

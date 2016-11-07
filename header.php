@@ -10,19 +10,11 @@
 
 <head>
 
-<meta charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
-<meta name="viewport" content="width=device-width, maximum-scale=1">
-<meta name="mobile-web-app-capable" content="yes">
+<meta charset="<?php echo esc_attr_e( get_bloginfo( 'charset' ) ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-<?php endif; ?>
-
+<link rel="preconnect" href="https://stat.mvandek.nl/">
 <link rel="prefetch" href="https://www.maartenvandekamp.nl/wp-content/plugins/piwik-tracker/js/piwik.js">
-<link rel="prefetch" href="https://www.maartenvandekamp.nl/wp-content/plugins/piwik-tracker/js/piwik-config.js">
-<link rel="preconnect" href="http://stat.mvandek.nl/">
-<link rel="dns-prefetch" href="//secure.gravatar.com/">
-<link rel="dns-prefetch" href="//s0.wp.com/">
 
 <?php wp_head(); ?>
 
@@ -31,7 +23,7 @@
 <body <?php body_class() ?>>
 
 <!--[if gte IE 9]>
-<div class="browsehappy">Zoals je kunt zien wordt de website niet bepaald goed weergegeven. Dat komt omdat je een <strong>sterk verouderde</strong> browser gebruikt, waardoor de website niet goed wordt weergegeven. <a href="http://browsehappy.com/">Upgrade je browser</a> als dat mogelijk is om veilig te kunnen internetten en om deze website optimaal te kunnen gebruiken.</div>
+<div class="browsehappy">Je ziet deze melding omdat je browser zo oud is dat het niet meer loont om de website daarvoor te optimaliseren. Tijd om te upgraden (als dat kan en mag, stel je werkt in een bedrijf met verouderde software en jij hebt er niets over te zeggen...) Ga naar <a href="http://browsehappy.com/">BrowseHappy.com</a> om een moderne browser te downloaden die wel functioneert.</div>
 <![endif]-->
 
 <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Ga naar de inhoud van de website', 'mvdk' ); ?></a>
@@ -55,7 +47,7 @@ if ( $description || is_customize_preview() ) { ?>
 
 <?php if ( has_nav_menu( 'primary' ) ) : ?>
 <nav id="site-navigation" class="main-navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php _e( 'Menu', 'mvdk' ); ?></button>
+<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menu', 'mvdk' ); ?></button>
 <?php
 // Primary navigation menu.
 wp_nav_menu( [
@@ -69,8 +61,10 @@ wp_nav_menu( [
 <?php endif; ?>
 </header>
 
-<?php if ( function_exists('breadcrumb_trail') ) {
-breadcrumb_trail();
-} ?>
+<?php
+if ( function_exists('breadcrumb_trail') ) {
+	breadcrumb_trail();
+}
+?>
 
 <div id="content" class="container">

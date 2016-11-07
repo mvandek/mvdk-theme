@@ -22,35 +22,31 @@ get_header(); ?>
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
 </div>
-<?php
-wp_link_pages( [
-'before'      => '<div class="page-links"><span class="page-links-title">' . esc_html__( 'Pagina\'s:', 'mvdk' ) . '</span>',
-'after'       => '</div>',
-'link_before' => '<span>',
-'link_after'  => '</span>',
-'pagelink'    => '<span class="screen-reader-text">' . esc_html__( 'Pagina', 'mvdk' ) . ' </span>%',
-'separator'   => '<span class="screen-reader-text">, </span>',
-] );
-?>
 <footer class="entry-utility">
 <?php
-$terms = get_the_terms( get_the_ID() , 'onderwerp' );
-if( $terms && ! is_wp_error( $terms ) ) {
-echo get_the_term_list( get_the_ID(), 'onderwerp', '<div class="entry-terms taxonomy-onderwerp" itemprop="articleSection">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
+$terms = get_the_term_list( get_the_ID(), 'onderwerp' );
+if( $terms ) {
+printf( '<div class="entry-terms taxonomy-onderwerp" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
 }
 ?>
 <?php
-$terms = get_the_terms( get_the_ID() , 'software' );
-if( $terms && ! is_wp_error( $terms ) ) {
-echo get_the_term_list( get_the_ID(), 'software', '<div class="entry-terms taxonomy-software" itemprop="keywords">', _x( ' ', 'Used between list items, there is a space after the comma.', 'mvdk' ), '</div>' );
+$terms = get_the_term_list( get_the_ID(), 'software' );
+if( $terms ) {
+printf( '<div class="entry-terms taxonomy-software" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
 }
 ?>
 <div class="entry-related">
 <section class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Relevante artikelen', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php _e( 'Blijf ontdekken!', 'mvdk' ); ?></h3>
 <?php
-$get_terms_from_post = get_the_terms( $post->ID, array ('onderwerp', 'software', ) );
-$taxonomy_ids = wp_list_pluck( $get_terms_from_post, 'term_id' );
+$get_onderwerp_terms_from_post = get_the_terms( $post->ID, 'onderwerp' );
+if( $get_onderwerp_terms_from_post ) {
+	$onderwerp_ids = wp_list_pluck( $get_onderwerp_terms_from_post, 'term_id' );
+}
+$get_software_terms_from_post = get_the_terms( $post->ID, 'software' );
+if( $get_software_terms_from_post ) {
+	$software_ids = wp_list_pluck( $get_software_terms_from_post, 'term_id' );
+}
 $term_args = [
 'cache_results' => false,
 'no_found_rows' => true,
@@ -60,13 +56,12 @@ $term_args = [
 'relation' => 'OR',
 [
 'taxonomy' => 'onderwerp',
-'field'    => 'term_id',
-'terms'    => $taxonomy_ids
+'terms'    => $onderwerp_ids,
 ],
 [
 'taxonomy' => 'software',
-'field'    => 'term_id',
-'terms'    => $taxonomy_ids
+'terms'    => $software_ids,
+'include_children' => false,
 ],
 ],
 ];
@@ -83,12 +78,17 @@ printf( '<li><a href="%1$s" rel="bookmark">%2$s</a></li>', esc_url( get_permalin
 <p><?php _e( 'Er zijn nog geen relevante aanbevelingen', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
-?>
-</section>
+?></section>
 <section class="entry-related-module">
 <?php get_sidebar( 'single' ); ?>
 </section>
 </div>
+
+<?php if( is_active_sidebar( 'sidebar-search' ) ) : ?>
+<div class="entry-related">
+<?php dynamic_sidebar( 'sidebar-search' ) ; ?>
+</div>
+<?php endif; ?>
 
 </footer>
 <?php mvdk_post_author(); ?>

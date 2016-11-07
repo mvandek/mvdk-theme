@@ -6,6 +6,9 @@
  * @since mvdk-theme v2
  */
 
+// First, make sure Jetpack doesn't concatenate all its CSS
+add_filter( 'jetpack_implode_frontend_css', '__return_false' );
+
 function mvdk_page_menu_args( $args ) {
 $args['show_home'] = true;
 return $args;
@@ -30,7 +33,7 @@ $defaults['show_browse'] = false; // whether to show the "browse" text
 // $defaults['post_taxonomy']['post'] = 'category';
 $defaults['labels']['error_404'] = esc_html__( '404 Niet gevonden' );
 $defaults['labels']['archives'] = esc_html__( 'Archief' );
-$defaults['labels']['search'] = esc_html__( 'Zoek resultaat voor %s' );
+$defaults['labels']['search'] = esc_html__( 'Zoekresultaat voor %s' );
 $defaults['labels']['paged'] = esc_html__( 'Pagina %s' );
 return $defaults;
 }
@@ -40,7 +43,7 @@ add_filter( 'breadcrumb_trail_args', 'mvdk_breadcrumbs' );
  * Andere functie
  */
 function mvdk_rel_attachment( $link ) {
-return str_replace( "<a ", "<a rel='attachment' ", $link );
+  return str_replace( "<a ", "<a rel='attachment' ", $link );
 }
 add_filter( 'wp_get_attachment_link', 'mvdk_rel_attachment' );
 
@@ -50,12 +53,10 @@ add_filter( 'wp_get_attachment_link', 'mvdk_rel_attachment' );
 *
 **/
 function remove_cssjs_ver( $src ) {
-    if( strpos( $src, '?ver=' ) )
-        $src = remove_query_arg( 'ver', $src );
-    return $src;
+return $src ? esc_url(remove_query_arg('ver', $src)) : false;
 }
-add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );
-add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
+add_filter( 'style_loader_src', 'remove_cssjs_ver' );
+add_filter( 'script_loader_src', 'remove_cssjs_ver' );
 /**
 * Redirect to the post if the search result matches directly
 *
@@ -113,7 +114,7 @@ add_filter( 'excerpt_length', 'mvdk_excerpt_length' );
 function mvdk_excerpt_more() {
 return sprintf( ' &mdash; <a href="%1$s">%2$s</a>',
 esc_url( get_permalink( get_the_ID() ) ),
-sprintf( esc_html_x( 'Lees verder %s', 'mvdk' ), '<span class="screen-reader-text">' . esc_html( get_the_title( get_the_ID() ) ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
+sprintf( esc_html_x( 'Lees het hele artikel %s', 'mvdk' ), '<span class="screen-reader-text">' . esc_html( get_the_title( get_the_ID() ) ) . '</span> <span class="meta-nav">&raquo;</span>' ) 
 );
 }
 add_filter( 'excerpt_more', 'mvdk_excerpt_more' );
@@ -186,7 +187,6 @@ function add_social_media_to_profile_contact_information( $fields) {
 $fields['twitter'] = esc_html__( 'Twitter', 'mvdk' );
 $fields['facebook'] = esc_html__( 'Facebook', 'mvdk' );
 $fields['linkedin'] = esc_html__( 'LinkedIn', 'mvdk' );
-$fields['googleplus'] = esc_html__( 'Google+', 'mvdk' );
 // Remove Yahoo IM
 unset($fields['yim']);
 unset($fields['aim']);
@@ -200,6 +200,40 @@ add_filter( 'user_contactmethods' , 'add_social_media_to_profile_contact_informa
 * This filter replaces the extra file with an base64 encoded 1x1 gif file.
 *
 */
-add_filter( 'lazyload_images_placeholder_image', function( $placeholder_image ) {
-return 'data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=';
-});
+//add_filter( 'lazyload_images_placeholder_image', function( $placeholder_image ) {
+//return 'data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=';
+//});
+
+/**
+ * Add a pingback url auto-discovery header for singularly identifiable articles.
+ */
+function mvdk_pingback_header() {
+if ( is_singular() && pings_open() ) {
+echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
+}
+}
+add_action( 'wp_head', 'mvdk_pingback_header' );
+
+function cr2_raw_allowed_upload_mime( $existing_mimes ) {
+	// add cr2 to the list of mime types
+	$existing_mimes['cr2'] = 'image/x-canon-cr2';
+	// return the array back to the function with our added mime type
+	return $existing_mimes;
+}
+add_filter( 'mime_types', 'cr2_raw_allowed_upload_mime' );
+
+/**
+ * Adds custom classes to the array of body classes.
+ */
+function mvdk_body_classes( $classes ) {
+	if ( ! is_singular() || is_page_template( 'page-uitgelicht.php') || is_page_template( 'page-onderwerp.php' ) )
+		$classes[] = 'has-sidebar';
+
+	return $classes;
+}
+add_filter( 'body_class', 'mvdk_body_classes' );
+
+/**
+ * This disables the adjacent_post links in the header that are almost never beneficial and are very slow to compute
+ */
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);

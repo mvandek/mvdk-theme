@@ -10,7 +10,8 @@
 ?>
 <article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" itemprop="workExample" itemscope="itemscope" itemtype="http://schema.org/blogPost">
 <?php if ( has_post_thumbnail() ) : ?>
-<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_post_thumbnail('post-thumbnail', [ 'itemprop' => 'image' ] ); ?></a>
+<a href="<?php the_permalink(); ?>" rel="bookmark"><span itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+<?php the_post_thumbnail('post-thumbnail', [ 'itemprop' => 'url' ] ); ?></span></a>
 <?php endif;?>
 <section class="entry-info">
 <header class="entry-header">

@@ -18,13 +18,22 @@ endwhile;
 wp_reset_postdata(); ?>
 <ul>
 <?php
-$posts = all_posts_archive_page();
-if( $posts->have_posts() ) : while ($posts->have_posts() ) : $posts->the_post(); ?>
+$query = [
+'post_type'		=> [ 'post', 'basiskennis', 'fotobewerking', 'praktijk', 'portfolio', 'gastartikel', ],
+'nopaging'		=> true,
+'ignore_sticky_posts'	=> true,
+'no_found_rows'		=> true,
+'cache_results'		=> false,
+];
+$posts = new WP_Query($query);
+if( $posts->have_posts() ) : while ($posts->have_posts() ) : $posts->the_post();
+?>
 <li><?= get_the_date(); ?> &mdash; <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></li>
 <?php
 endwhile;
 endif;
-wp_reset_postdata(); ?>
+wp_reset_postdata();
+?>
 </ul>
 </div>
 </article>
