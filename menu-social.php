@@ -10,15 +10,15 @@
  * @since   Independent Publisher 1.0
  */
 if ( has_nav_menu( 'social' ) ) : ?>
-<nav class="social-navigation" aria-label="<?php _e( 'Social Links Menu', 'mvdk' ); ?>" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+<nav class="social-navigation" aria-label="<?php esc_html_e( 'Social Links Menu', 'mvdk' ); ?>" itemscope itemtype="http://schema.org/SiteNavigationElement">
 <?php
 // Social links navigation menu.
 wp_nav_menu( [
-'theme_location' => 'social',
-'container'      => false,
-'depth'          => 1,
-'link_before'    => '<span class="screen-reader-text">',
-'link_after'     => '</span>',
+'theme_location'	=> 'social',
+'container'		=> false,
+'depth'			=> 1,
+'link_before'		=> '<span class="screen-reader-text" itemprop="name">',
+'link_after'		=> '</span>'
 ] );
 ?>
 </nav><!-- .social-navigation -->

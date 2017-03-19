@@ -35,7 +35,8 @@
 *
 * @since Esplanade 1.0
 */
-function mvdk_theme_setup() {
+
+add_action( 'after_setup_theme', function() {
 /*
  * Make theme available for translation.
  * Translations can be filed in the /languages/ directory.
@@ -59,8 +60,7 @@ add_theme_support( 'html5', [
 add_theme_support( 'social-links', [
 'facebook',
 'twitter',
-'google_plus',
-'linkedin',
+'linkedin'
 ] );
 
 // This theme uses its own gallery styles.
@@ -98,8 +98,7 @@ add_editor_style( [ 'css/editor-style.css', 'css/font-style.css', 'genericons/ge
  * Set max width of full screen visual editor to match content width
  */
 set_user_setting( 'dfw_width', 790 );
-}
-add_action( 'after_setup_theme', 'mvdk_theme_setup' );
+} );
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -127,10 +126,11 @@ wp_add_inline_style( 'mvdk-v2-stylesheet', $jetpack_subscription_css );
 }
 
 // Add Open Sans fonts, used in the main stylesheet.
-// wp_enqueue_style( 'fonts-mvdk-v2-style', get_template_directory_uri() . '/css/font-style.css' );
+// wp_enqueue_style( 'fonts-mvdk-v2-style', get_theme_file_uri( '/css/font-style.css' );
 
 // Add Genericons, check first for Jetpack Genericons, then the one delivered with this theme.
-wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', [], '3.3' );
+wp_register_style( 'genericons', get_theme_file_uri( '/genericons/genericons.css' ), array(), '3.4.1' );
+wp_enqueue_style( 'genericons' );
 
 // Remove jQuery scripts
 // wp_deregister_script( 'jquery' );
@@ -145,12 +145,12 @@ wp_dequeue_script('devicepx');
 wp_deregister_script('l10n');
 
 // Load the html5 shiv.
-wp_enqueue_script( 'mvdk-html5', get_template_directory_uri() . '/js/html5.js', [], '3.7.3' );
+wp_enqueue_script( 'mvdk-html5', get_theme_file_uri( '/js/html5.js' ), [], '3.7.3' );
 wp_script_add_data( 'mvdk-html5', 'conditional', 'lt IE 9' );
 
 // Loads JavaScript files
-wp_enqueue_script( 'skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', ['jquery'], false, true );
-wp_enqueue_script( 'navigation-script', get_template_directory_uri() . '/js/navigation.js', ['jquery'], false, true );
+wp_enqueue_script( 'skip-link-focus-fix', get_theme_file_uri( '/js/skip-link-focus-fix.js' ), ['jquery'], false, true );
+wp_enqueue_script( 'navigation-script', get_theme_file_uri( '/js/navigation4.js' ), ['jquery'], false, true );
 
 if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 wp_enqueue_script( 'comment-reply' );
@@ -161,17 +161,15 @@ wp_enqueue_script( 'comment-reply' );
 *
 * @since Esplanade 1.0
 */
-add_action('pre_get_posts', function($query) {
-if ( ( is_archive() && ! is_post_type_archive() ) && $query->is_main_query() ) {
+add_action('pre_get_posts', function(\WP_Query $q) {
+if ( ( is_archive() && ! is_post_type_archive() ) && $q->is_main_query() ) {
 set_query_var( 'post_type', [
 'post',
 'basiskennis',
 'fotobewerking',
-'portfolio',
 'praktijk',
-'gastartikel',
 ] );
-return $query;
+return $q;
 }
 } );
 /**
@@ -182,9 +180,7 @@ return $query;
  * @param string $html Search form HTML.
  * @return string Modified search form HTML.
  */
-add_filter('get_search_form', function($html) {
-return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
-} );
+
 /**
  * Custom functions that act independently of the theme templates.
  */
@@ -211,5 +207,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Load Dev Code.
  */
 require get_template_directory() . '/inc/dev.php';
-
+/**
+ * Load VIP-caching Code.
+ */
 require get_template_directory() . '/inc/vip-caching.php';
+/**
+ * Load AMP Code.
+ */
+if ( defined( 'AMP__FILE__' ) ) {
+	require get_template_directory() . '/inc/amp.php';
+}

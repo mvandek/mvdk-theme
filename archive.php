@@ -10,7 +10,7 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+<main class="page-content" itemscope itemtype="http://schema.org/Blog">
 <?php if( have_posts() ) : ?>
 <header class="entry-header">
 <h1 class="entry-title" itemprop="headline">
@@ -60,7 +60,9 @@ if ( ! empty( $title ) ) {
 get_template_part( 'content', get_post_format() );
 ?>
 <?php endwhile; ?>
+
 <?php mvdk_paging_nav(); ?>
+
 <?php else : ?>
 <?php get_template_part( 'content', 'none' ); ?>
 <?php endif; ?>

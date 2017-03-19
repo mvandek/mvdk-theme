@@ -12,18 +12,20 @@
 <?php get_sidebar( 'footer' ); ?>
 
 <?php if ( get_theme_mod( 'mvdk_custom_footer_text' ) ) { ?>
-<div class="copyright"><?= '© ' . date( 'Y' ) . ' ' . esc_html( get_theme_mod( 'mvdk_custom_footer_text' ) ); ?></div>
+<div class="copyright"><?php echo '©' . ' ' . date( 'Y' ) . ' ' . esc_html( get_theme_mod( 'mvdk_custom_footer_text' ) ); ?></div>
 <?php } ?>
 
 <?php if ( has_nav_menu( 'footer' ) ) : ?>
 <!-- .footer-navigation -->
-<nav class="footer-navigation" aria-label="<?php _e( 'Footer Menu', 'mvdk' ); ?>" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+<nav class="footer-navigation" aria-label="<?php esc_html_e( 'Footer Menu', 'mvdk' ); ?>" itemscope itemtype="http://schema.org/SiteNavigationElement">
 <?php
 // Social links navigation menu.
 wp_nav_menu( [
-'theme_location' => 'footer',
-'container'      => false,
-'depth'          => 1,
+'theme_location'	=> 'footer',
+'container'		=> false,
+'depth'			=> 1,
+'link_before'		=> '<span itemprop="name">', 
+'link_after'		=> '</span>'
 ] );
 ?>
 </nav>

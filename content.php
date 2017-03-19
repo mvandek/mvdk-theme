@@ -8,7 +8,7 @@
  * @since mvdk-theme v2
  */
 ?>
-<article <?php post_class('padding-20px'); ?> id="post-<?php the_ID(); ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 <?php if ( has_post_thumbnail() ) { ?>
 <div class="entry-thumbnail">
 <a href="<?php the_permalink(); ?>" rel="bookmark">
@@ -18,7 +18,7 @@
 </a>
 </div>
 <?php } ?>
-<div class="entry-info">
+<section class="entry-info">
 <header class="entry-header">
 <?php the_title( sprintf( '<h2 class="entry-title" itemprop="mainEntityOfPage headline"><a href="%s" rel="bookmark" itemprop="url">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 </header>
@@ -29,5 +29,5 @@
 <?php mvdk_entry_meta(); ?>
 <?php edit_post_link( esc_html__( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </footer>
-</div>
+</section>
 </article>

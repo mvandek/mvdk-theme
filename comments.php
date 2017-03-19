@@ -9,8 +9,9 @@
  * @since mvdk-theme v2
  */
 
-if ( post_password_required() )
+if ( post_password_required() ) {
 return;
+}
 ?>
 
 <footer id="comments" class="comments-area">
@@ -35,34 +36,33 @@ return;
 			?>
 		</ol><!-- .comment-list -->
 
-<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-<nav class="navigation comment-navigation">
-<h2 class="screen-reader-text"><?php _e( 'Navigatie voor reacties', 'mvdk' ); ?></h2>
-<div class="nav-previous"><?php previous_comments_link( __( 'Oude reacties', 'mvdk' ) ); ?></div>
-<div class="nav-next"><?php next_comments_link( __( 'Nieuwe reacties', 'mvdk' ) ); ?></div>
-</nav>
-<?php endif; // Check for comment navigation ?>
-
 	<?php endif; // have_comments() ?>
 
 	<?php
 		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
+		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
 	?>
-		<p class="no-comments"><?php _e( 'Reageren is uitgeschakeld', 'mvdk' ); ?></p>
-	<?php endif; ?>
+		<p class="no-comments"><?php esc_html_e( 'Reageren is uitgeschakeld', 'mvdk' ); ?></p>
+	<?php } ?>
 
-	<?php comment_form( array(
-		'comment_field' => '<p class="comment-form-comment"><label for="comment">' . _x( 'Reactie', 'mvdk' ) . '</label> <textarea id="comment" name="comment" cols="45" rows="8"  aria-required="true" required="required"></textarea></p>',
-		'comment_notes_before' => '<p class="comment-notes"><span id="email-notes">' . __( 'Leuk dat je een reactie wilt plaatsen! Vul daarvoor de onderstaande velden in. De velden met <span class="required">*</span> zijn verplicht.<br />Heb je een algemene vraag over fotografie? Dan kun je die op <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">deze pagina</a> plaatsen.', 'mvdk' ) . '</span></p>',
-		'comment_notes_after' => '<p>Je reactie wordt eerst gelezen voordat deze geplaatst wordt. Het emailadres wordt <strong>niet</strong> openbaar gemaakt.</p>',
-		'title_reply' => __( 'Schrijf een reactie' ),
-		'title_reply_to' => __( 'Reageer op %s' ),
-		'title_reply_before'   => '<h2 id="reply-title" class="comment-reply-title">',
-		'title_reply_after'    => '</h2>',
-		'cancel_reply_link' => __( 'Annuleer mijn reactie' ),
-		'label_submit' => __( 'Plaats mijn reactie' ),
-		'format' => 'html5',
-		) ); ?>
+<?php
+// These arguments change the default arguments as defined in /wp-includes/comment-template.php
+$comment_args = [
+'comment_field' => '<div class="comment-form-comment"><label for="comment">' . _x( 'Reactie', 'mvdk' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></div>',
+
+'comment_notes_before' => '<p class="comment-notes">' . __( 'Ben je nieuwsgierig geworden, wil je bijdragen aan de discussie, of heb je een aanvulling? <strong>Deel je mening!</strong> Voor algemene vragen is er de <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">Vraagbaak</a>.', 'mvdk' ) . '</p>',
+
+'comment_notes_after' => '<p id="email-notes"><strong>Opmerking:</strong> de reactie wordt eerst gelezen (en indien nodig geredigeerd), voordat deze wordt geplaatst. Het emailadres blijft privé.</p>',
+
+'title_reply' => __( 'Schrijf een reactie' ),
+'title_reply_to' => __( 'Reageer op %s' ),
+'title_reply_before'   => '<h2 id="reply-title" class="comment-reply-title">',
+'title_reply_after'    => '</h2>',
+'cancel_reply_link' => __( 'Annuleer mijn reactie' ),
+'label_submit' => __( 'Plaats mijn reactie' ),
+];
+
+comment_form( $comment_args ); // Apply all the custom args with the default and output the customized comment form.
+?>
 
 </footer><!-- .comments-area -->

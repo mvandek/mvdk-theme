@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Onderwerpen
+ * Template Name: Locaties
  *
  * @package mvdk-theme
  * @since mvdk-theme v2
@@ -29,7 +29,7 @@ wp_link_pages( [
 </article>
 <?php
 
-$taxonomy     = 'onderwerp';
+$taxonomy     = 'locatie';
 $orderby      = 'name';
 $show_count   = 1;      // 1 for yes, 0 for no
 $pad_counts   = 0;      // 1 for yes, 0 for no

@@ -6,7 +6,7 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
-<main class="content" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/SearchResultsPage">
+<main class="content" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/SearchResultsPage">
 <?php if( have_posts() ) : ?>
 <header class="entry-header">
 <h2 class="entry-title" itemprop="headline"><?php printf( esc_html__( 'Uw zoekopdracht: %s', 'mvdk' ), get_search_query() ); ?></h2>

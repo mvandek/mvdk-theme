@@ -22,34 +22,49 @@ get_header(); ?>
 <div class="entry-content" itemprop="articleBody">
 <?php the_content(); ?>
 </div>
+<?php endwhile; ?>
 <footer class="entry-utility">
 <?php
-$terms = get_the_term_list( get_the_ID(), 'onderwerp' );
-if( $terms ) {
+$terms = get_the_term_list( $post->ID, 'post_tag' );
+if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+printf( '<div class="entry-terms taxonomy-post-tag" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
+}
+?>
+<?php
+$terms = get_the_term_list( $post->ID, 'onderwerp' );
+if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 printf( '<div class="entry-terms taxonomy-onderwerp" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
 }
 ?>
 <?php
-$terms = get_the_term_list( get_the_ID(), 'software' );
-if( $terms ) {
-printf( '<div class="entry-terms taxonomy-software" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
+$terms = get_the_term_list( $post->ID, 'software' );
+if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+printf( '<div class="entry-terms taxonomy-software" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
+}
+?>
+<?php
+$terms = get_the_term_list( $post->ID, 'locatie' );
+if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+printf( '<div class="entry-terms taxonomy-location" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
 }
 ?>
 <div class="entry-related">
 <section class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Blijf ontdekken!', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php _e( 'Relevante artikelen', 'mvdk' ); ?></h3>
 <?php
 $get_onderwerp_terms_from_post = get_the_terms( $post->ID, 'onderwerp' );
-if( $get_onderwerp_terms_from_post ) {
+if( $get_onderwerp_terms_from_post && ! is_wp_error( $get_onderwerp_terms_from_post ) ) {
 	$onderwerp_ids = wp_list_pluck( $get_onderwerp_terms_from_post, 'term_id' );
 }
 $get_software_terms_from_post = get_the_terms( $post->ID, 'software' );
-if( $get_software_terms_from_post ) {
+if( $get_software_terms_from_post && ! is_wp_error( $get_software_terms_from_post ) ) {
 	$software_ids = wp_list_pluck( $get_software_terms_from_post, 'term_id' );
 }
 $term_args = [
-'cache_results' => false,
+'update_post_term_cache' => false,
+'update_post_meta_cache' => false,
 'no_found_rows' => true,
+'orderby' => 'rand',
 'post__not_in' => [$post->ID],
 'posts_per_page'=> 5,
 'tax_query' => [
@@ -75,7 +90,7 @@ printf( '<li><a href="%1$s" rel="bookmark">%2$s</a></li>', esc_url( get_permalin
 ?>
 </ul>
 <?php } else { ?>
-<p><?php _e( 'Er zijn nog geen relevante aanbevelingen', 'mvdk' ); ?></p>
+<p><?php _e( 'Er zijn geen relevante artikelen beschikbaar', 'mvdk' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?></section>
@@ -91,17 +106,18 @@ wp_reset_postdata();
 <?php endif; ?>
 
 </footer>
+
+</article>
+
 <?php mvdk_post_author(); ?>
+
 <?php
 the_post_navigation( [
-'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Vorig artikel', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Vorig artikel', 'mvdk' ) . '</span> ',
-'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Volgend artikel', 'mvdk' ) . '</span> ' .
-'<span class="screen-reader-text">' . __( 'Volgend artikel', 'mvdk' ) . '</span> ',
+'prev_text' => '<div class="meta-nav">' . esc_html__( 'Vorig artikel', 'mvdk' ) . '</div> ',
+'next_text' => '<div class="meta-nav">' . esc_html__( 'Volgend artikel', 'mvdk' ) . '</div> ',
 ] );
 ?>
-<?php endwhile; ?>
-</article>
+
 <?php
 // If comments are open or we have at least one comment, load up the comment template
 if ( comments_open() || get_comments_number() ) {

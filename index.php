@@ -14,13 +14,18 @@
  */
 get_header(); ?>
 <main class="content" itemprop="mainContentOfPage">
-<?php if( have_posts() ) : while( have_posts() ) : the_post();
+<?php if( have_posts() ) {
+	while( have_posts() ) :
+		the_post();
 get_template_part( 'content', get_post_format() );
 endwhile;
+
 mvdk_paging_nav();
-else :
-get_template_part( 'content', 'none' );
-endif; ?>
+
+} else {
+	get_template_part( 'content', 'none' );
+}
+?>
 </main>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
