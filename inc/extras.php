@@ -21,6 +21,9 @@ add_filter( 'wp_page_menu_args', 'mvdk_page_menu_args' );
 add_filter( 'wpcf7_load_js', '__return_false' );
 add_filter( 'wpcf7_load_css', '__return_false' );
 
+// Remove Color scheme picker from Profiles page
+remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
 /**
 * Output the breadcrumb trail
 *
@@ -53,7 +56,7 @@ add_filter( 'wp_get_attachment_link', 'mvdk_rel_attachment' );
 *
 **/
 function remove_cssjs_ver( $src ) {
-return $src ? esc_url(remove_query_arg('ver', $src)) : false;
+return esc_url( remove_query_arg( 'ver', $src ) );
 }
 add_filter( 'style_loader_src', 'remove_cssjs_ver' );
 add_filter( 'script_loader_src', 'remove_cssjs_ver' );
@@ -81,14 +84,16 @@ add_action('template_redirect', 'redirect_single_post');
 function mvdk_comment_fields( $fields ) {
 $commenter = wp_get_current_commenter();
 $req       = get_option( 'require_name_email' );
-$aria_req  = ( $req ? " aria-required='true'" : '' );
-$html_req  = ( $req ? " required='required'" : '' );
+$aria_req = ( $req ? " aria-required='true'" : '' );
+$html_req = ( $req ? " required='required'" : '' );
 
-$fields['author'] = '<p class="comment-form-author"><label for="author">' . esc_html__( 'Je naam', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="text" id="author" name="author" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+$fields   =  array(
+	'author' => '<p class="comment-form-author">' . '<label for="author">' . __( 'Naam' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245"' . $aria_req . $html_req . ' /></p>',
 
-$fields['email'] = '<p class="comment-form-email"><label for="email">' . esc_html__( 'Je emailadres', 'mvdk' ) . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input type="email" id="email" name="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>';
+	'email' => '<p class="comment-form-email"><label for="email">' . __( 'Emailadres' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>',
 
-$fields['url'] = '<p class="comment-form-url"><label for="url">' . esc_html__( 'Jouw website', 'mvdk' ) . '</label>' . '<input type="url" id="url" name="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . $html_req  . ' /></p>';
+	'url' => '<p class="comment-form-url"><label for="url">' . __( 'Website (<em>optioneel</em>)' ) . '</label> ' . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" /></p>',
+);
 
 return $fields;
 
@@ -209,8 +214,8 @@ add_filter( 'user_contactmethods' , 'add_social_media_to_profile_contact_informa
  */
 function mvdk_pingback_header() {
 if ( is_singular() && pings_open() ) {
-echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
-}
+	echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
+	}
 }
 add_action( 'wp_head', 'mvdk_pingback_header' );
 
@@ -226,14 +231,53 @@ add_filter( 'mime_types', 'cr2_raw_allowed_upload_mime' );
  * Adds custom classes to the array of body classes.
  */
 function mvdk_body_classes( $classes ) {
-	if ( ! is_singular() || is_page_template( 'page-uitgelicht.php') || is_page_template( 'page-onderwerp.php' ) )
-		$classes[] = 'has-sidebar';
+	// Adds a class of hfeed to non-singular pages.
+	if ( ! is_singular() ) {
+		$classes[] = 'hfeed';
+	}
 
+	if ( ! is_singular()
+	|| is_page_template( 'page-uitgelicht.php')
+	|| is_page_template( 'page-locatie.php')
+ 	|| is_page_template( 'page-onderwerp.php')
+	|| is_page_template( 'templates/template-front-page.php')
+	) {
+		$classes[] = 'has-sidebar';
+	}
 	return $classes;
 }
 add_filter( 'body_class', 'mvdk_body_classes' );
 
+// Don't log IP addresses of comment authors.
+add_filter( 'pre_comment_user_ip', '__return_empty_string' );
+
+// Don't log User Agents of comment authors.
+add_filter( 'pre_comment_user_agent', '__return_empty_string' );
+
 /**
- * This disables the adjacent_post links in the header that are almost never beneficial and are very slow to compute
+ * Add schema microdata to nav urls
  */
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+function mvdk_add_menu_atts( $atts, $item, $args ) {
+    $atts['itemprop'] = 'url';
+    return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'mvdk_add_menu_atts', 10, 3 );
+
+/**
+ * Improve perfomance of the `_WP_Editors::wp_link_query` method
+ *
+ * The WordPress core is currently not setting `no_found_rows` inside the `_WP_Editors::wp_link_query`
+ * See https://core.trac.wordpress.org/ticket/38784
+ * 
+ * Since the `_WP_Editors::wp_link_query` method is not using the `found_posts` nor `max_num_pages`
+ * properties of `WP_Query` class, the `SQL_CALC_FOUND_ROWS` in produced SQL query is extra and
+ * useless.
+ *
+ */
+function wpcom_vip_wp_link_query_args( $query ) {
+	//Since the WP_Query is not checking the $found_posts nor $max_num_pages properties
+	//we don't need to know the total number of matching posts in the database
+	$query['no_found_rows'] = true;
+	return $query;
+}
+add_filter( 'wp_link_query_args', 'wpcom_vip_wp_link_query_args', 10, 1 );

@@ -25,7 +25,7 @@ return;
 <div class="nav-previous"><?php previous_posts_link( __( 'Terug', 'mvdk' ) ); ?></div>
 <?php } ?>
 <?php if ( get_next_posts_link() ) { ?>
-<div class="nav-next"><?php next_posts_link( __( 'Meer', 'mvdk' ) ); ?></div>
+<div class="nav-next"><?php next_posts_link( __( 'Volgende pagina', 'mvdk' ) ); ?></div>
 <?php } ?>
 </div>
 </nav>
@@ -54,30 +54,32 @@ if ( 'pingback' === $comment->comment_type || 'trackback' === $comment->comment_
 
 <li class="post pingback">
 <div class="comment-body">
-<?php _e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
+<?php esc_html_e( 'Pingback: ', 'mvdk' ); comment_author_link(); edit_comment_link( __( 'Bewerken', 'mvdk' ), '<span class="edit-link">', '</span>' ); ?>
 </div>
+</li>
 
 <?php else : ?>
 
-<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
+<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
 
-<article id="div-comment-<?php comment_ID(); ?>" class="comment-body" itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment">
+<article id="comment-<?php comment_ID(); ?>" class="comment" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
 
 <header class="comment-meta">
-<?php if ( 0 != $args['avatar_size'] ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
+<div class="comment-author comment-metadata vcard" itemprop="author" itemscope itemtype="http://schema.org/Person">
 
-<div class="comment-author comment-metadata vcard" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
-<?php printf( '<div class="fn" itemprop="name">%1$s</div>', get_comment_author_link() ); ?>
+<?php
+$comment_author = get_comment_author_link();
+if ( ! empty( $comment_author ) ) {
+printf( '<div class="fn" itemprop="name">%1$s</div>', wp_kses_post( $comment_author ) );
+} else {
+$comment_author = 'Anoniem';
+printf( '<div class="fn" itemprop="name">%1$s</div>', wp_kses_post( $comment_author ) );
+}
+?>
 
-<a href="<?= esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-<time datetime="<?= get_comment_date('c'); ?>">
-<?php printf( __( '%1$s om %2$s', 'mvdk' ), get_comment_date(), get_comment_time() ); ?>
-</time>
+<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+<time datetime="<?php comment_date( DATE_W3C ); ?>"><?php printf( __( '%1$s om %2$s', 'mvdk' ), get_comment_date(), get_comment_time() ); ?></time>
 </a>
-
-<?php if ( $comment->comment_approved === '0' ) { ?>
-<p class="comment-awaiting-moderation"><?php _e( 'Je reactie wordt beoordeeld voor plaatsing.', 'mvdk' ); ?></p>
-<?php } ?>
 
 </div>
 </header>
@@ -86,10 +88,14 @@ if ( 'pingback' === $comment->comment_type || 'trackback' === $comment->comment_
 <?php comment_text(); ?>
 </div>
 
-<?php edit_comment_link( __( 'Bewerken', 'mvdk' ), '<p class="edit-link">', '</p>' ); ?>
+<?php if ( $comment->comment_approved === '0' ) { ?>
+<div class="comment-awaiting-moderation"><?php esc_html_e( 'Je reactie wordt beoordeeld voor plaatsing.', 'mvdk' ); ?></div>
+<?php } ?>
+
+<?php edit_comment_link( __( 'Bewerken', 'mvdk' ), '<div class="edit-link">', '</div>' ); ?>
 
 <footer class="reply">
-<?php comment_reply_link( array_merge( $args, [ 'reply_text' => __( 'Reageer', 'mvdk' ),  'depth' => $depth ] ) ); ?>
+<?php comment_reply_link( array_merge( $args, [ 'depth' => $depth ] ) ); ?>
 </footer>
 
 </article>
@@ -99,32 +105,20 @@ endif;
 /*
  * Change the comment reply link to use 'Reply to [Author First Name]'
  */
-function mvdk_author_comment_reply_link( $link, $args, $comment ) {
-$comment = get_comment( $comment );
+function mvdk_author_comment_reply_link( $args, $comment ) {
+$comment = get_comment( $comment_ID );
 
 // If no comment author is blank, use 'Anoniem'
-if ( ! empty( $comment->comment_author ) ) {
+if ( $comment->comment_author ) {
 	$author = $comment->comment_author;
 } else {
-	if ( ! empty( $comment->user_id ) ) {
-		$user   = get_userdata( $comment->user_id );
-		$author = $user->user_login;
-	} else {
-		$author = __( 'Anoniem', 'independent-publisher' );
-	}
+	$author = 'Anoniem';
 }
-
-// If the user provided more than a first name, use only first name
-//	if ( strpos( $author, ' ' ) ) {
-//		$author = substr( $author, 0, strpos( $author, ' ' ) );
-//	}
-
-// Replace Reply Link with "Reageer op <Author First Name>"
-$reply_link_text = $args['reply_text'];
-$link            = str_replace( $reply_link_text, esc_html__( 'Reageer op', 'mvdk' ) . ' ' . $author, $link );
-return $link;
+// Replace Reply Text with "Reply to <Author Name>"
+$args['reply_text'] = __( 'Reageer op', 'independent-publisher' ) . ' ' . esc_html( $author );
+return $args;
 }
-add_filter( 'comment_reply_link', 'mvdk_author_comment_reply_link', 420, 4 );
+add_filter( 'comment_reply_link_args', 'mvdk_author_comment_reply_link', 10, 3 );
 
 /**
  * Returns the URL from the post.
@@ -150,9 +144,9 @@ function mvdk_entry_meta() {
 	}
 
 	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
+		esc_attr( get_the_date( DATE_W3C ) ),
 		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
+		esc_attr( get_the_modified_date( DATE_W3C ) ),
 		esc_html( get_the_modified_date() )
 	);
 
@@ -161,33 +155,11 @@ function mvdk_entry_meta() {
 		$time_string
 	);
 
-printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s</span> <a class="url fn n" href="%2$s" itemscope="itemscope" itemtype="https://schema.org/Person" itemprop="author"><span itemprop="name">%3$s</span></a></span></span>',
+printf( '<span class="byline"><span class="author vcard"><span class="screen-reader-text">%1$s</span><a class="url fn n" href="%2$s" itemscope itemtype="https://schema.org/Person" itemprop="author"><span itemprop="name">%3$s</span></a></span></span>',
 	_x( 'Geschreven door', 'Wordt voor weergave schrijver geplaatst.', 'mvdk' ),
 	esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 	esc_html( get_the_author() )
 	);
-
-//if( is_singular() ) {
-//if ( 'post' === get_post_type() ) {
-//	$categories_list = get_the_term_list( get_the_ID(), 'category', '', ', ' );
-//} elseif ( 'portfolio' === get_post_type() ) {
-//	$categories_list = get_the_term_list( get_the_ID(), 'portfolio-type' );
-//} elseif ( in_array( get_post_type(), [ 'basiskennis', 'fotobewerking', 'praktijk', ] ) ) {
-//	$categories_list = get_the_term_list( get_the_ID(), ['onderwerp', 'software',] ,'', ', ' );
-//} elseif ( 'gastartikel' === get_post_type() ) {
-//	$categories_list = get_the_term_list( get_the_ID(), 'gastartikel-type' );
-//} elseif ( 'advertentie' === get_post_type() ) {
-//	$categories_list = get_the_term_list( get_the_ID(), 'adverteerder' );
-//}
-
-// if ( $categories_list && mvdk_categorized_blog() ) {
-//if ( $categories_list ) {
-//	printf( '<span class="cat-links"><span class="screen-reader-text">%1$s </span><span itemprop="articleSection">%2$s</span></span>',
-//		_x( 'Categorie', 'Wordt voor weergave categorie geplaatst.', 'mvdk' ),
-//		$categories_list
-//	);
-//}
-//} // Einde if( is_singular() )
 
 if ( is_attachment() && wp_attachment_is_image() ) {
 	// Retrieve attachment metadata.
@@ -201,9 +173,9 @@ if ( is_attachment() && wp_attachment_is_image() ) {
 	);
 }
 
-if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-	echo '<span class="comments-link" itemprop="commentCount">';
-	comments_popup_link( esc_html__( '0', 'mvdk' ), esc_html__( '1', 'mvdk' ), esc_html__( '%', 'mvdk' ) );
+if ( ! post_password_required() && ( comments_open() || get_comments_number() ) && post_type_supports( get_post_type(), 'comments' ) ) {
+	echo '<span class="comments-link">';
+	comments_popup_link( esc_html__( '0', 'mvdk' ), esc_html__( '1 reactie', 'mvdk' ), esc_html__( '% reacties', 'mvdk' ) );
 	echo '</span>';
 }
 }
@@ -241,159 +213,21 @@ delete_transient( 'all_the_cool_cats' );
 }
 add_action( 'delete_category', 'mvdk_category_transient_flusher' );
 add_action( 'save_post', 'mvdk_category_transient_flusher' );
-add_action( 'delete_post', 'all_posts_archive_page_transient_flusher' );
-/**
- * Retrieve all posts from database and store them for 24h in a transient for the archive page
- *
- * @since 9-3-2013
- */
-function all_posts_archive_page() {
-$all_posts_archive_page_transient = get_transient( 'all_posts_for_archive' );
-if( ! empty( $all_posts_archive_page_transient) ) {
-// The function will return here every time after the first time it is run, until the transient expires.
-return $all_posts_archive_page_transient;
-// Nope!  We gotta make a call.
-} else {
-$query = [
-'post_type'		=> [ 'post', 'basiskennis', 'fotobewerking', 'praktijk', 'portfolio', 'gastartikel', 'advertentie' ],
-'nopaging'		=> true,
-'ignore_sticky_posts'	=> true,
-'no_found_rows'		=> true,
-'cache_results'		=> false,
-];
-$all_posts_for_archive = new WP_Query($query);
-// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
-set_transient( 'all_posts_for_archive', $all_posts_for_archive );
-}
-// do normal loop stuff
-return $all_posts_for_archive;
-}
-/**
- * Flush out the transients used in mvdk_categorized_blog when a post is saved
- *
- * @since 11-3-2013
- */
-function all_posts_archive_page_transient_flusher() {
-delete_transient( 'all_posts_for_archive' );
-}
-add_action( 'save_post', 'all_posts_archive_page_transient_flusher' );
-add_action( 'delete_post', 'all_posts_archive_page_transient_flusher' );
+
 /**
 * Display author box
 *
 * @since Esplanade 1.0
 */
 function mvdk_post_author() { ?>
-<section class="entry-author" itemscope="itemscope" itemtype="http://schema.org/Person">
-<?= get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'mvdk_author_bio_avatar_size', 96 ) ); ?>
-<div class="author-info">
+<div class="entry-author" itemscope itemtype="http://schema.org/Person">
+<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'mvdk_author_bio_avatar_size', 96 ) ); ?>
+<section class="author-info">
 <h3 class="author vcard"><span class="fn" itemprop="name"><?php the_author(); ?></span></h3>
 <?php if ( get_the_author_meta( 'description' ) ) : ?>
 <p class="author-bio" itemprop="description"><?php the_author_meta( 'description' ); ?></p>
 <?php endif; ?>
-<div class="author-meta">
-<?php 
-// Change language depending on number of posts
-//$posts_posted = get_the_author_posts();
-//if ( $posts_posted == 1) { printf(__( 'Eén artikel tot nu toe. ', 'mvdk' ) ); }
-//else { printf(__( '%s artikelen tot nu toe. ', 'mvdk' ), the_author_posts() ); }
-// Laat sociale media en andere links zien
-//printf( '<span class="external-link"><a class="url" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
-//esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-//esc_attr( sprintf( __( 'Bekijk het archief van %s', 'mvdk' ), get_the_author() ) ),
-//__( 'Mijn archief', 'mvdk' )
-//);
-?>
-</div>
-</div>
 </section>
+</div>
 <?php
-}
-
-function basiskennis_posts_for_front_page() {
-$basiskennis_posts_for_front_page_transient = get_transient( 'basiskennis_posts_for_front_page' );
-if( ! empty( $basiskennis_posts_for_front_page_transient) ) {
-// The function will return here every time after the first time it is run, until the transient expires.
-return $basiskennis_posts_for_front_page_transient;
-// Nope!  We gotta make a call.
-} else {
-$query = [
-'post_type'             => 'basiskennis',
-'ignore_sticky_posts'   => true,
-'posts_per_page'        => 8,
-'no_found_rows'         => true,
-'cache_results'         => false,
-];
-$retrieve_8_basiskennis_posts = new WP_Query($query);
-// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
-set_transient( 'basiskennis_posts_for_front_page', $retrieve_8_basiskennis_posts );
-}
-// do normal loop stuff
-return $retrieve_8_basiskennis_posts;
-}
-
-function praktijk_posts_for_front_page() {
-$praktijk_posts_for_front_page_transient = get_transient( 'praktijk_posts_for_front_page' );
-if( ! empty( $praktijk_posts_for_front_page_transient) ) {
-// The function will return here every time after the first time it is run, until the transient expires.
-return $praktijk_posts_for_front_page_transient;
-// Nope!  We gotta make a call.
-} else {
-$query = [
-'post_type'             => 'praktijk',
-'ignore_sticky_posts'   => true,
-'posts_per_page'        => 8,
-'no_found_rows'         => true,
-'cache_results'         => false,
-];
-$retrieve_8_praktijk_posts = new WP_Query($query);
-// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
-set_transient( 'praktijk_posts_for_front_page', $retrieve_8_praktijk_posts );
-}
-// do normal loop stuff
-return $retrieve_8_praktijk_posts;
-}
-
-function fotobewerking_posts_for_front_page() {
-$fotobewerking_posts_for_front_page_transient = get_transient( 'fotobewerking_posts_for_front_page' );
-if( ! empty( $fotobewerking_posts_for_front_page_transient) ) {
-// The function will return here every time after the first time it is run, until the transient expires.
-return $fotobewerking_posts_for_front_page_transient;
-// Nope!  We gotta make a call.
-} else {
-$query = [
-'post_type'             => 'fotobewerking',
-'ignore_sticky_posts'   => true,
-'posts_per_page'        => 8,
-'no_found_rows'         => true,
-'cache_results'         => false,
-];
-$retrieve_8_fotobewerking_posts = new WP_Query($query);
-// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
-set_transient( 'fotobewerking_posts_for_front_page', $retrieve_8_fotobewerking_posts );
-}
-// do normal loop stuff
-return $retrieve_8_fotobewerking_posts;
-}
-
-function blog_posts_for_front_page() {
-$blog_posts_for_front_page_transient = get_transient( 'blog_posts_for_front_page' );
-if( ! empty( $blog_posts_for_front_page_transient) ) {
-// The function will return here every time after the first time it is run, until the transient expires.
-return $blog_posts_for_front_page_transient;
-// Nope!  We gotta make a call.
-} else {
-$query = [
-'post_type'             => 'post',
-'ignore_sticky_posts'   => true,
-'posts_per_page'        => 8,
-'no_found_rows'         => true,
-'cache_results'         => false,
-];
-$retrieve_8_blog_posts = new WP_Query($query);
-// transient set to last forever until another post is saved - all_posts_archive_page_transient_flusher takes care of the flush
-set_transient( 'blog_posts_for_front_page', $retrieve_8_blog_posts );
-}
-// do normal loop stuff
-return $retrieve_8_blog_posts;
 }

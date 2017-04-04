@@ -8,23 +8,8 @@
 
 function mvdk_jetpack_setup() {
 
-// Add theme support for Infinite Scroll.
-//	add_theme_support( 'infinite-scroll', array(
-//		'type'           => 'click',
-//		'footer_widgets' => 'footer',
-//		'container' 	 => 'infinite-scroll',
-//		'render'    	 => 'mvdk_infinite_scroll_render',
-//		'footer'    	 => 'footer',
-//	) );
-
-	// This theme supports Portfolios
-	add_theme_support( 'portfolio' );
-
-	// This theme supports Workshops
-	add_theme_support( 'gastartikel' );
-
-	// This theme supports Advertenties
-	add_theme_support( 'advertentie' );
+	// Add theme support for Social Menu.
+	add_theme_support( 'jetpack-social-menu', 'svg' );
 	
 	// Support for Jetpack Responsive Videos
 	add_theme_support( 'jetpack-responsive-videos' );
@@ -33,3 +18,24 @@ add_action( 'after_setup_theme', 'mvdk_jetpack_setup' );
 
 // Will add a checkbox option to every new post of whether or not to email the post to subscribers.
 add_filter( 'jetpack_allow_per_post_subscriptions', '__return_true' );
+
+/**
+ * Return early if Social Menu is not available.
+ */
+function mvdk_social_menu() {
+	if ( ! function_exists( 'jetpack_social_menu' ) ) {
+		return;
+	} else {
+		jetpack_social_menu();
+	}
+}
+
+function remove_jetpack_social_menu_css() {
+	// Dequeue Jetpack Social Menu CSS
+	if ( ! function_exists( 'jetpack_social_menu' ) ) {
+		return;
+	} else {
+		remove_action( 'wp_enqueue_scripts', 'jetpack_social_menu_style' );
+	}
+}
+add_action( 'after_setup_theme', 'remove_jetpack_social_menu_css', 99 );

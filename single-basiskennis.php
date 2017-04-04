@@ -26,27 +26,17 @@ get_header(); ?>
 <?php endwhile; ?>
 <footer class="entry-utility">
 <?php
-$terms = get_the_term_list( $post->ID, 'post_tag' );
-if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-printf( '<div class="entry-terms taxonomy-post-tag" itemprop="keywords">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
-}
-?>
-<?php
-$terms = get_the_term_list( $post->ID, 'onderwerp' );
-if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-printf( '<div class="entry-terms taxonomy-onderwerp" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
-}
-?>
-<?php
-$terms = get_the_term_list( $post->ID, 'software' );
-if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-printf( '<div class="entry-terms taxonomy-software" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
-}
-?>
-<?php
-$terms = get_the_term_list( $post->ID, 'locatie' );
-if( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-printf( '<div class="entry-terms taxonomy-location" itemprop="articleSection">' . esc_html__( '%1$s', 'mvdk' ) . '</div>', $terms ); // WPCS: XSS OK.
+$post_type = get_post_type();
+foreach ( get_object_taxonomies( $post_type ) as $tax_name ) {
+	$term_list = get_the_term_list( get_the_ID(), $tax_name, '', ' ', '' );
+	if ( !empty( $term_list ) ) {
+		$the_tax = get_taxonomy( $tax_name );
+		?>
+		<div class="taxonomy-<?php echo esc_attr( $tax_name ); ?> entry-terms">
+			<?php echo wp_kses_post( $term_list ); ?>
+		</div>
+		<?php
+	}
 }
 ?>
 <div class="entry-related">

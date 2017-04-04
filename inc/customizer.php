@@ -80,59 +80,6 @@ $wp_customize->add_control( 'mvdk_flickr', [
 'priority'			=> 115,
 ] );
 
-$wp_customize->add_section( 'mvdk_theme_options', [
-'title'				=> esc_html__( 'Custom Post Type pagina opties', 'mvdk' ),
-'priority'			=> 120,
-] );
-
-$wp_customize->add_setting( 'mvdk_hide_advertentie_page_content', [
-'capability'			=> 'edit_theme_options',
-'default'			=> '',
-'sanitize_callback'		=> 'mvdk_sanitize_checkbox',
-] );
-
-$wp_customize->add_control( 'mvdk_hide_advertentie_page_content', [
-'label'				=> esc_html__( 'Verberg titel en inhoud op Advertentie Page Template', 'mvdk' ),
-'section'			=> 'mvdk_theme_options',
-'type'				=> 'checkbox',
-] );
-
-$wp_customize->add_setting( 'mvdk_hide_gastartikel_page_content', [
-'capability'			=> 'edit_theme_options',
-'default'			=> '',
-'sanitize_callback'		=> 'mvdk_sanitize_checkbox',
-] );
-
-$wp_customize->add_control( 'mvdk_hide_gastartikel_page_content', [
-'label'				=> esc_html__( 'Verberg titel en inhoud op Gastartikel Page Template', 'mvdk' ),
-'section'			=> 'mvdk_theme_options',
-'type'				=> 'checkbox',
-] );
-
-$wp_customize->add_setting( 'mvdk_hide_portfolio_page_content', [
-'capability'			=> 'edit_theme_options',
-'default'			=> '',
-'sanitize_callback'		=> 'mvdk_sanitize_checkbox',
-] );
-
-$wp_customize->add_control( 'mvdk_hide_portfolio_page_content', [
-'label'				=> esc_html__( 'Verberg titel en inhoud op Portfolio Page Template', 'mvdk' ),
-'section'			=> 'mvdk_theme_options',
-'type'				=> 'checkbox',
-] );
-
-$wp_customize->add_setting( 'mvdk_hide_workshop_page_content', [
-'capability'			=> 'edit_theme_options',
-'default'			=> '',
-'sanitize_callback'		=> 'mvdk_sanitize_checkbox',
-] );
-
-$wp_customize->add_control( 'mvdk_hide_workshop_page_content', [
-'label'				=> esc_html__( 'Verberg titel en inhoud op Workshop Page Template', 'mvdk' ),
-'section'			=> 'mvdk_theme_options',
-'type'				=> 'checkbox',
-] );
-
 //Add Footer Section
 $wp_customize->add_section( 'mvdk_footer_settings', [
 'title'				=> esc_html__('Instellingen footer website','mvdk'),
@@ -174,5 +121,5 @@ return esc_url( $input );
 }
 
 function mvdk_sanitize_text( $input ) {
-return esc_html( $input );
+return sanitize_text_field( $input );
 }
