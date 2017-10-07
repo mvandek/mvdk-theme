@@ -981,9 +981,10 @@ flex: 0 1 35%
 */
 
 body{
-/*display: grid;*/
-/*grid-auto-rows: auto;*/
-/*grid-row-gap: 2rem;*/
+display: grid;
+grid-auto-rows: auto;
+grid-row-gap: 2rem;
+grid-template-columns: minmax(320px, 1080px);
 font-size: 1.8rem;
 margin-left: auto;
 margin-right: auto;
@@ -999,11 +1000,11 @@ grid-auto-rows: auto;
 grid-row-gap: 2rem;
 }
 
-/* @supports not (display: grid) { */
+@supports not (display: grid) {
 .header {
 margin-bottom: 2rem
 }
-/* } einde @supports not (display: grid) */
+} einde @supports not (display: grid)
 
 .sidebar{
 box-sizing: border-box;
@@ -1017,13 +1018,13 @@ box-sizing: border-box;
 font-size: 1.6rem;
 }
 
-/* @supports not (display: grid) { */
+@supports not (display: grid) {
 .breadcrumbs {
 margin-bottom: 1rem;
 }
-/* } einde @supports not (display: grid) */
+} /* einde @supports not (display: grid) */
 
-.has-sidebar:not(.page-template-page-onderwerp):not(.page-template-page-locatie):not(.error404):not(.search-no-results) article{
+.has-sidebar:not(.page-template-page-onderwerp):not(.page-template-page-locatie):not(.error404):not(.search-no-results) article {
 margin-top: 4vmin
 }
 
@@ -1426,7 +1427,7 @@ grid-row-gap: 2.5rem;
 .comment-form > div{
 margin-bottom: 2.5rem
 }
-} /* einde @supports not (display: grid)
+} /* einde @supports not (display: grid) */
 
 .comment-form label {
 display: block;
@@ -1518,21 +1519,17 @@ display: grid;
 grid-row-gap: 2rem;
 }
 
-/* @supports not (display: grid) { */
-.footer {
-margin-top: 2rem;
-}
-
+@supports not (display: grid) {
 .copyright,
 .footer-navigation {
 padding-bottom: 1em;
 padding-top: 1em;
 }
+} /* einde @supports not (display: grid) */
 
 .copyright {
 margin-top: 2rem;
 }
-/* } /* einde @ supports not (display: grid) */
 
 .footer-area{}
 
@@ -1973,6 +1970,7 @@ padding: 1.2rem;
 
 .copyright {
 border-top: 1px solid #000;
+padding-top: 2rem;
 }
 }
 
@@ -2007,6 +2005,7 @@ margin-right: 2vw
 display: grid;
 grid-template-columns: minmax(auto, 79rem) 27rem;
 grid-column-gap: 2rem;
+grid-row-gap: inherit;
 }
 
 .main-navigation ul{
