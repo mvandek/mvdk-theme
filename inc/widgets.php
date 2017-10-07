@@ -57,7 +57,7 @@ register_sidebar(
 'name' => esc_html__( 'Search Sidebar', 'mvdk' ),
 'id' => 'sidebar-search',
 'description'   => esc_html__( 'Verschijnt onder sidebar Single Post - Below Content', 'mvdk' ),
-'before_widget' => '<section id="%1$s" class="widget entry-related-module %2$s">',
+'before_widget' => '<section id="%1$s" class="widget %2$s">',
 'after_widget' => '</section>',
 'before_title' => '<h3 class="widget-title">',
 'after_title' => '</h3>'

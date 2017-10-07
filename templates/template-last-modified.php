@@ -30,7 +30,7 @@ $posts = new WP_Query($query);
 if( $posts->have_posts() ) : ?>
 <ul>
 <?php while ($posts->have_posts() ) : $posts->the_post(); ?>
-<li>Bijgewerkt op <?php the_modified_date(); ?> &mdash; <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></span></li>
+<li>Bijgewerkt op <?php the_modified_date(); ?> &mdash; <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></span></li>
 <?php endwhile;
 wp_reset_postdata(); ?>
 </ul>

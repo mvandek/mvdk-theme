@@ -27,7 +27,7 @@ get_header(); ?>
 <?php
 $post_type = get_post_type();
 foreach ( get_object_taxonomies( $post_type ) as $tax_name ) {
-	$term_list = get_the_term_list( get_the_ID(), $tax_name, '', ' ', '' );
+	$term_list = get_the_term_list( $post->ID, $tax_name, '', ' ', '' );
 	if ( !empty( $term_list ) ) {
 		$the_tax = get_taxonomy( $tax_name );
 		?>
@@ -40,7 +40,7 @@ foreach ( get_object_taxonomies( $post_type ) as $tax_name ) {
 ?>
 <div class="entry-related">
 <section class="entry-related-module">
-<h3 class="widget-title"><?php _e( 'Relevante artikelen', 'mvdk' ); ?></h3>
+<h3 class="widget-title"><?php echo esc_html( 'Relevante artikelen' ); ?></h3>
 <?php
 $get_onderwerp_terms_from_post = get_the_terms( $post->ID, 'onderwerp' );
 if( $get_onderwerp_terms_from_post && ! is_wp_error( $get_onderwerp_terms_from_post ) ) {
@@ -80,7 +80,7 @@ printf( '<li><a href="%1$s" rel="bookmark">%2$s</a></li>', esc_url( get_permalin
 ?>
 </ul>
 <?php } else { ?>
-<p><?php _e( 'Er zijn geen relevante artikelen beschikbaar', 'mvdk' ); ?></p>
+<p><?php echo esc_html( 'Er zijn geen relevante artikelen beschikbaar' ); ?></p>
 <?php }
 wp_reset_postdata();
 ?></section>
@@ -90,7 +90,7 @@ wp_reset_postdata();
 </div>
 
 <?php if( is_active_sidebar( 'sidebar-search' ) ) : ?>
-<div class="entry-related">
+<div class="entry-search">
 <?php dynamic_sidebar( 'sidebar-search' ) ; ?>
 </div>
 <?php endif; ?>
@@ -103,8 +103,8 @@ wp_reset_postdata();
 
 <?php
 the_post_navigation( [
-'prev_text' => '<div class="meta-nav">' . esc_html__( 'Vorig artikel', 'mvdk' ) . '</div> ',
-'next_text' => '<div class="meta-nav">' . esc_html__( 'Volgend artikel', 'mvdk' ) . '</div> ',
+'prev_text' => '<div class="meta-nav">' . esc_html__( 'Vorig artikel' ) . '</div> ',
+'next_text' => '<div class="meta-nav">' . esc_html__( 'Volgend artikel' ) . '</div> ',
 ] );
 ?>
 

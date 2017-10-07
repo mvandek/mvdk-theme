@@ -10,7 +10,7 @@ function mvdk_jetpack_setup() {
 
 	// Add theme support for Social Menu.
 	add_theme_support( 'jetpack-social-menu', 'svg' );
-	
+
 	// Support for Jetpack Responsive Videos
 	add_theme_support( 'jetpack-responsive-videos' );
 }

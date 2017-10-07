@@ -16,14 +16,14 @@ get_header(); ?>
 <?php the_content(); 
 endwhile;
 wp_reset_postdata(); ?>
-
 <?php
 $query = [
-'post_type'		=> [ 'post', 'basiskennis', 'fotobewerking', 'praktijk', ],
-'nopaging'		=> true,
+'post_type'				=> [ 'post', 'basiskennis', 'fotobewerking', 'praktijk', ],
+'posts_per_page'		=> '250',
 'ignore_sticky_posts'	=> true,
-'no_found_rows'		=> true,
-'cache_results'		=> false,
+'no_found_rows'			=> true,
+'update_post_meta_cache' => false,
+'update_post_term_cache' => false,
 ];
 $posts = new WP_Query($query);
 if( $posts->have_posts() ) : ?>

@@ -92,7 +92,7 @@ set_post_thumbnail_size( 270, 200, true );
 add_image_size( 'attachment-thumb', 700, 9999 ); // no crop flag, unlimited height
 
 // Styles the post editor
-add_editor_style( [ 'css/editor-style.css', 'css/font-style.css', 'genericons/genericons.css' ] );
+add_editor_style( [ 'css/editor-style.css', 'genericons/genericons.css' ] );
 
 /**
  * Set max width of full screen visual editor to match content width
@@ -104,7 +104,7 @@ set_user_setting( 'dfw_width', 790 );
  * Set the content width based on the theme's design and stylesheet.
  */
 add_filter( 'after_setup_theme', function() {
-//if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-//page.php' ) || is_page_template( 'template-links.php' ) ) {
+//if ( is_page_template( 'template-full-width.php' ) || is_page_template( 'template-archive.php' ) || is_page_template( 'template-contact-page.php' ) || is_page_template( 'template-links.php' ) ) {
 //$GLOBALS['content_width'] = 1056;
 //} else {
 $GLOBALS['content_width'] = apply_filters( 'mvdk_content_width', 790 );
@@ -121,22 +121,15 @@ add_filter( 'wp_enqueue_scripts', function() {
 wp_enqueue_style( 'mvdk-v2-stylesheet', get_stylesheet_uri() );
 
 if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'subscriptions' ) ) {
-$jetpack_subscription_css = "#subscribe-email input {width: 100%;} .comment-subscription-form .subscribe-label {display: inline !important;}";
+$jetpack_subscription_css = "#subscribe-email input {width: 100%;} .comment-subscription-form .subscribe-label {display: inline;}";
 wp_add_inline_style( 'mvdk-v2-stylesheet', $jetpack_subscription_css );
 }
 
-// Add Open Sans fonts, used in the main stylesheet.
-// wp_enqueue_style( 'fonts-mvdk-v2-style', get_theme_file_uri( '/css/font-style.css' );
-
 // Add Genericons, check first for Jetpack Genericons, then the one delivered with this theme.
-wp_register_style( 'genericons', get_theme_file_uri( '/genericons/genericons.css' ), array(), '3.4.1' );
+//wp_register_style( 'genericons', get_theme_file_uri( '/genericons/genericons.css' ), array(), '3.4.1' );
 wp_enqueue_style( 'genericons' );
 
-// Remove jQuery scripts
-// wp_deregister_script( 'jquery' );
-// wp_deregister_script('jquery-migrate');
 // Device Pixels support
-
 // This improves the resolution of gravatars and wordpress.com uploads on hi-res and zoomed browsers. We only have gravatars so we should be ok without it.
 wp_deregister_script('devicepx');
 wp_dequeue_script('devicepx');
@@ -211,9 +204,3 @@ require get_template_directory() . '/inc/dev.php';
  * Load VIP-caching Code.
  */
 require get_template_directory() . '/inc/vip-caching.php';
-/**
- * Load AMP Code.
- */
-if ( defined( 'AMP__FILE__' ) ) {
-	require get_template_directory() . '/inc/amp.php';
-}

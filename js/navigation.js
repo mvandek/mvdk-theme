@@ -109,7 +109,7 @@
 			};
 
 			for ( i = 0; i < parentLink.length; ++i ) {
-				parentLink[i].addEventListener( 'touchstart', touchStartFn, false )
+				parentLink[i].addEventListener( 'touchstart', touchStartFn )
 			}
 		}
 	}( container ) );

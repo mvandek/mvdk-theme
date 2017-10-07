@@ -31,7 +31,6 @@ return;
 				wp_list_comments( [
 					'callback'	=> 'mvdk_comment',
 					'short_ping'	=> true,
-					'avatar_size'	=> 40,
 				] );
 			?>
 		</ol><!-- .comment-list -->
@@ -40,7 +39,7 @@ return;
 
 	<?php
 		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
+		if ( ! comments_open() ) {
 	?>
 		<p class="no-comments"><?php esc_html_e( 'Reageren is uitgeschakeld', 'mvdk' ); ?></p>
 	<?php } ?>
@@ -50,9 +49,9 @@ return;
 $comment_args = [
 'comment_field' => '<div class="comment-form-comment"><label for="comment">' . _x( 'Reactie', 'mvdk' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" aria-required="true" required="required"></textarea></div>',
 
-'comment_notes_before' => '<p class="comment-notes">' . __( 'Ben je nieuwsgierig geworden, wil je bijdragen aan de discussie, of heb je een aanvulling? <strong>Deel je mening!</strong> Voor algemene vragen is er de <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">Vraagbaak</a>.', 'mvdk' ) . '</p>',
+'comment_notes_before' => '<div class="comment-notes">' . __( 'Ben je nieuwsgierig geworden, wil je bijdragen aan de discussie, of heb je een aanvulling? <strong>Deel je mening!</strong> Voor algemene vragen is er de <a href="https://www.maartenvandekamp.nl/stel-een-vraag/">Vraagbaak</a>.', 'mvdk' ) . '</div>',
 
-'comment_notes_after' => '<p id="email-notes"><strong>Opmerking:</strong> de reactie wordt eerst gelezen (en indien nodig geredigeerd), voordat deze wordt geplaatst. Het emailadres blijft privé.</p>',
+'comment_notes_after' => '<div id="email-notes"><strong>Opmerking:</strong> de reactie wordt eerst gelezen (en indien nodig geredigeerd), voordat deze wordt geplaatst. Het emailadres blijft privé.</div>',
 
 'title_reply' => __( 'Schrijf een reactie' ),
 'title_reply_to' => __( 'Reageer op %s' ),
@@ -60,6 +59,7 @@ $comment_args = [
 'title_reply_after'    => '</h2>',
 'cancel_reply_link' => __( 'Annuleer mijn reactie' ),
 'label_submit' => __( 'Plaats mijn reactie' ),
+'submit_field' => '<div class="form-submit">%1$s %2$s</div>',
 ];
 
 comment_form( $comment_args ); // Apply all the custom args with the default and output the customized comment form.

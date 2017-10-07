@@ -23,17 +23,13 @@ function wpcom_vip_akismet_spam_count_incr( $val ) {
 }
 add_filter( 'akismet_spam_count_incr', 'wpcom_vip_akismet_spam_count_incr' );
 
-// Cleaner permalink options
-add_filter( 'got_url_rewrite', '__return_true' );
-
-
 /**
  * This is a list of performance tweaks that will become default for All VIP sites
  */
 function wpcom_vip_enable_performance_tweaks() {
 	/**
 	 * Improves performance of all the wp-admin pages that load comment counts in the menu.
-	 * 
+	 *
 	 * This caches them for 30 minutes. It does not impact the per page comment count, only
 	 * the total comment count that shows up in the admin menu.
 	 */
@@ -57,16 +53,53 @@ add_action( 'after_setup_theme', 'wpcom_vip_enable_performance_tweaks' );
 /**
  * Use this function to disable the loading of performance tweaks
  */
-// function wpcom_vip_disable_performance_tweaks() {
-//	remove_action( 'after_setup_theme', 'wpcom_vip_enable_performance_tweaks' );
-// }
+function wpcom_vip_disable_performance_tweaks() {
+	remove_action( 'after_setup_theme', 'wpcom_vip_enable_performance_tweaks' );
+}
 
-add_filter( 'rest_authentication_errors', function( $result ) {
-    if ( ! empty( $result ) ) {
-        return $result;
-    }
-    if ( ! is_user_logged_in() ) {
-        return new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
-    }
-    return $result;
-});
+
+add_action( 'add_attachment', 'wpcom_vip_bust_media_months_cache' );
+function wpcom_vip_bust_media_months_cache( $post_id ) {
+	if ( defined( 'WP_IMPORTING' ) && WP_IMPORTING ) {
+		return;
+	}
+
+	// Grab the transient to see if it needs updating
+	$media_months = get_transient( 'wpcom_media_months_array' );
+
+	// Make sure month and year exists in transient before comparing
+	$cached_latest_year = ( ! empty( $media_months[0]->year ) ) ? $media_months[0]->year : '';
+	$cached_latest_month = ( ! empty( $media_months[0]->month ) ) ? $media_months[0]->month : '';
+
+	// If the transient exists, and the attachment uploaded doesn't match the first (latest) month or year in the transient, lets clear it.
+	$matches_latest_year = get_the_time( 'Y', $post_id ) === $cached_latest_year;
+	$matches_latest_month = get_the_time( 'n', $post_id ) === $cached_latest_month;
+	if ( false !== $media_months && ( ! $matches_latest_year || ! $matches_latest_month ) ) {
+		// the new attachment is not in the same month/year as the data in our transient
+		delete_transient( 'wpcom_media_months_array' );
+	}
+}
+
+if ( is_admin() ) {
+	add_filter( 'media_library_show_video_playlist', '__return_true' );
+	add_filter( 'media_library_show_audio_playlist', '__return_true' );
+
+	add_filter( 'media_library_months_with_files', 'wpcom_vip_media_library_months_with_files' );
+	function wpcom_vip_media_library_months_with_files() {
+		global $wpdb;
+
+		$months = get_transient( 'wpcom_media_months_array' );
+
+		if ( false === $months ) {
+			$months = $wpdb->get_results( $wpdb->prepare( "
+            		     SELECT DISTINCT YEAR( post_date ) AS year, MONTH( post_date ) AS month
+            			FROM $wpdb->posts
+            			WHERE post_type = %s
+            			ORDER BY post_date DESC
+        			", 'attachment' ) );
+			set_transient( 'wpcom_media_months_array', $months );
+		}
+
+		return $months;
+	}
+}

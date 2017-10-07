@@ -15,6 +15,7 @@
  * @since mvdk-theme v2
  */
 get_header(); ?>
+<main class="content" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
 <?php 
 $term_id = get_queried_object_id();
 $geo_latitude = get_term_meta( $term_id, 'locatie_latitude', true );
@@ -26,7 +27,6 @@ if( !empty( $geo_latitude ) && !empty( $geo_longtitude ) ) {
 <meta itemprop="longitude" content="<?php echo $geo_longtitude; ?>" />
 </div>
 <?php } ?>
-<main class="content" itemprop="mainContentOfPage" itemscope itemtype="http://schema.org/Blog">
 <?php if ( have_posts() ) : ?>
 <header class="entry-header">
 <h1 class="entry-title" itemprop="headline">

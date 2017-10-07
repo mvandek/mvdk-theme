@@ -12,8 +12,8 @@ get_header(); ?>
 <h1 class="entry-title" itemprop="headline"><?php _e( 'Er is iets fout gegaan.', 'mvdk' ); ?></h1>
 </header>
 <div class="entry-content">
-<p><?php _e( 'De link waarop je hebt geklikt, is mogelijk buiten werking of de pagina is verwijderd.', 'mvdk' ); ?></p>
-<p><?php _e( 'Gebruik de onderstaande zoekfunctie om alsnog te vinden waar je naar op zoek bent. ', 'mvdk' ); ?></p>
+<p><?php _e( 'De link waarop je hebt geklikt is mogelijk buiten werking of de pagina is verwijderd.', 'mvdk' ); ?></p>
+<p><?php _e( 'Gebruik de zoekfunctie om alsnog te vinden waar je naar op zoek bent. ', 'mvdk' ); ?></p>
 <hr />
 </div>
 <div class="sidebar widget-area 404">
@@ -21,4 +21,5 @@ get_header(); ?>
 </div>
 </section>
 </main>
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

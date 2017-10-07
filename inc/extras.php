@@ -34,10 +34,10 @@ $defaults['show_on_front'] = false; // whether to show the breadcrumb on the fro
 $defaults['show_browse'] = false; // whether to show the "browse" text
 // $defaults['separator'] = '&raquo;'; // separator between items
 // $defaults['post_taxonomy']['post'] = 'category';
-$defaults['labels']['error_404'] = esc_html__( '404 Niet gevonden' );
-$defaults['labels']['archives'] = esc_html__( 'Archief' );
-$defaults['labels']['search'] = esc_html__( 'Zoekresultaat voor %s' );
-$defaults['labels']['paged'] = esc_html__( 'Pagina %s' );
+$defaults['labels']['error_404'] = esc_html( '404 Niet gevonden' );
+$defaults['labels']['archives'] = esc_html( 'Archief' );
+$defaults['labels']['search'] = esc_html( 'Zoekresultaat voor %s' );
+$defaults['labels']['paged'] = esc_html( 'Pagina %s' );
 return $defaults;
 }
 add_filter( 'breadcrumb_trail_args', 'mvdk_breadcrumbs' );
@@ -88,11 +88,11 @@ $aria_req = ( $req ? " aria-required='true'" : '' );
 $html_req = ( $req ? " required='required'" : '' );
 
 $fields   =  array(
-	'author' => '<p class="comment-form-author">' . '<label for="author">' . __( 'Naam' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245"' . $aria_req . $html_req . ' /></p>',
+	'author' => '<div class="comment-form-author">' . '<label for="author">' . __( 'Naam' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245"' . $aria_req . $html_req . ' /></div>',
 
-	'email' => '<p class="comment-form-email"><label for="email">' . __( 'Emailadres' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></p>',
+	'email' => '<div class="comment-form-email"><label for="email">' . __( 'Emailadres' ) . ' ' . ( $req ? '<span class="required">*</span>' : '' ) . '</label> ' . '<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . $html_req  . ' /></div>',
 
-	'url' => '<p class="comment-form-url"><label for="url">' . __( 'Website (<em>optioneel</em>)' ) . '</label> ' . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" /></p>',
+	'url' => '<div class="comment-form-url"><label for="url">' . __( 'Website (<em>optioneel</em>)' ) . '</label> ' . '<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" /></div>',
 );
 
 return $fields;
@@ -281,3 +281,55 @@ function wpcom_vip_wp_link_query_args( $query ) {
 	return $query;
 }
 add_filter( 'wp_link_query_args', 'wpcom_vip_wp_link_query_args', 10, 1 );
+
+/**
+ * Fix a race condition in alloptions caching
+ *
+ * See https://core.trac.wordpress.org/ticket/31245
+ */
+function _wpcom_vip_maybe_clear_alloptions_cache( $option ) {
+	if ( ! wp_installing() ) {
+		$alloptions = wp_load_alloptions(); //alloptions should be cached at this point
+		if ( isset( $alloptions[ $option ] ) ) { //only if option is among alloptions
+			wp_cache_delete( 'alloptions', 'options' );
+		}
+	}
+}
+add_action( 'added_option',   '_wpcom_vip_maybe_clear_alloptions_cache' );
+add_action( 'updated_option', '_wpcom_vip_maybe_clear_alloptions_cache' );
+add_action( 'deleted_option', '_wpcom_vip_maybe_clear_alloptions_cache' );
+
+add_filter( 'enable_post_by_email_configuration', '__return_false' );
+
+// Cleaner permalink options
+add_filter( 'got_url_rewrite', '__return_true' );
+
+// Disable custom fields meta box dropdown (very slow)
+add_filter( 'postmeta_form_keys', '__return_false' );
+
+add_filter( 'rest_authentication_errors', function( $result ) {
+    if ( ! empty( $result ) ) {
+        return $result;
+    }
+    if ( ! is_user_logged_in() ) {
+        return new WP_Error( 'rest_not_logged_in', 'You are not authorized.', array( 'status' => 401 ) );
+    }
+    return $result;
+});
+
+function add_attribute_to_current_menu_item( $atts, $item, $args ) {
+	if( in_array( 'current-menu-item', $item->classes ) ) {
+		$atts['aria-current'] = 'page';
+	}
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'add_attribute_to_current_menu_item', 10, 3 );
+
+// Add style to embed links
+add_action( 'embed_head', 'embed_top_style' );	
+function embed_top_style(){ ?>
+<style>
+.wp-embed{color: initial}
+.wp-embed .wp-embed-more{color:crimson}
+</style>
+<?php }
