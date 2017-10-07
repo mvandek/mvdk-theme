@@ -1004,7 +1004,7 @@ grid-row-gap: 2rem;
 .header {
 margin-bottom: 2rem
 }
-} einde @supports not (display: grid)
+} /* einde @supports not (display: grid) */
 
 .sidebar{
 box-sizing: border-box;
