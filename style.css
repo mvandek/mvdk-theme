@@ -712,20 +712,19 @@ color: #000;
 display: block;
 padding-top: 1rem;
 padding-bottom: 1rem;
-text-align: center;
+}
+
+@media all and (max-width:49.99em){
+.main-navigation a {
+padding-left: 1.5rem;
+padding-right: 1.5rem;
+}
 }
 
 .main-navigation .sub-menu a {
 padding-left: 1.5rem;
 padding-right: 1.5rem;
 text-align: initial;
-}
-
-@supports not (display: grid) {
-.main-navigation a {
-padding-left: 1.5rem;
-padding-right: 1.5rem;
-}
 }
 
 .main-navigation a:hover,
@@ -747,7 +746,7 @@ margin-left: 2rem;
 display: none
 }
 
-} // Einde @media all and (max-width:50em)
+} /* Einde @media all and (max-width:50em) */
 
 .main-navigation a[aria-current="page"],
 .main-navigation .current-menu-item > a,
@@ -938,7 +937,7 @@ margin-top: 2rem;
 width: 80%
 }
 
-} // Einde @media
+} /* Einde @media */
 
 /**
 * 11.0 Widgets
@@ -984,7 +983,7 @@ body{
 display: grid;
 grid-auto-rows: auto;
 grid-row-gap: 2rem;
-grid-template-columns: minmax(320px, 1080px);
+grid-template-columns: minmax(32rem, 108rem);
 font-size: 1.8rem;
 margin-left: auto;
 margin-right: auto;
@@ -1889,6 +1888,14 @@ grid-template-columns: repeat(5, 1fr);
 grid-template-rows: repeat(2, 1fr);
 }
 
+.main-navigation a {
+text-align: center
+}
+
+.main-navigation .sub-menu a {
+text-align: initial
+}
+
 @supports not (display: grid) {
 .main-navigation ul{
 display: -webkit-flex;
@@ -1896,6 +1903,12 @@ display: flex;
 -webkit-flex-wrap: wrap;
 flex-wrap: wrap;
 }
+
+.main-navigation a {
+padding-left: 1.5rem;
+padding-right: 1.5rem;
+}
+
 }
 
 .main-navigation li:hover > ul,
