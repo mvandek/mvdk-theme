@@ -30,14 +30,19 @@ else :
 	$paged = 1;
 endif;
 
-$args = [
-	'post_type'		=> array( 'basiskennis', 'fotobewerking', 'praktijk', ),
-	'paged'			=> $paged,
-	'posts_per_page'	=> 5,
-	'meta_key'		=> 'uitgelicht_maak-deze-post-uitgelicht',
-	'meta_value_num'	=> '1',
+$term_id = '850';
+$term_args = [
+'posts_per_page'=> 5,
+'paged'         => $paged,
+	'tax_query' => [
+		[
+		'taxonomy' => 'onderwerp',
+		'terms'    => $term_id,
+		'include_children' => false,
+		],
+	],
 ];
-$wp_query = new WP_Query( $args );
+$wp_query = new WP_Query( $term_args );
 
 // Update the thumbnail cache
 update_post_thumbnail_cache( $wp_query );
@@ -63,4 +68,3 @@ wp_reset_postdata();
 <?php
 get_sidebar();
 get_footer();
-?>
